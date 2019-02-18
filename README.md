@@ -24,7 +24,7 @@ and is currently comprised of two functions:
 2. The `mvmr` function fits an IVW multivariable Mendelian randomization model using first order weights. The function returns 
 an object of class \code{"MVMRIVW"}, containing regression estimates, estimated heterogeneity as a measure of instrument strength
 (\code{Q_strength}), and estimated heterogeneity as a measure of instrument validity (\code{Q_valid}). Estimation follows the method
-outlined in:[Sanderson et al, 2018](https://dx.doi.org/10.1093/ije/dyy262).
+outlined in [Sanderson et al, 2018](https://dx.doi.org/10.1093/ije/dyy262).
 
 Multivariable Mendelian randomization is implemented in a number of R packages such as `TwoSampleMR`, and `MendelianRandomization`,
 however, this package includes further sensitivity analyses leveraging information on causal effect heterogeneity across instruments.
@@ -35,7 +35,7 @@ Mendelian randomization.
 
 The corresponding paper has been published by the International Journal of Epidemiology, and can be accessed at:
 
-[An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. [Internet]. 2018;dyy262.(https://dx.doi.org/10.1093/ije/dyy262)
+[An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. [Internet]. 2018;dyy262.](https://dx.doi.org/10.1093/ije/dyy262)
 
 ## License
 
