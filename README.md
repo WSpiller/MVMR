@@ -22,8 +22,8 @@ and is currently comprised of two functions:
 1. The `format_mvmr` function is used to convert a data frame containing summary data into a set format for MVMR analyses.
 
 2. The `mvmr` function fits an IVW multivariable Mendelian randomization model using first order weights. The function returns 
-an object of class \code{"MVMRIVW"}, containing regression estimates, estimated heterogeneity as a measure of instrument strength
-(\code{Q_strength}), and estimated heterogeneity as a measure of instrument validity (\code{Q_valid}). Estimation follows the method
+an object of class `MVMRIVW`, containing regression estimates, estimated heterogeneity as a measure of instrument strength
+(`Q_strength`), and estimated heterogeneity as a measure of instrument validity (`Q_valid`). Estimation follows the method
 outlined in [Sanderson et al, 2018](https://dx.doi.org/10.1093/ije/dyy262).
 
 Multivariable Mendelian randomization is implemented in a number of R packages such as `TwoSampleMR`, and `MendelianRandomization`,
