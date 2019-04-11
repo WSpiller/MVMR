@@ -38,6 +38,14 @@ format_mvmr<-function(BXGs,BYG,seBXGs,seBYG,RSID){
   #they appear in the provided matrix, labeling each exposure with an X and
   #subsequent index number. The first exposure provided is labelled betaX1.
   
+  BXGs<-data.frame(BXGs)
+  seBXGs<-data.frame(seBXGs)
+  BYG<-data.frame(BYG)
+  seBYG<-data.frame(seBYG)
+  RSID<-data.frame(RSID)
+  
+  
+  
   for(i in 1:ncol(BXGs)){
     names(BXGs)[i]<-paste0("betaX",i,collapse=",")
   }
@@ -58,6 +66,15 @@ format_mvmr<-function(BXGs,BYG,seBXGs,seBYG,RSID){
   
   # The columns of the dataframe are renamed so as to be interpretable in
   #subsequent functions.
+  
+  for(i in 1:ncol(dat)){
+    
+    if(i>1){
+      dat[,i]<-as.numeric(dat[,i])
+      
+    }
+    
+  }
   
   names(dat)<-c("SNP","betaYG","sebetaYG",names(BXGs),names(seBXGs))
   
