@@ -1,6 +1,6 @@
 Package: MVMR
 Title: MVMR
-Version: 0.1
+Version: 0.2
 Authors@R: c(person("Wes", "Spiller", email = "wes.spiller@bristol.ac.uk", role = c("aut", "cre")), person("Jack", "Bowden", email = "jack.bowden@bristol.ac.uk", role = c("aut")), person("Eleanor", "Sanderson", email = "eleanor.sanderson@bristol.ac.uk", role = c("aut")))
 Description: An R package for performing multivariable Mendelian randomization analyses.
 Depends: R (>= 3.1)
@@ -10,4 +10,3 @@ LazyData: true
 Suggests: knitr, rmarkdown
 VignetteBuilder: knitr
 RoxygenNote: 6.1.1
-

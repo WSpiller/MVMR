@@ -1,5 +1,7 @@
-#' mvmr
+#' mvmr (legacy)
 #'
+#' Note: This function is from the old version of the MVMR package and will be replaced in the future: The gencov argument should be set to zero when using \code{mvmr()}.
+#' 
 #' Fits an IVW multivariable Mendelian randomization model using first order weights. The function returns an object of class \code{"MVMRIVW"}, containing regression estimates, estimated heterogeneity as a measure of instrument strength (\code{Q_strength}), and estimated heterogeneity as a measure of instrument validity (\code{Q_valid}).
 #' 
 #' @param r_input A formatted data frame using the \code{format_mvmr} function.
@@ -136,7 +138,7 @@ mvmr<-function(r_input,gencov,weights){
   if(gencov != 0){
     
     warning("Validity statistics do not currently account for covariance between the effect of the genetic variants on each exposure")
- 
+    
   }
   
   #Create a subset of exposure effect estimates
@@ -157,58 +159,58 @@ mvmr<-function(r_input,gencov,weights){
   ##########
   # Output #
   ##########
-
-    # Print a few summary elements that are common to both lm and plm model summary objects
-    cat("\n")
-    
-    cat("Multivariable MR\n")
-    
-    cat("\n")
-
-    print(A)
-    
-    cat("\nResidual standard error:", round(A_sum$sigma,3), "on", A_sum$df[2], "degrees of freedom")
-    
-    cat("\n")
-    
-    cat(paste(c("\nF-statistic:", " on"," and"), round(A_sum$fstatistic,2), collapse=""),
-        "DF, p-value:",
-        format.pval(pf(A_sum$fstatistic[1L], A_sum$fstatistic[2L], A_sum$fstatistic[3L], 
-                       lower.tail = FALSE), digits=3))
-    
-    cat("\n")  
-    
-    cat("\n")
-    
-    cat("------------------------------")
-    
-    cat("\n")
-    
-    cat("Q-Statistics for instrument strength:")
-    
-    cat("\n")
-    
-    cat("\n")
-    
-    print(Q_strength)
-    
-    cat("\n")
-    
-    cat("------------------------------")
-    
-    cat("\n")
-    
-    cat("Q-Statistic for instrument validity:")
-    
-    cat("\n")
-    
-    cat("\n")
-    
-    cat(Q_valid, "on", length(r_input[,2])-exp.number-1, "DF",",", "p-value:" , Q_chiValid)
-    
-    cat("\n")
-    
-
+  
+  # Print a few summary elements that are common to both lm and plm model summary objects
+  cat("\n")
+  
+  cat("Multivariable MR\n")
+  
+  cat("\n")
+  
+  print(A)
+  
+  cat("\nResidual standard error:", round(A_sum$sigma,3), "on", A_sum$df[2], "degrees of freedom")
+  
+  cat("\n")
+  
+  cat(paste(c("\nF-statistic:", " on"," and"), round(A_sum$fstatistic,2), collapse=""),
+      "DF, p-value:",
+      format.pval(pf(A_sum$fstatistic[1L], A_sum$fstatistic[2L], A_sum$fstatistic[3L], 
+                     lower.tail = FALSE), digits=3))
+  
+  cat("\n")  
+  
+  cat("\n")
+  
+  cat("------------------------------")
+  
+  cat("\n")
+  
+  cat("Q-Statistics for instrument strength:")
+  
+  cat("\n")
+  
+  cat("\n")
+  
+  print(Q_strength)
+  
+  cat("\n")
+  
+  cat("------------------------------")
+  
+  cat("\n")
+  
+  cat("Q-Statistic for instrument validity:")
+  
+  cat("\n")
+  
+  cat("\n")
+  
+  cat(Q_valid, "on", length(r_input[,2])-exp.number-1, "DF",",", "p-value:" , Q_chiValid)
+  
+  cat("\n")
+  
+  
   #A function allowing multiple objects to be accessed from the output object
   multi_return <- function() {
     Out_list <- list("coef" = A, "Q_strength"=Q_strength, "Q_valid"=Q_valid, "p_valid"=Q_chiValid)

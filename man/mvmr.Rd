@@ -2,7 +2,7 @@
 % Please edit documentation in R/mvmr.R
 \name{mvmr}
 \alias{mvmr}
-\title{mvmr}
+\title{mvmr (legacy)}
 \usage{
 mvmr(r_input, gencov, weights)
 }
@@ -23,6 +23,9 @@ An object of class \code{"MVMRIVW"} containing the following components:\describ
 }
 }
 \description{
+Note: This function is from the old version of the MVMR package and will be replaced in the future: The gencov argument should be set to zero when using \code{mvmr()}.
+}
+\details{
 Fits an IVW multivariable Mendelian randomization model using first order weights. The function returns an object of class \code{"MVMRIVW"}, containing regression estimates, estimated heterogeneity as a measure of instrument strength (\code{Q_strength}), and estimated heterogeneity as a measure of instrument validity (\code{Q_valid}).
 }
 \examples{
