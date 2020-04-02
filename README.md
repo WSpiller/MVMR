@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # MVMR
 
 ## Installation
@@ -44,3 +45,6 @@ This project is licensed under GNU GPL v3.
 
 
 
+=======
+TEST
+>>>>>>> 6d478f8353044b1145530fccf71b5dfde9e61633
