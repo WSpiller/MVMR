@@ -2,16 +2,16 @@
 
 ## Installation
 
-To install `MVMR` directly from the GitHub repository, first make sure you have the `devtools` package installed:
+To install `MVMR` directly from the GitHub repository, first make sure you have the `remotes` package installed:
 
-    install.packages("devtools")
+    install.packages("remotes")
 
 Then the `MVMR` package can be installed using:
 
-    library(devtools)
-    install_github("WSpiller/MVMR")
+    library(remotes)
+    install_github("WSpiller/MVMR", build_opts = c("--no-resave-data", "--no-manual"), build_vignettes = TRUE)
     
-To update the package just run the `install_github("WSpiller/MVMR")` command again.
+To update the package just run the `remotes::install_github("WSpiller/MVMR", build_opts = c("--no-resave-data", "--no-manual"), build_vignettes = TRUE)` command again.
 
 ## Description
 
