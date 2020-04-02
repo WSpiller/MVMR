@@ -1,8 +1,13 @@
+  
 ---
 title: "Multivariable MR Tutorial"
 author: "Wes Spiller, Eleanor Sanderson, and Jack Bowden"
-date: "14/02/2020"
-output: html_document
+date: "2 April 2020"
+output: html_vignette
+vignette: >
+  %\VignetteIndexEntry{Multivariable MR Tutorial}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}
