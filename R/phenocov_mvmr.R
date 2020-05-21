@@ -7,7 +7,7 @@
 #' @param Pcov A phenotypic matrix using exposures, constructed using individual level exposure data. Columns should be ordered by exposure so as to match \code{format_mvmr}.
 #' @param seBXGs A matrix containing standard errors corresponding in relation to the gene-exposure association for each SNP.
 #'
-#' @return A list of covariance matrices with respect to each genetic variant, retaining the ordering in \code{Gs}
+#' @return A list of covariance matrices with respect to each genetic variant, retaining the ordering in \code{seBXGs}
 #' 
 #'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. [Internet]. 2018;dyy262. Available from: https://dx.doi.org/10.1093/ije/dyy262
