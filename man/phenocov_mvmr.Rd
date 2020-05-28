@@ -12,11 +12,11 @@ phenocov_mvmr(Pcov, seBXGs)
 \item{seBXGs}{A matrix containing standard errors corresponding in relation to the gene-exposure association for each SNP.}
 }
 \value{
-A list of covariance matrices with respect to each genetic variant, retaining the ordering in \code{Gs}
+A list of covariance matrices with respect to each genetic variant, retaining the ordering in \code{seBXGs}
 }
 \description{
 Uses an external phenotypic covariance matrix and summary data to estimate covariance matrices for estimated effects of individual genetic
-variants on each exposure. The function returns a number of covariance matrices equal to the number of SNPs, where SNP and
+variants on each exposure. The phenotypic covariance matrix should be constructed using standardised phenotype measures. The function returns a number of covariance matrices equal to the number of SNPs, where SNP and
 row numbers reference ordered exposures.
 }
 \examples{
@@ -25,7 +25,7 @@ phenocov_mvmr(Pcov,summarydata[,c(3,4)])
 
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. [Internet]. 2018;dyy262. Available from: https://dx.doi.org/10.1093/ije/dyy262
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. \link{Internet}. 2018;dyy262. Available from: https://dx.doi.org/10.1093/ije/dyy262
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.

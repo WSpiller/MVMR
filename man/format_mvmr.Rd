@@ -29,7 +29,7 @@ format_mvmr(summarydata[,c(1,2)],summarydata[,5],summarydata[,c(3,4)],summarydat
 
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. [Internet]. 2018;dyy262. Available from: https://dx.doi.org/10.1093/ije/dyy262
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. \link{Internet}. 2018;dyy262. Available from: https://dx.doi.org/10.1093/ije/dyy262
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.

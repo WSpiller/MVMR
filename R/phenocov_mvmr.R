@@ -1,7 +1,7 @@
 #' phenocov_mvmr
 #'
 #' Uses an external phenotypic covariance matrix and summary data to estimate covariance matrices for estimated effects of individual genetic
-#' variants on each exposure. The function returns a number of covariance matrices equal to the number of SNPs, where SNP and
+#' variants on each exposure. The phenotypic covariance matrix should be constructed using standardised phenotype measures. The function returns a number of covariance matrices equal to the number of SNPs, where SNP and
 #' row numbers reference ordered exposures.
 #'
 #' @param Pcov A phenotypic matrix using exposures, constructed using individual level exposure data. Columns should be ordered by exposure so as to match \code{format_mvmr}.

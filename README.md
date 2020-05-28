@@ -17,7 +17,7 @@ To update the package just run the `remotes::install_github("WSpiller/MVMR", bui
 
 We have written the `MVMR` R package to perform multivariable Mendelian randomization analyses, including heterogeneity
 statistics for assessing instrument strength and validity. The package accommodates any number of exposures greater than 1,
-and is currently includes a range of functions for estimating causal effects, as well as assessing conditional instrument strength and pleiotropic bias. For a detailed description regarding each function, please install the package and input `vignette("MVMR Tutorial")`
+and is currently includes a range of functions for estimating causal effects, as well as assessing conditional instrument strength and pleiotropic bias. For a detailed description regarding each function, please install the package and input `vignette("MVMR")`
 
 
 
