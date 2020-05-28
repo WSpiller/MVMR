@@ -16,7 +16,8 @@ An dataframe containing effect estimates with respect to each exposure. Currentl
 }
 \description{
 Fits a multivariable Mendelian randomization model adjusting for weak instruments. The functions requires a
-formatted dataframe using the \code{format_mvmr} function, as well a a phenotypic correlation matrix \code{pcor} function.
+formatted dataframe using the \code{format_mvmr} function, as well a phenotypic correlation matrix \code{pcor}. This should be obtained from individual level
+phenotypic data, or constructed as a correlation matrix where correlations have previously been reported.
 }
 \examples{
 
