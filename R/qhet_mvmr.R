@@ -2,7 +2,7 @@
 #'
 #' Fits a multivariable Mendelian randomization model adjusting for weak instruments. The functions requires a formatted dataframe using the \code{format_mvmr} function, as well a phenotypic correlation matrix \code{pcor}. This should be obtained from individual level
 #' phenotypic data, or constructed as a correlation matrix where correlations have previously been reported. Confidence intervals are calculated using a non-parametric bootstrap.
-#' By default, standard errors are not produced but can be calculated by setting \code{se = T}. The number of bootstrap iterations is specified using the \code{iterations argument}.
+#' By default, standard errors are not produced but can be calculated by setting \code{se = T}. The number of bootstrap iterations is specified using the \code{iterations} argument.
 #' Note that calculating confidence intervals at present can take a substantial amount of time.
 #' 
 #'
@@ -22,6 +22,8 @@
 #'
 
 qhet_mvmr<-function(r_input,pcor,CI,iterations){
+  
+  library(boot)
   
   warning("qhet_mvmr() is currently undergoing development.")
   
