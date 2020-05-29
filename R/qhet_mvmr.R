@@ -12,7 +12,7 @@
 #' @param CI Indicates whether 95 percent confidence intervals should be calculated using a non-parametric bootstrap.
 #' @param iterations Specifies number of bootstrap iterations for calculating 95 percent confidence intervals.
 #'
-#' @return An dataframe containing effect estimates with respect to each exposure. Currently only point estimates are provided.
+#' @return An dataframe containing effect estimates with respect to each exposure.
 #'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. [Internet]. 2018;dyy262. Available from: https://dx.doi.org/10.1093/ije/dyy262
 #'@export

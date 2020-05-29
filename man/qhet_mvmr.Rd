@@ -16,7 +16,7 @@ qhet_mvmr(r_input, pcor, CI, iterations)
 \item{iterations}{Specifies number of bootstrap iterations for calculating 95 percent confidence intervals.}
 }
 \value{
-An dataframe containing effect estimates with respect to each exposure. Currently only point estimates are provided.
+An dataframe containing effect estimates with respect to each exposure.
 }
 \description{
 Fits a multivariable Mendelian randomization model adjusting for weak instruments. The functions requires a formatted dataframe using the \code{format_mvmr} function, as well a phenotypic correlation matrix \code{pcor}. This should be obtained from individual level
