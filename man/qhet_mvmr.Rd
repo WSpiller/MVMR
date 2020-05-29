@@ -26,7 +26,7 @@ Note that calculating confidence intervals at present can take a substantial amo
 }
 \examples{
 
-qhet_mvmr(r_input,pcor,se=T,iterations=1000)
+qhet_mvmr(r_input,pcor,CI=T,iterations=1000)
 
 }
 \references{

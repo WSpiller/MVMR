@@ -18,7 +18,7 @@
 #'@export
 #'@examples
 #'
-#' qhet_mvmr(r_input,pcor,se=T,iterations=1000)
+#' qhet_mvmr(r_input,pcor,CI=T,iterations=1000)
 #'
 
 qhet_mvmr<-function(r_input,pcor,CI,iterations){
@@ -27,7 +27,7 @@ qhet_mvmr<-function(r_input,pcor,CI,iterations){
   
   if(missing(CI)) {
     CI<-F
-    warning("95% confidence interval not calculated")
+    warning("95 percent confidence interval not calculated")
   }
   
   if(missing(iterations)) {
