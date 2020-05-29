@@ -1,7 +1,6 @@
 #' qhet_mvmr
 #'
-#' Fits a multivariable Mendelian randomization model adjusting for weak instruments. The functions requires a
-#' formatted dataframe using the \code{format_mvmr} function, as well a phenotypic correlation matrix \code{pcor}. This should be obtained from individual level
+#' Fits a multivariable Mendelian randomization model adjusting for weak instruments. The functions requires a formatted dataframe using the \code{format_mvmr} function, as well a phenotypic correlation matrix \code{pcor}. This should be obtained from individual level
 #' phenotypic data, or constructed as a correlation matrix where correlations have previously been reported. Confidence intervals are calculated using a non-parametric bootstrap.
 #' By default, standard errors are not produced but can be calculated by setting \code{se = T}. The number of bootstrap iterations is specified using the \code{iterations argument}.
 #' Note that calculating confidence intervals at present can take a substantial amount of time.
@@ -10,8 +9,8 @@
 #'
 #' @param r_input A formatted data frame using the \code{format_mvmr} function.
 #' @param pcor A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.
-#' @param CI Indicates whether 95% confidence intervals should be calculated using a non-parametric bootstrap.
-#' @param iterations Specifies number of bootstrap iterations for calculating 95% confidence intervals.
+#' @param CI Indicates whether \code(95%) confidence intervals should be calculated using a non-parametric bootstrap.
+#' @param iterations Specifies number of bootstrap iterations for calculating \code(95%) confidence intervals.
 #'
 #' @return An dataframe containing effect estimates with respect to each exposure. Currently only point estimates are provided.
 #'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
