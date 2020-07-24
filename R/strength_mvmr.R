@@ -69,7 +69,7 @@ strength_mvmr<-function(r_input,gencov){
   
   sigma2xj_dat<-matrix(ncol=exp.number,nrow=length(r_input[,1]),0)
   
-  if(length(gencov) > 0){
+  if(length(gencov)==0){
     
     #Create a subset containing only standard errors for exposure effect estimates
     sebetas<-r_input[,(exp.number + 4):length(r_input)]
