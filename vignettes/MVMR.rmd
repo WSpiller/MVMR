@@ -101,16 +101,13 @@ A vector of names for genetic variants included in the analysis. If variant IDs 
 
 Using the previous data `rawdat.mvmr`, we can format the data using the following command:
 
-```{r,echo=T}
-
-F.data<-format_mvmr(BXGs=rawdat_mvmr[,c(1,2,3)],
-                    BYG=rawdat_mvmr[,7],
-                    seBXGs=rawdat_mvmr[,c(4,5,6)],
-                    seBYG=rawdat_mvmr[,8],
-                    RSID=rawdat_mvmr[,9])
-
+```{r}
+F.data <- format_mvmr(BXGs = rawdat_mvmr[,c(1,2,3)],
+                    BYG = rawdat_mvmr[,7],
+                    seBXGs = rawdat_mvmr[,c(4,5,6)],
+                    seBYG = rawdat_mvmr[,8],
+                    RSID = rawdat_mvmr[,9])
 head(F.data)
-
 ```
 
 In the above code we have provided the numbered columns for each argument. For example, `BXGs=rawdat.mvmr[,c(1,2,3)]` indicates that columns 1, 2, and 3 are the association estimates for exposures 1, 2, and 3. It is important to note that standard error columns `seBXGs` should be input in the same order as BXGs to ensure the correct matching of association estimates with corresponding standard errors.
