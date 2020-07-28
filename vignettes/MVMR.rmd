@@ -96,10 +96,9 @@ F.data <- format_mvmr(BXGs = rawdat_mvmr[,c(1,2,3)],
 head(F.data)
 ```
 
-In the above code we have provided the numbered columns for each argument. For example, `BXGs=rawdat.mvmr[,c(1,2,3)]` indicates that columns 1, 2, and 3 are the association estimates for exposures 1, 2, and 3. It is important to note that standard error columns `seBXGs` should be input in the same order as BXGs to ensure the correct matching of association estimates with corresponding standard errors.
+In the above code we have provided the numbered columns for each argument. For example, `BXGs = rawdat.mvmr[,c(1,2,3)]` indicates that columns 1, 2, and 3 are the association estimates for exposures 1, 2, and 3. It is important to note that standard error columns `seBXGs` should be input in the same order as BXGs to ensure the correct matching of association estimates with corresponding standard errors.
 
-In subsequent steps, each exposure is numbered such that `X1`, `X2`, and `X3` are the first, second, and third entries in the `BXGs=rawdat.mvmr[,c(1,2,3)]` argument.
-
+In subsequent steps, each exposure is numbered such that `X1`, `X2`, and `X3` are the first, second, and third entries in the `BXGs = rawdat.mvmr[,c(1,2,3)]` argument.
 
 ## Step 3: Test for weak instruments
 
