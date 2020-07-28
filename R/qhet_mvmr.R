@@ -157,18 +157,18 @@ qhet_mvmr<-function(r_input,pcor,CI,iterations){
       return(bres)
 
     }
-    
-    b.results<-boot(data=r_input,statistic=bootse,R=iterations)
-    
+
+    b.results<-boot::boot(data=r_input,statistic=bootse,R=iterations)
+
     lcb<-NULL
     ucb<-NULL
     ci<-NULL
 
     for(i in 1:exp.number){
-      
-      lcb[i]<-round(boot.ci(b.results, type="bca",index=i)$bca[4],digits=3)
-      ucb[i]<-round(boot.ci(b.results, type="bca",index=i)$bca[5],digits=3)
-      
+
+      lcb[i]<-round(boot::boot.ci(b.results, type="bca",index=i)$bca[4],digits=3)
+      ucb[i]<-round(boot::boot.ci(b.results, type="bca",index=i)$bca[5],digits=3)
+
       ci[i]<-paste(lcb[i],ucb[i],sep="-")
 
     }
