@@ -106,7 +106,7 @@ In univariate two-sample summary MR, genetic variants selected as instruments ar
 
 Multivariable MR relies upon an extension of this assumption, requiring instruments to be strongly associated with their corresponding exposure conditioning on the remaining included exposures. Conditional instrument strength is quantified by a modified F-statistic which has the same distribution as the univariate F-statistic. Consequently, the same conventional instrument strength threshold of 10 can be used.
 
-Further details are available at [doi:]
+Further details are available [here](https://doi.org/10.1093/ije/dyy262).
 
 The `strength_mvmr()` function is used to evaluate instrument strength in the MVMR setting. The function contains two arguments:
 
