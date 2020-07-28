@@ -13,10 +13,10 @@
 #' @param iterations Specifies number of bootstrap iterations for calculating 95 percent confidence intervals.
 #'
 #' @return An dataframe containing effect estimates with respect to each exposure.
-#'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. [Internet]. 2018;dyy262. Available from: https://dx.doi.org/10.1093/ije/dyy262
 #'@export
 #'@examples
+#' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
+#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
 #'
 #' qhet_mvmr(r_input,pcor,CI=T,iterations=1000)
 #'
