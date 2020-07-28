@@ -117,10 +117,8 @@ The `strength_mvmr()` function is used to evaluate instrument strength in the MV
 
 Continuing with the previous example, we can evaluate the conditional strength of the instruments for each exposure using the following command
 
-```{r,echo=T}
-
-sres<-strength_mvmr(r_input=F.data,gencov=0)
-
+```{r}
+sres <- strength_mvmr(r_input = F.data, gencov = 0)
 ```
 
 In this case the set of instruments is sufficiently strong for MVMR estimation using the conventional F-statistic threshold of 10. However, note that we have manually set `mvmrcov` to zero, which would likely not be appropriate given each SNP-exposure estimate eas obtained from the same sample.
