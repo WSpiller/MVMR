@@ -18,7 +18,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Multivariable Mendelian Randomisation (MVMR) is a form of instrumental variable analysis
 which estimates the direct effect of multiple exposures on an outcome using genetic variants as
-instruments. The `MVMR` R package facilitates estimation of causal effects using MVMR, as well as including a range of sensitivity analyses evaluating the underlying assumptions of the approach. The methods included in `MVMR` originate from Sanderson et al (2020), available at: [doi:]
+instruments. The `MVMR` R package facilitates estimation of causal effects using MVMR, as well as including a range of sensitivity analyses evaluating the underlying assumptions of the approach. The methods included in `MVMR` originate from Sanderson et al (2020), available [here](https://doi.org/10.1093/ije/dyy262).
 
 ### Workflow
 
