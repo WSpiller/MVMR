@@ -131,10 +131,8 @@ Importantly, weak instruments can increase the false positive rate for pleiotrop
 
 The function `pleiotropy_mvmr()` can be used to test for pleiotropy, requiring the same arguments as the `strength_mvmr()`; `r_input` and `mvmrcov`.
 
-```{r, echo=T}
-
-pres<-pleiotropy_mvmr(r_input=F.data,gencov=0)
-
+```{r}
+pres <- pleiotropy_mvmr(r_input = F.data, gencov = 0)
 ```
 
 ## Step 5: Estimate causal effects
