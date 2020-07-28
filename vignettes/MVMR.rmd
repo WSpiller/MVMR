@@ -144,8 +144,3 @@ res <- ivw_mvmr(r_input = F.data)
 ```
 
 In this case, the effect estimates are interpreted as the direct effects of LDL-C (exposure 1), HDL-C (exposure 2), and Trg (exposure 3) on SBP. Estimates are not robust to weak instruments of pleiotropic bias, and therefore rely upon the underlying MVMR assumptions being satisfied.
-
-
-
-
-
