@@ -65,15 +65,15 @@ The MVMR approach requires pairwise covariances between an instrument and pairs 
 
 1. Estimate the covariance terms using individual level data
 
-If individual level data is available from which the GWAS summary estimates were obtained, the `snpcov_mvmr()` function can be used to calculate the necessary covariance terms. 
+    If individual level data is available from which the GWAS summary estimates were obtained, the `snpcov_mvmr()` function can be used to calculate the necessary covariance terms. 
 
 2. Estimate the phenotypic correlation between exposures from individual level data
 
-If individual level data is available including phenotypic data, the `phenocov_mvmr()` function can be used to provide an approximation for the necessary covariance terms. 
+    If individual level data is available including phenotypic data, the `phenocov_mvmr()` function can be used to provide an approximation for the necessary covariance terms. 
 
 3. Obtain gene-exposure associations from non-overlapping samples.
 
-If gene-exposure associations are estimated in seperate non-overlapping samples, then the covariances will be zero by design. It is therefore not necessary to calculate the set of covariances, although this approach can be difficult to apply due to a lack of suitable sources of data.
+    If gene-exposure associations are estimated in seperate non-overlapping samples, then the covariances will be zero by design. It is therefore not necessary to calculate the set of covariances, although this approach can be difficult to apply due to a lack of suitable sources of data.
 
 ## Step 2: Format summary data
 
