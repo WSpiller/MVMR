@@ -14,8 +14,10 @@
 #'@export
 #'@examples
 #'
-#' phenocov_mvmr(Pcov,summarydata[,c(3,4)])
-#' 
+#' \dontrun{
+#' phenocov_mvmr(Pcov, summarydata[,c(3,4)])
+#' }
+#'
 
 phenocov_mvmr<-function(Pcov,seBXGs){
   
