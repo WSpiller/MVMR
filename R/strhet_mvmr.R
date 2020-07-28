@@ -11,14 +11,14 @@
 #' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
 #'
 #' @return A dataframe showing the conditional F-statistic for each exposure.
-#' 
-#'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. [Internet]. 2018;dyy262. Available from: https://dx.doi.org/10.1093/ije/dyy262
 #'@export
 #'@examples
 #'
 #' strhet_mvmr(data,covariances)
 #' 
+#' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
+#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
+#' @importFrom stats lm as.formula optimize
 #' @importFrom utils combn
 
 strhet_mvmr<-function(r_input,gencov){
