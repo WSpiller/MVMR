@@ -1,10 +1,10 @@
 #' ivw_mvmr
 #'
 #' Fits an IVW multivariable Mendelian randomization model using first order weights.
-#' 
+#'
 #' @param r_input A formatted data frame using the \code{format_mvmr} function.
-#' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default. 
-#' 
+#' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
+#'
 #' @return An dataframe containing MVMR results, including estimated coefficients, their standard errors, t-statistics, and corresponding (two-sided) p-values.
 #'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
@@ -26,56 +26,56 @@
 # genetic variants on each exposure.
 
 ivw_mvmr<-function(r_input,gencov){
-  
+
   #If weights is missing, first order weights are used by default.
 
-  
-  # Inverse variance weighting is used. 
-  
+
+  # Inverse variance weighting is used.
+
     Wj<-1/r_input[,3]^2
-  
+
   #Determine the number of exposures included in the model
-  
+
   exp.number<-length(names(r_input)[-c(1,2,3)])/2
-  
+
   #Fit the IVW MVMR model
-  
+
   A_sum<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,weights=Wj,data=r_input))
-  
+
   A<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,weights=Wj,data=r_input))$coef
-  
+
   #Rename the regressors for ease of interpretation
   for(i in 1:exp.number){
     dimnames(A)[[1]][i]<- paste0("exposure",i,collapse="")
   }
-  
-  
+
+
   ##########
   # Output #
   ##########
-  
+
   # Print a few summary elements that are common to both lm and plm model summary objects
   cat("\n")
-  
+
   cat("Multivariable MR\n")
-  
+
   cat("\n")
-  
+
   print(A)
-  
+
   cat("\nResidual standard error:", round(A_sum$sigma,3), "on", A_sum$df[2], "degrees of freedom")
-  
+
   cat("\n")
-  
-  cat("\n")  
-  
+
   cat("\n")
-  
+
+  cat("\n")
+
 
   return(A)
-  
+
 }
