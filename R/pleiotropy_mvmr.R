@@ -7,7 +7,8 @@
 #'  Q-statistic for instrument validity, and a corresponding P-value.
 #' 
 #'
-#' @param r_input r_input A formatted data frame using the \code{format_mvmr} function.
+#'
+#' @param r_input A formatted data frame using the \code{format_mvmr} function.
 #' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
 #'
 #' @return A Q-statistic for instrument validity and the corresponding p-value
