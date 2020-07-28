@@ -8,7 +8,7 @@
 #' @param seBXGs A matrix containing standard errors corresponding in relation to the gene-exposure association for each SNP.
 #'
 #' @return A list of covariance matrices with respect to each genetic variant, retaining the ordering in \code{seBXGs}
-#' 
+#'
 #'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
 #'@export
@@ -20,32 +20,31 @@
 #'
 
 phenocov_mvmr<-function(Pcov,seBXGs){
-  
+
   sigmalist <- vector("list", length(seBXGs[1,]))
-  
+
   for(i in 1:length(seBXGs[,1])){
-    
+
     sigma_mattemp<-Pcov
-    
+
     for(j in 1:length(seBXGs[1,])){
-      
+
       for(k in 1:length(seBXGs[1,])){
-        
+
         sigma_mattemp[j,k]<-sigma_mattemp[j,k] * seBXGs[i,j] * seBXGs[i,k]
-        
+
       }
-      
+
     }
-    
+
     sigmalist[[i]] <-sigma_mattemp
-    
+
   }
-  
+
   return(sigmalist)
-  
+
 }
-  
-  
-  
-  
-  
+
+
+
+
