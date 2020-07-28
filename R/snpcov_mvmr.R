@@ -16,6 +16,7 @@
 #'
 #' snpcov_mvmr(data[,1:10],data[,11:13])
 #' 
+#' @importFrom stats lm
 
 snpcov_mvmr<-function(Gs,Xs){
   
