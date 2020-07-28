@@ -79,25 +79,11 @@ If gene-exposure associations are estimated in seperate non-overlapping samples,
 
 Downstream functions in the `MVMR` package rely upon prior formatting of raw summary data using the `format_mvmr()` function. Specifically, `format_mvmr()` checks and organises summary data columns for use in MVMR analyses. The `format_mvmr` function takes the following arguments:
 
-`BXGs`
-
-A subset containing beta-coefficient values for genetic associations with each exposure. Columns should indicate exposure number, with rows representing estimates for a given genetic variant.
-
-`BYG`
-
-A numeric vector of beta-coefficient values for genetic associations with the outcome.
-
-`seBXGs`
-
-A subset containing standard errors corresponding to the subset of beta-coefficients `BXGs`.
-
-`seBYG`
-
-A numeric vector of standard errors corresponding to the beta-coefficients `BYG`.
-
-`RSID`	
-
-A vector of names for genetic variants included in the analysis. If variant IDs are not provided (`RSID="NULL"`), a vector of ID numbers will be generated.
+- `BXGs`: A subset containing beta-coefficient values for genetic associations with each exposure. Columns should indicate exposure number, with rows representing estimates for a given genetic variant.
+- `BYG`: A numeric vector of beta-coefficient values for genetic associations with the outcome.
+- `seBXGs`: A subset containing standard errors corresponding to the subset of beta-coefficients `BXGs`.
+- `seBYG`: A numeric vector of standard errors corresponding to the beta-coefficients `BYG`.
+- `RSID`: A vector of names for genetic variants included in the analysis. If variant IDs are not provided (`RSID = "NULL"`), a vector of ID numbers will be generated.
 
 Using the previous data `rawdat.mvmr`, we can format the data using the following command:
 
