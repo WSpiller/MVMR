@@ -19,6 +19,7 @@
 #'
 #' strhet_mvmr(data,covariances)
 #' 
+#' @importFrom utils combn
 
 strhet_mvmr<-function(r_input,gencov){
   
