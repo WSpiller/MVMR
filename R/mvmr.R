@@ -16,13 +16,19 @@
 #' \item{\code{p_valid}}{A p-value corresponding to the heterogeneity measure for instrument validity (\code{Q_valid})}
 #'}
 #'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#'@export
-#'@examples
 #'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
 #' @importFrom stats lm as.formula pchisq pf
+#' @export
+#' @examples
 #'
-#' mvmr(r_input,0,1)
-#' 
+#' r_input <- format_mvmr(
+#'     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
+#'     BYG = rawdat_mvmr$SBP_beta,
+#'     seBXGs = rawdat_mvmr[,c("LDL_se","HDL_se")],
+#'     seBYG = rawdat_mvmr$SBP_se,
+#'     RSID = rawdat_mvmr$SNP)
+#' mvmr(r_input, 0, 1)
+#'
 
 # Define IVW Multivariable MR function: This takes the formatted dataframe from
 # the format_MVMR function, as an input, the covariance between the effect of the
