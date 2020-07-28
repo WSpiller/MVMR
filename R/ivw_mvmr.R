@@ -7,13 +7,19 @@
 #' 
 #' @return An dataframe containing MVMR results, including estimated coefficients, their standard errors, t-statistics, and corresponding (two-sided) p-values.
 #'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#'@export
-#'@examples
 #'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
 #' @importFrom stats lm as.formula
+#' @export
+#' @examples
 #'
+#' r_input <- format_mvmr(
+#'     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
+#'     BYG = rawdat_mvmr$SBP_beta,
+#'     seBXGs = rawdat_mvmr[,c("LDL_se","HDL_se")],
+#'     seBYG = rawdat_mvmr$SBP_se,
+#'     RSID = rawdat_mvmr$SNP)
 #' ivw_mvmr(r_input)
-#' 
+#'
 
 # Define IVW Multivariable MR function: This takes the formatted dataframe from
 # the format_MVMR function as an input, as well as the covariance between the effect of the
