@@ -52,7 +52,7 @@ The data frame `rawdat_mvmr`, included in the `MVMR` package shows an example of
 
 The first 6 rows of `rawdat_mvmr` are:
 
-```{r, echo=T}
+```{r}
 library(MVMR)
 head(rawdat_mvmr)
 ```
