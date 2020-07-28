@@ -8,14 +8,17 @@
 #' @param Xs A matrix or dataframe containing exposure measures. Columns should indicate exposure number, with rows representing an observed measure for the given exposure.
 #'
 #' @return A list of covariance matrices with respect to each genetic variant, retaining the ordering in \code{Gs}
-#'@export
-#'@examples
 #'
-#' snpcov_mvmr(data[,1:10],data[,11:13])
-#' 
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
 #' @importFrom stats lm
+#' @export
+#' @examples
+#'
+#' \dontrun{
+#' snpcov_mvmr(data[,1:10], data[,11:13])
+#' }
+#'
 
 snpcov_mvmr<-function(Gs,Xs){
   
