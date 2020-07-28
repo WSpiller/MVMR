@@ -10,6 +10,7 @@
 #'@export
 #'@examples
 #'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
+#' @importFrom stats lm as.formula
 #'
 #' ivw_mvmr(r_input)
 #' 
