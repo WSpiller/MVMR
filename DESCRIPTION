@@ -1,7 +1,18 @@
 Package: MVMR
 Title: MVMR
 Version: 0.2
-Authors@R: c(person("Wes", "Spiller", email = "wes.spiller@bristol.ac.uk", role = c("aut", "cre")), person("Jack", "Bowden", email = "jack.bowden@bristol.ac.uk", role = c("aut")), person("Eleanor", "Sanderson", email = "eleanor.sanderson@bristol.ac.uk", role = c("aut")))
+Authors@R: c(person("Wes", "Spiller", 
+                    email = "wes.spiller@bristol.ac.uk", 
+                    role = c("aut", "cre"),
+                    comment = c(ORCID = "0000-0002-8169-5531")), 
+              person("Jack", "Bowden", 
+                    email = "j.bowden2@exeter.ac.uk", 
+                    role = c("aut"),
+                    comment = c(ORCID = "0000-0003-2628-3304")), 
+              person("Eleanor", "Sanderson", 
+                    email = "eleanor.sanderson@bristol.ac.uk", 
+                    role = c("aut"),
+                    comment = c(ORCID = "0000-0001-5188-5775")))
 Description: An R package for performing multivariable Mendelian randomization analyses.
 Depends: R (>= 3.5)
 License: GPL(>= 2)
@@ -10,6 +21,7 @@ Imports: boot
 LazyData: true
 Suggests: knitr, rmarkdown, kableExtra, captioner, stringr
 VignetteBuilder: knitr
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 URL: https://github.com/WSpiller/MVMR
 BugReports: https://github.com/WSpiller/MVMR/issues
+Roxygen: list(markdown = TRUE)

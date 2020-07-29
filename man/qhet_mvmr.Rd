@@ -21,16 +21,18 @@ An dataframe containing effect estimates with respect to each exposure.
 \description{
 Fits a multivariable Mendelian randomization model adjusting for weak instruments. The functions requires a formatted dataframe using the \code{format_mvmr} function, as well a phenotypic correlation matrix \code{pcor}. This should be obtained from individual level
 phenotypic data, or constructed as a correlation matrix where correlations have previously been reported. Confidence intervals are calculated using a non-parametric bootstrap.
-By default, standard errors are not produced but can be calculated by setting \code{se = T}. The number of bootstrap iterations is specified using the \code{iterations} argument.
+By default, standard errors are not produced but can be calculated by setting \code{se = TRUE}. The number of bootstrap iterations is specified using the \code{iterations} argument.
 Note that calculating confidence intervals at present can take a substantial amount of time.
 }
 \examples{
 
-qhet_mvmr(r_input,pcor,CI=T,iterations=1000)
+\dontrun{
+qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000)
+}
 
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. [Internet]. 2018;dyy262. Available from: https://dx.doi.org/10.1093/ije/dyy262
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \url{https://dx.doi.org/10.1093/ije/dyy262}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.
