@@ -33,7 +33,7 @@ strength_mvmr<-function(r_input,gencov){
   
   # Inverse variance weighting is used. 
   
-    Wj<-1/r_input[,3]^2
+  Wj<-1/r_input[,3]^2
   
   #Determine the number of exposures included in the model
   
@@ -41,7 +41,7 @@ strength_mvmr<-function(r_input,gencov){
   
   A<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
-    ,weights=Wj,data=r_input))$coef
+    ,data=r_input))$coef
   
   #Rename the regressors for ease of interpretation
   for(i in 1:exp.number){
@@ -57,6 +57,7 @@ strength_mvmr<-function(r_input,gencov){
   
   delta_mat<-matrix(0,ncol=exp.number,nrow=exp.number-1)
   
+  
   #Obtain delta values fitting regression models for each set of exposure effects upon other exposure effects
   for(i in 1:exp.number){
     regressand<-names(r_input[3 + i])
@@ -69,7 +70,7 @@ strength_mvmr<-function(r_input,gencov){
   
   sigma2xj_dat<-matrix(ncol=exp.number,nrow=length(r_input[,1]),0)
   
-  if(length(gencov)==0|length(gencov)<2){
+  if(length(gencov) < 2){
     
     #Create a subset containing only standard errors for exposure effect estimates
     sebetas<-r_input[,(exp.number + 4):length(r_input)]
@@ -80,53 +81,43 @@ strength_mvmr<-function(r_input,gencov){
       for(j in 1:(exp.number-1)){
         sigma2xj_dat[,i]<- sigma2xj_dat[,i] + (se.temp[,j]^2 * delta_mat[j,i]^2)
       }
-      sigma2xj_dat[,i]<- sigma2xj_dat[,i] + sebetas[,i]^2
+      sigma2xj_dat[,i] <- sigma2xj_dat[,i] + sebetas[,i]^2
       
     }
     
     
   }
-  
-  
-  
-  
-  
-  
-  
-  
-  
   
   if(length(gencov) > 2){
-  
-  #Create a subset containing only standard errors for exposure effect estimates
-  sebetas<-r_input[,(exp.number + 4):length(r_input)]
-  
-  #Generates the sigma2xj values for each exposure
-  for(i in 1:exp.number){
-    se.temp<-as.matrix(sebetas[,-i])
-    for(j in 1:(exp.number-1)){
-      sigma2xj_dat[,i]<- sigma2xj_dat[,i] + (se.temp[,j]^2 * delta_mat[j,i]^2)
-    }
-    sigma2xj_dat[,i]<- sigma2xj_dat[,i] + sebetas[,i]^2 - 0
+    sigma2xj_dat<-matrix(ncol=exp.number,nrow=length(r_input[,1]),0)
+    delta.temp <- matrix(0,ncol=exp.number,nrow=exp.number)
     
-    for(k in 1:(exp.number-1)){
+    
+    #Generates the sigma2xj values for each exposure
+    for(i in 1:exp.number){
       
-      temp<-seq(1:exp.number)
-      
-      temp<-temp[-i]
-      
-      for(l in 1:length(r_input[,1])){
-      
-      sigma2xj_dat[l,i]<- sigma2xj_dat[l,i] - delta_mat[j,i]*2*gencov[[l]][i,temp[k]]
-      
+      if(i == 1) { 
+        delta.temp[,i] <- c(-1, delta_mat[,i])
       }
       
+      if(i>1 & i<exp.number){
+        delta.temp[,i] <- c(delta_mat[1:(i-1),i],-1,delta_mat[i:(exp.number-1),i])
+      }
+      
+      if(i == exp.number){
+        delta.temp[,i] <- c(delta_mat[,i],-1)
+      }
+      
+      
+      for(l in 1:length(r_input[,1])){
+        
+        sigma2xj_dat[l,i]<- sigma2xj_dat[l,i] +  t(delta.temp[,i])%*%gencov[[l]]%*%delta.temp[,i]
+        
+      }
+      
+      
     }
-    
   }
-  
-  }
-  
   
   #Create an empty matrix for instrument strength Q statistics
   Q_strength<-matrix(ncol=exp.number,nrow=1,0)
@@ -166,4 +157,4 @@ strength_mvmr<-function(r_input,gencov){
   
   return(Q_strength)
   
-  }
+}
