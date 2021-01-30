@@ -20,14 +20,12 @@ variants on each exposure. The phenotypic covariance matrix should be constructe
 row numbers reference ordered exposures.
 }
 \examples{
-
 \dontrun{
 phenocov_mvmr(Pcov, summarydata[,c(3,4)])
 }
-
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \url{https://dx.doi.org/10.1093/ije/dyy262}
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.

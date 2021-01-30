@@ -20,14 +20,12 @@ variants on each exposure. The function returns a number of covariance matrices 
 row numbers reference ordered exposures.
 }
 \examples{
-
 \dontrun{
 snpcov_mvmr(data[,1:10], data[,11:13])
 }
-
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \url{https://dx.doi.org/10.1093/ije/dyy262}
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.

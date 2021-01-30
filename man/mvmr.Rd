@@ -7,7 +7,7 @@
 mvmr(r_input, gencov, weights)
 }
 \arguments{
-\item{r_input}{A formatted data frame using the \code{format_mvmr} function.}
+\item{r_input}{A formatted data frame using the \code{format_mvmr} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput}}}
 
 \item{gencov}{Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.}
 
@@ -29,7 +29,7 @@ Note: This function is from the old version of the MVMR package and will be repl
 Fits an IVW multivariable Mendelian randomization model using first order weights. The function returns an object of class \code{"MVMRIVW"}, containing regression estimates, estimated heterogeneity as a measure of instrument strength (\code{Q_strength}), and estimated heterogeneity as a measure of instrument validity (\code{Q_valid}).
 }
 \examples{
-
+# Example using format_mvmr formatted data
 r_input <- format_mvmr(
     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
     BYG = rawdat_mvmr$SBP_beta,
@@ -38,9 +38,18 @@ r_input <- format_mvmr(
     RSID = rawdat_mvmr$SNP)
 mvmr(r_input, 0, 1)
 
+# Example using MRMVInput formatted data from the MendelianRandomization package
+bx <- as.matrix(rawdat_mvmr[,c("LDL_beta", "HDL_beta")])
+bxse <- as.matrix(rawdat_mvmr[,c("LDL_se", "HDL_se")])
+dat <- MendelianRandomization::mr_mvinput(bx = bx,
+                                          bxse = bxse,
+                                          by = rawdat_mvmr$SBP_beta,
+                                          byse = rawdat_mvmr$SBP_se,
+                                          snps = rawdat_mvmr$SNP)
+mvmr(r_input = r_input, gencov = 0, weights = 1)
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \url{https://dx.doi.org/10.1093/ije/dyy262}
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.

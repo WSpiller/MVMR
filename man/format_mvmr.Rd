@@ -18,13 +18,12 @@ format_mvmr(BXGs, BYG, seBXGs, seBYG, RSID)
 \item{RSID}{A vector of names for genetic variants included in the analysis. If variant IDs are not provided (\code{RSID="NULL"}), a vector of ID numbers will be generated.}
 }
 \value{
-A formatted data frame.
+A formatted data frame of class \code{mvmr_format}.
 }
 \description{
 Reads in summary data. Checks and organises columns for use in calculating multivariable Mendelian Randomization analyses. Where variant IDs are not provided, a vector is generated for variant identification.
 }
 \examples{
-
 r_input <- format_mvmr(
     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
     BYG = rawdat_mvmr$SBP_beta,
@@ -32,10 +31,10 @@ r_input <- format_mvmr(
     seBYG = rawdat_mvmr$SBP_se,
     RSID = rawdat_mvmr$SNP)
 names(r_input)
-
+class(r_input)
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \url{https://dx.doi.org/10.1093/ije/dyy262}
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.

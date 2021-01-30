@@ -7,7 +7,7 @@
 qhet_mvmr(r_input, pcor, CI, iterations)
 }
 \arguments{
-\item{r_input}{A formatted data frame using the \code{format_mvmr} function.}
+\item{r_input}{A formatted data frame using the \code{format_mvmr} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput}}}
 
 \item{pcor}{A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.}
 
@@ -25,14 +25,12 @@ By default, standard errors are not produced but can be calculated by setting \c
 Note that calculating confidence intervals at present can take a substantial amount of time.
 }
 \examples{
-
 \dontrun{
 qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000)
 }
-
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \url{https://dx.doi.org/10.1093/ije/dyy262}
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.
