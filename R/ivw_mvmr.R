@@ -11,7 +11,6 @@
 #' @importFrom stats lm as.formula
 #' @export
 #' @examples
-#'
 #' r_input <- format_mvmr(
 #'     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
 #'     BYG = rawdat_mvmr$SBP_beta,
@@ -19,7 +18,6 @@
 #'     seBYG = rawdat_mvmr$SBP_se,
 #'     RSID = rawdat_mvmr$SNP)
 #' ivw_mvmr(r_input)
-#'
 
 # Define IVW Multivariable MR function: This takes the formatted dataframe from
 # the format_MVMR function as an input, as well as the covariance between the effect of the
