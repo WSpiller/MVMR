@@ -37,6 +37,11 @@
 
 mvmr<-function(r_input,gencov,weights){
 
+  # convert MRMVInput object to mvmr_format
+  if ("MRMVInput" %in% class(r_input)) {
+    r_input <- mrmvinput_to_mvmr_format(r_input)
+  }
+
   # Perform check that r_input has been formatted using format_mvmr function
   if(!("mvmr_format" %in%
        class(r_input))) {
