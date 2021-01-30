@@ -23,6 +23,7 @@ Suggests:
   captioner,
   kableExtra,
   knitr,
+  MendelianRandomization,
   rmarkdown,
   stringr
 VignetteBuilder: knitr
