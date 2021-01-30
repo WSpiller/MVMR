@@ -82,7 +82,8 @@ format_mvmr<-function(BXGs,BYG,seBXGs,seBYG,RSID){
 
   }
 
-  names(dat)<-c("SNP","betaYG","sebetaYG",names(BXGs),names(seBXGs))
+  names(dat) <- c("SNP", "betaYG", "sebetaYG",
+                  names(BXGs), names(seBXGs))
 
   # The function returns the formatted dataframe
 
