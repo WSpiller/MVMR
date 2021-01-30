@@ -7,7 +7,7 @@
 #'
 #'
 #'
-#' @param r_input A formatted data frame using the \code{format_mvmr} function.
+#' @param r_input A formatted data frame using the \code{format_mvmr} function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput`]
 #' @param pcor A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.
 #' @param CI Indicates whether 95 percent confidence intervals should be calculated using a non-parametric bootstrap.
 #' @param iterations Specifies number of bootstrap iterations for calculating 95 percent confidence intervals.
