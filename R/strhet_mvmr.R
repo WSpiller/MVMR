@@ -6,7 +6,6 @@
 #'  applying the \code{snpcov_mvmr} or \code{phenocov_mvmr} functions, are input manually. The function returns a dataframe including the conditional
 #'  F-statistic with respect to each exposure. A conventional F-statistic threshold of 10 is used in basic assessments of instrument strength.
 #'
-#'
 #' @param r_input A formatted data frame using the \code{format_mvmr} function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput`]
 #' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
 #'
@@ -18,11 +17,9 @@
 #' @importFrom utils combn
 #' @export
 #' @examples
-#'
 #' \dontrun{
 #' strhet_mvmr(r_input, covariances)
 #' }
-#'
 
 strhet_mvmr<-function(r_input,gencov){
 
