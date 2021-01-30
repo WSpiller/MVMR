@@ -14,11 +14,9 @@
 #' @importFrom stats lm
 #' @export
 #' @examples
-#'
 #' \dontrun{
 #' snpcov_mvmr(data[,1:10], data[,11:13])
 #' }
-#'
 
 snpcov_mvmr<-function(Gs,Xs){
 
