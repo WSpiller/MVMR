@@ -5,8 +5,6 @@
 #' By default, standard errors are not produced but can be calculated by setting \code{se = TRUE}. The number of bootstrap iterations is specified using the \code{iterations} argument.
 #' Note that calculating confidence intervals at present can take a substantial amount of time.
 #'
-#'
-#'
 #' @param r_input A formatted data frame using the \code{format_mvmr} function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput`]
 #' @param pcor A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.
 #' @param CI Indicates whether 95 percent confidence intervals should be calculated using a non-parametric bootstrap.
@@ -18,11 +16,9 @@
 #' @importFrom stats optim optimize
 #' @export
 #' @examples
-#'
 #' \dontrun{
 #' qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000)
 #' }
-#'
 
 qhet_mvmr<-function(r_input,pcor,CI,iterations){
 
