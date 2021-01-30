@@ -21,7 +21,7 @@
 #'     seBYG = rawdat_mvmr$SBP_se,
 #'     RSID = rawdat_mvmr$SNP)
 #' names(r_input)
-#'
+#' class(r_input)
 
 #Function for formatting MVMR data frame
 
