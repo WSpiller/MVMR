@@ -26,6 +26,12 @@
 
 qhet_mvmr<-function(r_input,pcor,CI,iterations){
 
+  # Perform check that r_input has been formatted using format_mvmr function
+  if(!("mvmr_format" %in%
+       class(r_input))) {
+    stop('The class of the data object must be "mvmr_format", please resave the object with the output of format_mvmr().')
+  }
+
   requireNamespace("boot", quietly = TRUE)
 
   warning("qhet_mvmr() is currently undergoing development.")
