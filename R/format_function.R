@@ -13,7 +13,6 @@
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 #' @export
 #' @examples
-#'
 #' r_input <- format_mvmr(
 #'     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
 #'     BYG = rawdat_mvmr$SBP_beta,
