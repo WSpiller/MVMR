@@ -26,6 +26,12 @@
 
 strhet_mvmr<-function(r_input,gencov){
 
+  # Perform check that r_input has been formatted using format_mvmr function
+  if(!("mvmr_format" %in%
+       class(r_input))) {
+    stop('The class of the data object must be "mvmr_format", please resave the object with the output of format_mvmr().')
+  }
+
   # Inverse variance weighting is used.
 
   Wj<-1/r_input[,3]^2
