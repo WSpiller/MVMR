@@ -37,6 +37,12 @@
 
 mvmr<-function(r_input,gencov,weights){
 
+  # Perform check that r_input has been formatted using format_mvmr function
+  if(!("mvmr_format" %in%
+       class(r_input))) {
+    stop('The class of the data object must be "mvmr_format", please resave the object with the output of format_mvmr().')
+  }
+
   #gencov is the covariance between the effect of the genetic variants on each exposure.
   #By default it is set to 0.
 
