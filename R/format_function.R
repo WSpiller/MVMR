@@ -7,7 +7,7 @@
 #' @param seBXGs A matrix containing standard errors corresponding to the matrix of beta-coefficients \code{BXGs}.
 #' @param seBYG A numeric vector of standard errors corresponding to the beta-coefficients \code{BYG}.
 #' @param RSID A vector of names for genetic variants included in the analysis. If variant IDs are not provided (\code{RSID="NULL"}), a vector of ID numbers will be generated.
-#' @return A formatted data frame.
+#' @return A formatted data frame of class `mvmr_format`.
 #'
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
