@@ -20,7 +20,7 @@
 #' @importFrom stats lm as.formula pchisq pf
 #' @export
 #' @examples
-#'
+#' # Example using format_mvmr formatted data
 #' r_input <- format_mvmr(
 #'     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
 #'     BYG = rawdat_mvmr$SBP_beta,
