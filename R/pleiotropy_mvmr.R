@@ -17,7 +17,6 @@
 #' @importFrom stats lm as.formula pchisq
 #' @export
 #' @examples
-#'
 #' \dontrun{
 #' pleiotropy_mvmr(r_input, covariances)
 #' }
