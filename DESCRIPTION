@@ -1,6 +1,6 @@
 Package: MVMR
 Title: MVMR
-Version: 0.2
+Version: 0.3
 Authors@R: c(person("Wes", "Spiller", 
                     email = "wes.spiller@bristol.ac.uk", 
                     role = c("aut", "cre"),
