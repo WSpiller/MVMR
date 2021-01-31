@@ -1,7 +1,7 @@
 ---
 title: "Multivariable MR Tutorial"
 author: "Wes Spiller, Eleanor Sanderson, and Jack Bowden"
-date: "2 April 2020"
+date: "31^st^ January 2021"
 output: html_vignette
 vignette: >
   %\VignetteIndexEntry{Multivariable MR Tutorial}
