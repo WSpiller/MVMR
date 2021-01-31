@@ -7,7 +7,7 @@
 ivw_mvmr(r_input, gencov)
 }
 \arguments{
-\item{r_input}{A formatted data frame using the \code{format_mvmr} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput}}}
+\item{r_input}{A formatted data frame using the \code{\link{format_mvmr}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput}}}
 
 \item{gencov}{Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.}
 }
