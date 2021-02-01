@@ -4,7 +4,7 @@
 #'
 #' Fits an IVW multivariable Mendelian randomization model using first order weights. The function returns an object of class \code{"MVMRIVW"}, containing regression estimates, estimated heterogeneity as a measure of instrument strength (\code{Q_strength}), and estimated heterogeneity as a measure of instrument validity (\code{Q_valid}).
 #'
-#' @param r_input A formatted data frame using the \code{format_mvmr} function.
+#' @param r_input A formatted data frame using the [`format_mvmr`] function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput`]
 #' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
 #' @param weights A value specifying the inverse variance weights used to calculate IVW estimate and Cochran's Q statistic. Currently only first order weights are available (\code{1}).
 #'
@@ -16,11 +16,11 @@
 #' \item{\code{p_valid}}{A p-value corresponding to the heterogeneity measure for instrument validity (\code{Q_valid})}
 #'}
 #'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
+#'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 #' @importFrom stats lm as.formula pchisq pf
 #' @export
 #' @examples
-#'
+#' # Example using format_mvmr formatted data
 #' r_input <- format_mvmr(
 #'     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
 #'     BYG = rawdat_mvmr$SBP_beta,
@@ -29,6 +29,15 @@
 #'     RSID = rawdat_mvmr$SNP)
 #' mvmr(r_input, 0, 1)
 #'
+#' # Example using MRMVInput formatted data from the MendelianRandomization package
+#' bx <- as.matrix(rawdat_mvmr[,c("LDL_beta", "HDL_beta")])
+#' bxse <- as.matrix(rawdat_mvmr[,c("LDL_se", "HDL_se")])
+#' dat <- MendelianRandomization::mr_mvinput(bx = bx,
+#'                                           bxse = bxse,
+#'                                           by = rawdat_mvmr$SBP_beta,
+#'                                           byse = rawdat_mvmr$SBP_se,
+#'                                           snps = rawdat_mvmr$SNP)
+#' mvmr(r_input = r_input, gencov = 0, weights = 1)
 
 # Define IVW Multivariable MR function: This takes the formatted dataframe from
 # the format_MVMR function, as an input, the covariance between the effect of the
@@ -36,6 +45,17 @@
 # used in the analysis.
 
 mvmr<-function(r_input,gencov,weights){
+
+  # convert MRMVInput object to mvmr_format
+  if ("MRMVInput" %in% class(r_input)) {
+    r_input <- mrmvinput_to_mvmr_format(r_input)
+  }
+
+  # Perform check that r_input has been formatted using format_mvmr function
+  if(!("mvmr_format" %in%
+       class(r_input))) {
+    stop('The class of the data object must be "mvmr_format", please resave the object with the output of format_mvmr().')
+  }
 
   #gencov is the covariance between the effect of the genetic variants on each exposure.
   #By default it is set to 0.

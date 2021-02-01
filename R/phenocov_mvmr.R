@@ -9,15 +9,13 @@
 #'
 #' @return A list of covariance matrices with respect to each genetic variant, retaining the ordering in \code{seBXGs}
 #'
-#'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
-#'@export
-#'@examples
-#'
+#' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
+#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
+#' @export
+#' @examples
 #' \dontrun{
 #' phenocov_mvmr(Pcov, summarydata[,c(3,4)])
 #' }
-#'
 
 phenocov_mvmr<-function(Pcov,seBXGs){
 

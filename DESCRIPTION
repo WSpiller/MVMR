@@ -1,6 +1,6 @@
 Package: MVMR
 Title: MVMR
-Version: 0.2
+Version: 0.3
 Authors@R: c(person("Wes", "Spiller", 
                     email = "wes.spiller@bristol.ac.uk", 
                     role = c("aut", "cre"),
@@ -19,7 +19,13 @@ License: GPL(>= 2)
 Encoding: UTF-8
 Imports: boot
 LazyData: true
-Suggests: knitr, rmarkdown, kableExtra, captioner, stringr
+Suggests:
+  captioner,
+  kableExtra,
+  knitr,
+  MendelianRandomization,
+  rmarkdown,
+  stringr
 VignetteBuilder: knitr
 RoxygenNote: 7.1.1
 URL: https://github.com/WSpiller/MVMR

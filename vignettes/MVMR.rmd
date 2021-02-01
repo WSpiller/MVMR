@@ -1,8 +1,7 @@
-  
 ---
 title: "Multivariable MR Tutorial"
 author: "Wes Spiller, Eleanor Sanderson, and Jack Bowden"
-date: "2 April 2020"
+date: "31^st^ January 2021"
 output: html_vignette
 vignette: >
   %\VignetteIndexEntry{Multivariable MR Tutorial}
@@ -110,7 +109,7 @@ Further details are available [here](https://doi.org/10.1093/ije/dyy262).
 
 The `strength_mvmr()` function is used to evaluate instrument strength in the MVMR setting. The function contains two arguments:
 
-- `r_input`: A formatted data frame created using the `format_mvmr()` function.
+- `r_input`: A formatted data frame created using the `format_mvmr()` function or an object of class `MRMVInput` from the `mr_mvinput()` function in the MendelianRandomization package.
 - `gencov`: A variance-covariance matrix for the effect of the genetic variants on each exposure. This is obtained from either `snpcov_mvmr()`, `phenocov_mvmr()`, or set to zero when omitted.
 
 **Note**: The `strength_mvmr()` function will output a warning if a variance-covariance matrix is not provided. Please see Step 1 for further information.

@@ -1,2 +1,6 @@
 ^MVMR\.Rproj$
 ^\.Rproj\.user$
+^doc$
+^Meta$
+^docs$
+^_pkgdown\.yml

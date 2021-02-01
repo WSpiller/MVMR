@@ -7,13 +7,12 @@
 #' @param seBXGs A matrix containing standard errors corresponding to the matrix of beta-coefficients \code{BXGs}.
 #' @param seBYG A numeric vector of standard errors corresponding to the beta-coefficients \code{BYG}.
 #' @param RSID A vector of names for genetic variants included in the analysis. If variant IDs are not provided (\code{RSID="NULL"}), a vector of ID numbers will be generated.
-#' @return A formatted data frame.
+#' @return A formatted data frame of class `mvmr_format`.
 #'
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. <https://dx.doi.org/10.1093/ije/dyy262>
+#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 #' @export
 #' @examples
-#'
 #' r_input <- format_mvmr(
 #'     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
 #'     BYG = rawdat_mvmr$SBP_beta,
@@ -21,7 +20,7 @@
 #'     seBYG = rawdat_mvmr$SBP_se,
 #'     RSID = rawdat_mvmr$SNP)
 #' names(r_input)
-#'
+#' class(r_input)
 
 #Function for formatting MVMR data frame
 
@@ -82,7 +81,10 @@ format_mvmr<-function(BXGs,BYG,seBXGs,seBYG,RSID){
 
   }
 
-  names(dat)<-c("SNP","betaYG","sebetaYG",names(BXGs),names(seBXGs))
+  names(dat) <- c("SNP", "betaYG", "sebetaYG",
+                  names(BXGs), names(seBXGs))
+
+  class(dat) <- append(class(dat), "mvmr_format")
 
   # The function returns the formatted dataframe
 

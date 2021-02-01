@@ -7,7 +7,7 @@
 pleiotropy_mvmr(r_input, gencov)
 }
 \arguments{
-\item{r_input}{A formatted data frame using the \code{format_mvmr} function.}
+\item{r_input}{A formatted data frame using the \code{\link{format_mvmr}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput}}}
 
 \item{gencov}{Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.}
 }
@@ -16,20 +16,19 @@ A Q-statistic for instrument validity and the corresponding p-value
 }
 \description{
 Calculates modified form of Cochran's Q statistic measuring heterogeneity in causal effect estimates obtained using each genetic variant. Observed heterogeneity is indicative of a violation of the exclusion restriction assumption in MR (validity), which can result in biased effect estimates.
-The function takes a formatted dataframe as an input, obtained using the function \code{format_mvmr}. Additionally, covariance matrices
+The function takes a formatted dataframe as an input, obtained using the function \code{\link{format_mvmr}}. Additionally, covariance matrices
 for estimated effects of individual genetic variants on each exposure can also be provided. These can be estimated using external data by
-applying the \code{snpcov_mvmr} or \code{phenocov_mvmr} functions, are input manually. The function returns a dataframe including the conditional
+applying the \code{\link{snpcov_mvmr}} or \code{\link{phenocov_mvmr}} functions, are input manually. The function returns a dataframe including the conditional
 Q-statistic for instrument validity, and a corresponding P-value.
 }
 \examples{
-
 \dontrun{
 pleiotropy_mvmr(r_input, covariances)
 }
 
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \url{https://dx.doi.org/10.1093/ije/dyy262}
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.
