@@ -4,13 +4,15 @@
 
 To install `MVMR` directly from the GitHub repository, first make sure you have the `remotes` package installed:
 
-    install.packages("remotes")
+```r
+install.packages("remotes")
+```
 
 Then the `MVMR` package can be installed using:
-
-    library(remotes)
-    install_github("WSpiller/MVMR", build_opts = c("--no-resave-data", "--no-manual"), build_vignettes = TRUE)
-    
+```r
+library(remotes)
+install_github("WSpiller/MVMR", build_opts = c("--no-resave-data", "--no-manual"), build_vignettes = TRUE)
+```
 To update the package just run the `remotes::install_github("WSpiller/MVMR", build_opts = c("--no-resave-data", "--no-manual"), build_vignettes = TRUE)` command again.
 
 ## Description
@@ -30,7 +32,3 @@ The corresponding paper has been published by the International Journal of Epide
 ## License
 
 This project is licensed under GNU GPL v3.
-
-
-
-
