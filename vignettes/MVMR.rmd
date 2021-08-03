@@ -155,6 +155,7 @@ Where the MVMR assumptions are potentially violated, specifically where instrume
 mvmrcovmatrix<-matrix(c(1,-0.1,-0.05,-0.1,1,0.2,-0.05,0.2,1), nrow = 3, ncol = 3)
 Xcovmat<-phenocov_mvmr(mvmrcovmatrix,F.data[,7:9])
 res1 <- qhet_mvmr(F.data, Xcovmat, CI = TRUE, iterations = 100)
+res1
 ```
 
 It should be noted that as the number of exposure and instruments increases, estimation using `qhet_mvmr()` may prove difficult, owing to the substantial amount of computing power required.
