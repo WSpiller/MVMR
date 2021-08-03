@@ -121,7 +121,13 @@ Continuing with the previous example, we can evaluate the conditional strength o
 sres <- strength_mvmr(r_input = F.data, gencov = 0)
 ```
 
-In this case the set of instruments is sufficiently strong for MVMR estimation using the conventional F-statistic threshold of 10. However, note that we have manually set `mvmrcov` to zero, which would likely not be appropriate given each SNP-exposure estimate eas obtained from the same sample.
+In this case the set of instruments is sufficiently strong for MVMR estimation using the conventional F-statistic threshold of 10. However, note that we have manually set `mvmrcov` to zero, which would likely not be appropriate given each SNP-exposure estimate was obtained from the same sample. Using a random phenotypic covariance matrix, conditional F-statistics can be calculated as
+
+```{r}
+mvmrcovmatrix<-matrix(c(1,-0.1,-0.05,-0.1,1,0.2,-0.05,0.2,1), nrow = 3, ncol = 3)
+Xcovmat<-phenocov_mvmr(mvmrcovmatrix,F.data[,7:9])
+sres2 <- strength_mvmr(r_input = F.data, gencov = Xcovmat)
+```
 
 ## Step 4: Test for horizontal pleiotropy using conventional Q-statistic estimation
 
@@ -133,6 +139,12 @@ The function `pleiotropy_mvmr()` can be used to test for heterogeneity, requirin
 
 ```{r}
 pres <- pleiotropy_mvmr(r_input = F.data, gencov = 0)
+```
+
+And with the example covariance matrices from Step 3:
+
+```{r}
+pres <- pleiotropy_mvmr(r_input = F.data, gencov = Xcovmat)
 ```
 
 ## Step 5: Estimate causal effects
@@ -151,14 +163,11 @@ Where the MVMR assumptions are potentially violated, specifically where instrume
 
 ```{r}
 
-#Example phenotypic correlations for illustration
-mvmrcovmatrix<-matrix(c(1,-0.1,-0.05,-0.1,1,0.2,-0.05,0.2,1), nrow = 3, ncol = 3)
-Xcovmat<-phenocov_mvmr(mvmrcovmatrix,F.data[,7:9])
-res1 <- qhet_mvmr(F.data, Xcovmat, CI = TRUE, iterations = 100)
+res1 <- qhet_mvmr(F.data, mvmrcovmatrix, CI = F, iterations = 100)
 res1
 ```
 
-It should be noted that as the number of exposure and instruments increases, estimation using `qhet_mvmr()` may prove difficult, owing to the substantial amount of computing power required.
+It is important to highlight that the phenotypic covariance matrix is used as an input, and not the set of estimated covariance matrices which previously formed the `gencov` argument. It should also be noted that as the number of exposure and instruments increases, estimation using `qhet_mvmr()` may prove difficult, owing to the substantial amount of computing power required. This can be initially relaxed by not computing 95% confidence intervals as above
 
 
 
