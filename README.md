@@ -23,9 +23,9 @@ and is currently includes a range of functions for estimating causal effects, as
 
 ## Citation
 
-The corresponding paper has been published by the International Journal of Epidemiology, and can be accessed at:
+The corresponding paper has been published in Statistics in Medicine, and can be accessed at:
 
-[An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018. [Internet]. 2018;dyy262.](https://dx.doi.org/10.1093/ije/dyy262)
+[Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Statistics in Medicine, 2021. [Internet]. 2021;sim.9133.]( https://doi.org/10.1002/sim.9133)
 
 ## License
 

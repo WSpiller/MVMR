@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Multivariable Mendelian Randomisation (MVMR) is a form of instrumental variable analysis
 which estimates the direct effect of multiple exposures on an outcome using genetic variants as
-instruments. The `MVMR` R package facilitates estimation of causal effects using MVMR, as well as including a range of sensitivity analyses evaluating the underlying assumptions of the approach. The methods included in `MVMR` originate from Sanderson et al (2020), available [here](https://doi.org/10.1093/ije/dyy262).
+instruments. The `MVMR` R package facilitates estimation of causal effects using MVMR, as well as including a range of sensitivity analyses evaluating the underlying assumptions of the approach. The methods included in `MVMR` originate from Sanderson et al (2021), available [here](https://doi.org/10.1002/sim.9133).
 
 ### Workflow
 
@@ -47,7 +47,7 @@ The following information is necessary to estimate causal effects using MVMR:
 
 4) Corresponding standard errors for the gene-outcome associations.
 
-The data frame `rawdat_mvmr`, included in the `MVMR` package shows an example of such data obtained from MRBase. In this case, low-density lipoprotein cholesterol (LDL-C), high-density lipoprotein cholesterol (HDL-C), and triglycerides (Trg) have been selected as exposures, while systolic blood pressure (SBP) is the outcome of interest. Here the suffix `_beta` is used to denote association estimates, while `_se` denotes standard errors. Please note that the `MVMR` can take an arbirtary number of exposures (greater than 1), and that three exposures have been selected purely for illustration.
+The data frame `rawdat_mvmr`, included in the `MVMR` package shows an example of such data obtained from MRBase. When data is extracted from MRBase or using the TwoSampleMR R package, the `mrmvinput_to_mvmr_format()` function can be used to convert the data to the `MVMR` data format. This specifically requires gene-exposure associations for all included SNPs, gene-outcome associations, and corresponding standard errors. In this case, low-density lipoprotein cholesterol (LDL-C), high-density lipoprotein cholesterol (HDL-C), and triglycerides (Trg) have been selected as exposures, while systolic blood pressure (SBP) is the outcome of interest. Here the suffix `_beta` is used to denote association estimates, while `_se` denotes standard errors. Please note that the `MVMR` can take an arbirtary number of exposures (greater than 1), and that three exposures have been selected purely for illustration.
 
 The first 6 rows of `rawdat_mvmr` are:
 
@@ -60,19 +60,20 @@ Note that the final column `SNP` contains the rsid numbers for each genetic vari
 
 ### Estimating pairwise covariances between SNP associations
 
-The MVMR approach requires pairwise covariances between an instrument and pairs of exposures to be known across all SNPs for accurate estimation and sensitivity analyses, however, this is often not reported in published GWAS analyses. Before continuing with MVMR it is therefore **necessary** to select one of the following three solutions:
+The MVMR approach requires pairwise covariances between an instrument and pairs of exposures to be known across all SNPs for testing and sensitivity analyses. However, this is often not reported in published GWAS analyses. Before continuing with MVMR it is therefore **necessary** to select one of the following three solutions:
 
 1. Estimate the covariance terms using individual level data
 
     If individual level data is available from which the GWAS summary estimates were obtained, the `snpcov_mvmr()` function can be used to calculate the necessary covariance terms. 
 
-2. Estimate the phenotypic correlation between exposures from individual level data
-
-    If individual level data is available including phenotypic data, the `phenocov_mvmr()` function can be used to provide an approximation for the necessary covariance terms. 
+2. Estimate the covariance terms using phenotypic correlation between exposures. an estimate of the correlation between the (phenotypic) exposures is available, the phenocov_mvmr() function can be used to provide an approximation for the necessary covariance terms. This function takes the phenotypic correlation between the exposures and the standard error of the SNP-exposure betas as inputs. 
 
 3. Obtain gene-exposure associations from non-overlapping samples.
 
     If gene-exposure associations are estimated in seperate non-overlapping samples, then the covariances will be zero by design. It is therefore not necessary to calculate the set of covariances, although this approach can be difficult to apply due to a lack of suitable sources of data.
+
+When the necessary data are provided to the `snpcov_mvmr()` or `phenocov_mvmr()` functions, a set of covariance matrices will be produced equal to the number of SNPs used in estimation. By saving this output as an object, it is possible to use this information in downstream senstivity analyses and assumption testing. As the `phenocov_mvmr()` function requires gene-exposure standard errors, it can be useful to estimate the covariance matrices after initially formatiing the data. An illustrative example is provided in step 6, creating an object `Xcovmat` using the `phenocov_mvmr()` function.
+
 
 ## Step 2: Format summary data
 
@@ -103,9 +104,9 @@ In subsequent steps, each exposure is numbered such that `X1`, `X2`, and `X3` ar
 
 In univariate two-sample summary MR, genetic variants selected as instruments are required to be strongly associated with their corresponding exposure. This is quantified by regressing the exposure upon each instrument, and evaluating conditional dependence using the F-statistic for the instrument. Conventionally, a F-statistic greater than 10 is used as a threshold for sufficient instrument strength, representing a 10% relative bias towards the null in the two-sample MR setting.
 
-Multivariable MR relies upon an extension of this assumption, requiring instruments to be strongly associated with their corresponding exposure conditioning on the remaining included exposures. Conditional instrument strength is quantified by a modified F-statistic which has the same distribution as the univariate F-statistic. Consequently, the same conventional instrument strength threshold of 10 can be used.
+Multivariable MR relies upon an extension of this assumption, requiring instruments to be strongly associated with their corresponding exposure conditioning on the remaining included exposures. Conditional instrument strength is quantified by a conditional F-statistic which has the same distribution as the univariate F-statistic. Consequently, the same conventional instrument strength threshold of 10 can be used.
 
-Further details are available [here](https://doi.org/10.1093/ije/dyy262).
+Further details are available [here](https://doi.org/10.1002/sim.9133).
 
 The `strength_mvmr()` function is used to evaluate instrument strength in the MVMR setting. The function contains two arguments:
 
@@ -122,13 +123,13 @@ sres <- strength_mvmr(r_input = F.data, gencov = 0)
 
 In this case the set of instruments is sufficiently strong for MVMR estimation using the conventional F-statistic threshold of 10. However, note that we have manually set `mvmrcov` to zero, which would likely not be appropriate given each SNP-exposure estimate eas obtained from the same sample.
 
-## Step 4: Test for horizontal pleiotropy
+## Step 4: Test for horizontal pleiotropy using conventional Q-statistic estimation
 
 Horizontal pleiotropy can be evaluated using a modified form of Cochran's Q statistic with respect to differences in MVMR estimates across the set of instruments. In this case, observed heterogeneity is indicative of a violation of the exclusion restriction assumption in MR (validity), which can result in biased effect estimates.
 
 Importantly, weak instruments can increase the false positive rate for pleiotropy detection, as heterogeneity in effect estimates due to weak instrument bias is conflated with heterogeneity as a result of pleiotropic bias. As a correction it is possible to estimate heterogeneity from pleiotropy through Q-statistic minimisation.
 
-The function `pleiotropy_mvmr()` can be used to test for pleiotropy, requiring the same arguments as the `strength_mvmr()`; `r_input` and `mvmrcov`.
+The function `pleiotropy_mvmr()` can be used to test for heterogeneity, requiring the same arguments as the `strength_mvmr()`; `r_input` and `mvmrcov`.
 
 ```{r}
 pres <- pleiotropy_mvmr(r_input = F.data, gencov = 0)
@@ -143,3 +144,21 @@ res <- ivw_mvmr(r_input = F.data)
 ```
 
 In this case, the effect estimates are interpreted as the direct effects of LDL-C (exposure 1), HDL-C (exposure 2), and Trg (exposure 3) on SBP. Estimates are not robust to weak instruments of pleiotropic bias, and therefore rely upon the underlying MVMR assumptions being satisfied.
+
+## Step 6: Robust causal effect estimation.
+
+Where the MVMR assumptions are potentially violated, specifically where instruments are weak or exhibit pleiotropy, it is possible to obtain more robust estimates through Q-statistic minimisation. This can be performed using the `qhet_mvmr()` function.
+
+```{r}
+
+#Example phenotypic correlations for illustration
+mvmrcovmatrix<-matrix(c(1,-0.1,-0.05,-0.1,1,0.2,-0.05,0.2,1), nrow = 3, ncol = 3)
+Xcovmat<-phenocov_mvmr(mvmrcovmatrix,F.data[,7:9])
+res1 <- qhet_mvmr(F.data, Xcovmat, CI = TRUE, iterations = 100)
+```
+
+It should be noted that as the number of exposure and instruments increases, estimation using `qhet_mvmr()` may prove difficult, owing to the substantial amount of computing power required.
+
+
+
+
