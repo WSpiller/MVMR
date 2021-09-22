@@ -32,7 +32,7 @@ Fitting and interpreting MVMR models can be achieved by following the 5 steps gi
 Each of these steps are shown in Figure 1, highlighting the R function used for each step.
 
 ```{r, echo=FALSE, out.width="600px"}
-knitr::include_graphics("png/workflow.png")
+knitr::include_graphics("./png/workflow.png")
 ```
 
 ## Step 1: Obtain summary data
