@@ -13,7 +13,6 @@
 #'
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
-#' @importFrom utils combn
 #' @export
 #' @examples
 #' \dontrun{
@@ -68,7 +67,7 @@ strhet_mvmr<-function(r_input,gencov){
 
   qminvec<-NULL
 
-  valvec<-combn(-100:100,c(exp.number-1))
+  valvec<-utils::combn(-100:100,c(exp.number-1))
 
   for(m in 1:exp.number){
 
