@@ -1,6 +1,6 @@
 Package: MVMR
 Title: MVMR
-Version: 0.3
+Version: 0.4
 Authors@R: c(
     person("Wes", "Spiller", , "wes.spiller@bristol.ac.uk", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-8169-5531")),
