@@ -77,7 +77,6 @@ The MVMR approach requires pairwise covariances between an instrument and pairs 
 
 When the necessary data are provided to the `snpcov_mvmr()` or `phenocov_mvmr()` functions, a set of covariance matrices will be produced equal to the number of SNPs used in estimation. By saving this output as an object, it is possible to use this information in downstream senstivity analyses and assumption testing. As the `phenocov_mvmr()` function requires gene-exposure standard errors, it can be useful to estimate the covariance matrices after initially formatiing the data. An illustrative example is provided in step 6, creating an object `Xcovmat` using the `phenocov_mvmr()` function.
 
-
 ## Step 2: Format summary data
 
 Downstream functions in the `MVMR` package rely upon prior formatting of raw summary data using the `format_mvmr()` function. Specifically, `format_mvmr()` checks and organises summary data columns for use in MVMR analyses. The `format_mvmr` function takes the following arguments:
@@ -165,13 +164,8 @@ In this case, the effect estimates are interpreted as the direct effects of LDL-
 Where the MVMR assumptions are potentially violated, specifically where instruments are weak or exhibit pleiotropy, it is possible to obtain more robust estimates through Q-statistic minimisation. This can be performed using the `qhet_mvmr()` function.
 
 ```{r}
-
 res1 <- qhet_mvmr(F.data, mvmrcovmatrix, CI = F, iterations = 100)
 res1
 ```
 
 It is important to highlight that the phenotypic covariance matrix is used as an input, and not the set of estimated covariance matrices which previously formed the `gencov` argument. It should also be noted that as the number of exposure and instruments increases, estimation using `qhet_mvmr()` may prove difficult, owing to the substantial amount of computing power required. This can be initially relaxed by not computing 95% confidence intervals as above
-
-
-
-
