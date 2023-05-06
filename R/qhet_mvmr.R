@@ -13,7 +13,6 @@
 #' @return An dataframe containing effect estimates with respect to each exposure.
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
-#' @importFrom stats optim optimize
 #' @export
 #' @examples
 #' \dontrun{
@@ -88,7 +87,7 @@ qhet_mvmr<-function(r_input,pcor,CI,iterations){
 
       st_PL2  =  rep(0,exp.number)
 
-      bc    = optim(st_PL2, PL2_MVMR)
+      bc    = stats::optim(st_PL2, PL2_MVMR)
 
       bcresults <- bc$par
 
@@ -127,12 +126,12 @@ qhet_mvmr<-function(r_input,pcor,CI,iterations){
 
     }
 
-    limltauest  = optimize(PL_MVMR,interval=c(-10,10))
+    limltauest  = stats::optimize(PL_MVMR,interval=c(-10,10))
     tau_i = limltauest$objective
 
     tau = tau_i
 
-    liml_het2<- optim(rep(0,exp.number), PL2_MVMR)
+    liml_het2<- stats::optim(rep(0,exp.number), PL2_MVMR)
     limlhets <- liml_het2$par
     Qexact_het <- liml_het2$value
 
