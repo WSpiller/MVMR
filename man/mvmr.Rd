@@ -39,6 +39,7 @@ r_input <- format_mvmr(
 mvmr(r_input, 0, 1)
 
 # Example using MRMVInput formatted data from the MendelianRandomization package
+if (require("MendelianRandomization", quietly = TRUE)) {
 bx <- as.matrix(rawdat_mvmr[,c("LDL_beta", "HDL_beta")])
 bxse <- as.matrix(rawdat_mvmr[,c("LDL_se", "HDL_se")])
 dat <- MendelianRandomization::mr_mvinput(bx = bx,
@@ -47,6 +48,7 @@ dat <- MendelianRandomization::mr_mvinput(bx = bx,
                                           byse = rawdat_mvmr$SBP_se,
                                           snps = rawdat_mvmr$SNP)
 mvmr(r_input = r_input, gencov = 0, weights = 1)
+}
 }
 \references{
 Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
