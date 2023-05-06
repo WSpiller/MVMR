@@ -6,7 +6,6 @@
 #' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
 #'
 #' @return An dataframe containing MVMR results, including estimated coefficients, their standard errors, t-statistics, and corresponding (two-sided) p-values.
-#' @importFrom stats lm as.formula
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 #' @export
@@ -49,11 +48,11 @@ ivw_mvmr<-function(r_input,gencov){
 
   #Fit the IVW MVMR model
 
-  A_sum<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
+  A_sum<-summary(stats::lm(stats::as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,weights=Wj,data=r_input))
 
-  A<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
+  A<-summary(stats::lm(stats::as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,weights=Wj,data=r_input))$coef
 
