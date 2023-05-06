@@ -14,9 +14,9 @@
 #' \item{\code{Q_strength}}{A data frame displaying modified Cochran's Q statistics for assessing instrument strength with respect to each exposure. The Q-statistic increases proportionally with instrument strength, and analogous to univariate MR analyses, a value equal to or greater than 10 can be used as a minimum threshold for instrument strength. Note that for these statistics it is not informative to evaluate p-values.}
 #' \item{\code{Q_valid}}{A modified form of Cochran's Q statistic measuring heterogeneity in causal effect estimates obtained using each genetic variant. Observed heterogeneity is indicative of a violation of the exclusion restriction assumption in MR (validity), which can result in biased effect estimates.}
 #' \item{\code{p_valid}}{A p-value corresponding to the heterogeneity measure for instrument validity (\code{Q_valid})}
-#'}
-#'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
+#' }
+#' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
+#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 #' @importFrom stats lm as.formula pchisq pf
 #' @export
 #' @examples
