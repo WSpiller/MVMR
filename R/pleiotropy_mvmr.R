@@ -14,7 +14,6 @@
 #'
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
-#' @importFrom stats lm as.formula pchisq
 #' @export
 #' @examples
 #' \dontrun{
@@ -53,11 +52,11 @@ pleiotropy_mvmr<-function(r_input,gencov){
 
   #Fit the IVW MVMR model
 
-  A_sum<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
+  A_sum<-summary(stats::lm(stats::as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,weights=Wj,data=r_input))
 
-  A<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
+  A<-summary(stats::lm(stats::as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,weights=Wj,data=r_input))$coef
 
@@ -96,7 +95,7 @@ pleiotropy_mvmr<-function(r_input,gencov){
     Q_valid<- sum ((1/sigma2A)*(r_input[,2]-temp.sub2)^2)
 
     #Calculates p_value for instrument validity
-    Q_chiValid<-pchisq(Q_valid,length(r_input[,2])-exp.number-1,lower.tail = FALSE)
+    Q_chiValid<-stats::pchisq(Q_valid,length(r_input[,2])-exp.number-1,lower.tail = FALSE)
 
 
   }
@@ -122,7 +121,7 @@ pleiotropy_mvmr<-function(r_input,gencov){
     Q_valid<- sum ((1/sigma2A)*(r_input[,2]-temp.sub2)^2)
 
     #Calculates p_value for instrument validity
-    Q_chiValid<-pchisq(Q_valid,length(r_input[,2])-exp.number-1,lower.tail = FALSE)
+    Q_chiValid<-stats::pchisq(Q_valid,length(r_input[,2])-exp.number-1,lower.tail = FALSE)
 
 
   }
