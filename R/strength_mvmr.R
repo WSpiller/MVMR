@@ -49,7 +49,7 @@ strength_mvmr<-function(r_input,gencov){
 
   exp.number<-length(names(r_input)[-c(1,2,3)])/2
 
-  A<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
+  A<-summary(stats::lm(stats::as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,data=r_input))$coef
 
@@ -74,7 +74,7 @@ strength_mvmr<-function(r_input,gencov){
     regressors<-names(r_input)[-c(1,2,3,
                                   4+exp.number:length(names(r_input)))]
     C<-paste(regressand, "~", "-1 +", paste(regressors[-i], collapse="+"))
-    D.reg<-lm(C,data=r_input)
+    D.reg<-stats::lm(C,data=r_input)
     delta_mat[,i]<-D.reg$coefficients
   }
 
