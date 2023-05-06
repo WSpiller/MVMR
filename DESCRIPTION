@@ -19,12 +19,9 @@ Depends:
 Imports: 
     boot
 Suggests:
-    captioner,
-    kableExtra,
     knitr,
     MendelianRandomization,
-    rmarkdown,
-    stringr
+    rmarkdown
 VignetteBuilder: 
     knitr
 Encoding: UTF-8
