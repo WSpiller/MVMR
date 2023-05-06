@@ -13,7 +13,6 @@
 #'
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
-#' @importFrom stats lm as.formula optimize
 #' @importFrom utils combn
 #' @export
 #' @examples
@@ -47,7 +46,7 @@ strhet_mvmr<-function(r_input,gencov){
 
   exp.number<-length(names(r_input)[-c(1,2,3)])/2
 
-  A<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
+  A<-summary(stats::lm(stats::as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,weights=Wj,data=r_input))$coef
 
@@ -148,7 +147,7 @@ strhet_mvmr<-function(r_input,gencov){
 
     }
 
-    qminvec[m] <- optimize(qmin, interval = c(1,length(valvec)))$objective
+    qminvec[m] <- stats::optimize(qmin, interval = c(1,length(valvec)))$objective
 
   }
 
