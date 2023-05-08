@@ -169,4 +169,4 @@ res1 <- qhet_mvmr(F.data, mvmrcovmatrix, CI = F, iterations = 100)
 res1
 ```
 
-It is important to highlight that the phenotypic covariance matrix is used as an input, and not the set of estimated covariance matrices which previously formed the `gencov` argument. It should also be noted that as the number of exposure and instruments increases, estimation using `qhet_mvmr()` may prove difficult, owing to the substantial amount of computing power required. This can be initially relaxed by not computing 95% confidence intervals as above
+It is important to highlight that the phenotypic covariance matrix is used as an input, and not the set of estimated covariance matrices which previously formed the `gencov` argument. It should also be noted that as the number of exposure and instruments increases, estimation using `qhet_mvmr()` may prove difficult, owing to the substantial amount of computing power required. This can be initially relaxed by not computing 95% confidence intervals as above.
