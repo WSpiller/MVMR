@@ -139,7 +139,7 @@ Horizontal pleiotropy can be evaluated using a modified form of Cochran's Q stat
 
 Importantly, weak instruments can increase the false positive rate for pleiotropy detection, as heterogeneity in effect estimates due to weak instrument bias is conflated with heterogeneity as a result of pleiotropic bias. As a correction it is possible to estimate heterogeneity from pleiotropy through Q-statistic minimisation.
 
-The function `pleiotropy_mvmr()` can be used to test for heterogeneity, requiring the same arguments as the `strength_mvmr()`; `r_input` and `mvmrcov`.
+The function `pleiotropy_mvmr()` can be used to test for heterogeneity, requiring the same arguments as the `strength_mvmr()`; `r_input` and `gencov`.
 
 ```{r}
 pres <- pleiotropy_mvmr(r_input = F.data, gencov = 0)
