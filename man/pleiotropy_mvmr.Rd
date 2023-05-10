@@ -4,7 +4,7 @@
 \alias{pleiotropy_mvmr}
 \title{pleiotropy_mvmr}
 \usage{
-pleiotropy_mvmr(r_input, gencov)
+pleiotropy_mvmr(r_input, gencov = 0)
 }
 \arguments{
 \item{r_input}{A formatted data frame using the \code{\link{format_mvmr}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput}}}

@@ -2,9 +2,9 @@
 #'
 #' Calculates the conditional F-statistic for assessing instrument strength in two sample summary multivariable Mendelian randomization.
 #' The function takes a formatted dataframe as an input, obtained using the function [`format_mvmr`]. Additionally, covariance matrices
-#'  for estimated effects of individual genetic variants on each exposure can also be provided. These can be estimated using external data by
-#'  applying the [`snpcov_mvmr`] or [`phenocov_mvmr`] functions, are input manually. The function returns a dataframe including the conditional
-#'  F-statistic with respect to each exposure. A conventional F-statistic threshold of 10 is used in basic assessments of instrument strength.
+#' for estimated effects of individual genetic variants on each exposure can also be provided. These can be estimated using external data by
+#' applying the [`snpcov_mvmr`] or [`phenocov_mvmr`] functions, are input manually. The function returns a dataframe including the conditional
+#' F-statistic with respect to each exposure. A conventional F-statistic threshold of 10 is used in basic assessments of instrument strength.
 #'
 #' @param r_input r_input A formatted data frame using the [`format_mvmr`] function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput`]
 #' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
@@ -19,7 +19,7 @@
 #' strength_mvmr(data, covariances)
 #' }
 
-strength_mvmr<-function(r_input,gencov){
+strength_mvmr<-function(r_input,gencov=0){
 
   # convert MRMVInput object to mvmr_format
   if ("MRMVInput" %in% class(r_input)) {
@@ -35,8 +35,7 @@ strength_mvmr<-function(r_input,gencov){
   #gencov is the covariance between the effect of the genetic variants on each exposure.
   #By default it is set to 0.
 
-  if(missing(gencov)) {
-    gencov<-as.numeric(0)
+  if(!is.list(gencov) && gencov == 0) {
     warning("Covariance between effect of genetic variants on each exposure not specified. Fixing covariance at 0.")
   }
 
@@ -49,7 +48,7 @@ strength_mvmr<-function(r_input,gencov){
 
   exp.number<-length(names(r_input)[-c(1,2,3)])/2
 
-  A<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
+  A<-summary(stats::lm(stats::as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,data=r_input))$coef
 
@@ -74,7 +73,7 @@ strength_mvmr<-function(r_input,gencov){
     regressors<-names(r_input)[-c(1,2,3,
                                   4+exp.number:length(names(r_input)))]
     C<-paste(regressand, "~", "-1 +", paste(regressors[-i], collapse="+"))
-    D.reg<-lm(C,data=r_input)
+    D.reg<-stats::lm(C,data=r_input)
     delta_mat[,i]<-D.reg$coefficients
   }
 

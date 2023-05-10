@@ -11,7 +11,6 @@
 #'
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
-#' @importFrom stats lm
 #' @export
 #' @examples
 #' \dontrun{
@@ -28,9 +27,9 @@ snpcov_mvmr<-function(Gs,Xs){
 
     for(i in 1:length(Gs[1,])){
 
-      betas[i,j]<-lm(Xs[,j]~-1 + Gs[,i])$coefficients
+      betas[i,j]<-stats::lm(Xs[,j]~-1 + Gs[,i])$coefficients
 
-      resids<-data.frame(lm(Xs[,j]~-1 + Gs[,i])$residuals)
+      resids<-data.frame(stats::lm(Xs[,j]~-1 + Gs[,i])$residuals)
 
       resmat<-cbind(resmat,resids)
 

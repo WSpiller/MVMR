@@ -14,10 +14,9 @@
 #' \item{\code{Q_strength}}{A data frame displaying modified Cochran's Q statistics for assessing instrument strength with respect to each exposure. The Q-statistic increases proportionally with instrument strength, and analogous to univariate MR analyses, a value equal to or greater than 10 can be used as a minimum threshold for instrument strength. Note that for these statistics it is not informative to evaluate p-values.}
 #' \item{\code{Q_valid}}{A modified form of Cochran's Q statistic measuring heterogeneity in causal effect estimates obtained using each genetic variant. Observed heterogeneity is indicative of a violation of the exclusion restriction assumption in MR (validity), which can result in biased effect estimates.}
 #' \item{\code{p_valid}}{A p-value corresponding to the heterogeneity measure for instrument validity (\code{Q_valid})}
-#'}
-#'@author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#'@references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
-#' @importFrom stats lm as.formula pchisq pf
+#' }
+#' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
+#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
 #' @export
 #' @examples
 #' # Example using format_mvmr formatted data
@@ -30,6 +29,7 @@
 #' mvmr(r_input, 0, 1)
 #'
 #' # Example using MRMVInput formatted data from the MendelianRandomization package
+#' if (require("MendelianRandomization", quietly = TRUE)) {
 #' bx <- as.matrix(rawdat_mvmr[,c("LDL_beta", "HDL_beta")])
 #' bxse <- as.matrix(rawdat_mvmr[,c("LDL_se", "HDL_se")])
 #' dat <- MendelianRandomization::mr_mvinput(bx = bx,
@@ -38,6 +38,7 @@
 #'                                           byse = rawdat_mvmr$SBP_se,
 #'                                           snps = rawdat_mvmr$SNP)
 #' mvmr(r_input = r_input, gencov = 0, weights = 1)
+#' }
 
 # Define IVW Multivariable MR function: This takes the formatted dataframe from
 # the format_MVMR function, as an input, the covariance between the effect of the
@@ -84,11 +85,11 @@ mvmr<-function(r_input,gencov,weights){
 
   #Fit the IVW MVMR model
 
-  A_sum<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
+  A_sum<-summary(stats::lm(stats::as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,weights=Wj,data=r_input))
 
-  A<-summary(lm(as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
+  A<-summary(stats::lm(stats::as.formula(paste("betaYG~ -1 +", paste(names(r_input)[
     seq(4,3+exp.number,by=1)], collapse="+")))
     ,weights=Wj,data=r_input))$coef
 
@@ -112,7 +113,7 @@ mvmr<-function(r_input,gencov,weights){
     regressors<-names(r_input)[-c(1,2,3,
                                   4+exp.number:length(names(r_input)))]
     C<-paste(regressand, "~", "-1 +", paste(regressors[-i], collapse="+"))
-    D.reg<-lm(C,data=r_input)
+    D.reg<-stats::lm(C,data=r_input)
     delta_mat[,i]<-D.reg$coefficients
   }
 
@@ -181,7 +182,7 @@ mvmr<-function(r_input,gencov,weights){
   Q_valid<- sum ((1/sigma2A)*(r_input[,2]-temp.sub2)^2)
 
   #Calculates p_value for instrument validity
-  Q_chiValid<-pchisq(Q_valid,length(r_input[,2])-exp.number-1,lower.tail = FALSE)
+  Q_chiValid<-stats::pchisq(Q_valid,length(r_input[,2])-exp.number-1,lower.tail = FALSE)
 
   ##########
   # Output #
@@ -202,7 +203,7 @@ mvmr<-function(r_input,gencov,weights){
 
   cat(paste(c("\nF-statistic:", " on"," and"), round(A_sum$fstatistic,2), collapse=""),
       "DF, p-value:",
-      format.pval(pf(A_sum$fstatistic[1L], A_sum$fstatistic[2L], A_sum$fstatistic[3L],
+      format.pval(stats::pf(A_sum$fstatistic[1L], A_sum$fstatistic[2L], A_sum$fstatistic[3L],
                      lower.tail = FALSE), digits=3))
 
   cat("\n")

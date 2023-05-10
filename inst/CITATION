@@ -1,0 +1,17 @@
+bibentry(
+  bibtype = "Article",
+  header = "To cite MVMR in publications please use:",
+  author = c(
+    person("E.", "Sanderson"),
+    person("W.", "Spiller"),
+    person("J.", "Bowden")
+  ),
+  title = "{Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization}",
+  year = "2021",
+  key = "mvmr",
+  doi = "10.1002/sim.9133",
+  journal = "Statistics in Medicine",
+  volume = 40,
+  number = 25,
+  pages = "5434--5452"
+)
