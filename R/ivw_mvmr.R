@@ -22,7 +22,7 @@
 # the format_MVMR function as an input, as well as the covariance between the effect of the
 # genetic variants on each exposure.
 
-ivw_mvmr<-function(r_input,gencov){
+ivw_mvmr<-function(r_input,gencov=0){
 
   # convert MRMVInput object to mvmr_format
   if ("MRMVInput" %in% class(r_input)) {
@@ -33,6 +33,10 @@ ivw_mvmr<-function(r_input,gencov){
   if(!("mvmr_format" %in%
        class(r_input))) {
     stop('The class of the data object must be "mvmr_format", please resave the object with the output of format_mvmr().')
+  }
+
+  if(!is.list(gencov) && gencov == 0) {
+    warning("Covariance between effect of genetic variants on each exposure not specified. Fixing covariance at 0.")
   }
 
   #If weights is missing, first order weights are used by default.

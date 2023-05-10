@@ -21,7 +21,7 @@
 #' }
 #'
 
-pleiotropy_mvmr<-function(r_input,gencov){
+pleiotropy_mvmr<-function(r_input,gencov=0){
 
   # convert MRMVInput object to mvmr_format
   if ("MRMVInput" %in% class(r_input)) {
@@ -37,8 +37,7 @@ pleiotropy_mvmr<-function(r_input,gencov){
   #gencov is the covariance between the effect of the genetic variants on each exposure.
   #By default it is set to 0.
 
-  if(missing(gencov)) {
-    gencov<-0
+  if(!is.list(gencov) && gencov == 0) {
     warning("Covariance between effect of genetic variants on each exposure not specified. Fixing covariance at 0.")
   }
 
