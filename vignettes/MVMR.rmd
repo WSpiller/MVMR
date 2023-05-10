@@ -71,7 +71,7 @@ The MVMR approach requires pairwise covariances between an instrument and pairs 
 
     If individual level data is available from which the GWAS summary estimates were obtained, the `snpcov_mvmr()` function can be used to calculate the necessary covariance terms. 
 
-2. Estimate the covariance terms using phenotypic correlation between exposures. an estimate of the correlation between the (phenotypic) exposures is available, the phenocov_mvmr() function can be used to provide an approximation for the necessary covariance terms. This function takes the phenotypic correlation between the exposures and the standard error of the SNP-exposure betas as inputs. 
+2. Estimate the covariance terms using phenotypic correlation between exposures. an estimate of the correlation between the (phenotypic) exposures is available, the `phenocov_mvmr()` function can be used to provide an approximation for the necessary covariance terms. This function takes the phenotypic correlation between the exposures and the standard error of the SNP-exposure betas as inputs. 
 
 3. Obtain gene-exposure associations from non-overlapping samples.
 
@@ -81,7 +81,7 @@ When the necessary data are provided to the `snpcov_mvmr()` or `phenocov_mvmr()`
 
 ## Step 2: Format summary data
 
-Downstream functions in the `MVMR` package rely upon prior formatting of raw summary data using the `format_mvmr()` function. Specifically, `format_mvmr()` checks and organises summary data columns for use in MVMR analyses. The `format_mvmr` function takes the following arguments:
+Downstream functions in the `MVMR` package rely upon prior formatting of raw summary data using the `format_mvmr()` function. Specifically, `format_mvmr()` checks and organises summary data columns for use in MVMR analyses. The `format_mvmr()` function takes the following arguments:
 
 - `BXGs`: A subset containing beta-coefficient values for genetic associations with each exposure. Columns should indicate exposure number, with rows representing estimates for a given genetic variant.
 - `BYG`: A numeric vector of beta-coefficient values for genetic associations with the outcome.
