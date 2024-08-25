@@ -154,7 +154,7 @@ qhet_mvmr<-function(r_input,pcor,CI,iterations){
 
   }
 
-  if(CI==T){
+  if(CI==TRUE){
 
     bootse<-function(data, indices){
 
