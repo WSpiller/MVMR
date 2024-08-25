@@ -37,7 +37,7 @@ qhet_mvmr<-function(r_input,pcor,CI,iterations){
   warning("qhet_mvmr() is currently undergoing development.")
 
   if(missing(CI)) {
-    CI<-F
+    CI<-FALSE
     warning("95 percent confidence interval not calculated")
   }
 
@@ -148,7 +148,7 @@ qhet_mvmr<-function(r_input,pcor,CI,iterations){
 
   }
 
-  if(CI==F){
+  if(CI==FALSE){
 
     res<-Qtemp(r_input,pcor)
 

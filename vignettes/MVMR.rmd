@@ -166,7 +166,7 @@ In this case, the effect estimates are interpreted as the direct effects of LDL-
 Where the MVMR assumptions are potentially violated, specifically where instruments are weak or exhibit pleiotropy, it is possible to obtain more robust estimates through Q-statistic minimisation. This can be performed using the `qhet_mvmr()` function.
 
 ```{r}
-res1 <- qhet_mvmr(F.data, mvmrcovmatrix, CI = F, iterations = 100)
+res1 <- qhet_mvmr(F.data, mvmrcovmatrix, CI = FALSE, iterations = 100)
 res1
 ```
 
