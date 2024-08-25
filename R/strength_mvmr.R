@@ -109,7 +109,7 @@ strength_mvmr<-function(r_input,gencov=0){
         delta.temp[,i] <- c(-1, delta_mat[,i])
       }
 
-      if(i>1 & i<exp.number){
+      if(i>1 && i<exp.number){
         delta.temp[,i] <- c(delta_mat[1:(i-1),i],-1,delta_mat[i:(exp.number-1),i])
       }
 
