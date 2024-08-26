@@ -53,6 +53,7 @@ jobs:
         with:
           extra-packages: any::rcmdcheck, MendelianRandomization=?ignore-before-r=4.4.0
           needs: check
+          upgrade: 'TRUE'
 
       - uses: r-lib/actions/check-r-package@v2
         with:
