@@ -2,6 +2,7 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/WSpiller/MVMR/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/WSpiller/MVMR/actions/workflows/R-CMD-check.yaml)
+[![r-universe](https://mrcieu.r-universe.dev/badges/MVMR)](https://mrcieu.r-universe.dev/MVMR)
 <!-- badges: end -->
 
 ## Installation
