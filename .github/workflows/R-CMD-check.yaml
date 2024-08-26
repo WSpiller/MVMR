@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [main, master]
   workflow_dispatch:
+  schedule:
+    - cron: "37 7 * * FRI" # run at 7:37am UTC on Fridays
 
 name: R-CMD-check.yaml
 
