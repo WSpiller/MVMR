@@ -51,7 +51,7 @@ format_mvmr<-function(BXGs,BYG,seBXGs,seBYG,RSID){
 
 
 
-  for(i in 1:ncol(BXGs)){
+  for(i in seq_len(ncol(BXGs))){
     names(BXGs)[i]<-paste0("betaX",i,collapse=",")
   }
 
@@ -60,7 +60,7 @@ format_mvmr<-function(BXGs,BYG,seBXGs,seBYG,RSID){
   #subsequent index number. The standard error for the first exposure provided
   #is labelled sebetaX1.
 
-  for(i in 1:ncol(seBXGs)){
+  for(i in seq_len(ncol(seBXGs))){
     names(seBXGs)[i]<-paste0("sebetaX",i,collapse=",")
   }
 
@@ -72,7 +72,7 @@ format_mvmr<-function(BXGs,BYG,seBXGs,seBYG,RSID){
   # The columns of the dataframe are renamed so as to be interpretable in
   #subsequent functions.
 
-  for(i in 1:ncol(dat)){
+  for(i in seq_len(ncol(dat))){
 
     if(i>1){
       dat[,i]<-as.numeric(dat[,i])
