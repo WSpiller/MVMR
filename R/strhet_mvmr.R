@@ -137,7 +137,7 @@ strhet_mvmr<-function(r_input,gencov){
         }
 
         #Populates matrix of Q statistics with respect to instrument strength
-        Q_strength[i]<- sum( (1/sigma2xj_dat[,i]) * ((r_input[,3+i] - temp.sub)^2) )
+        Q_strength[i]<- sum((1/sigma2xj_dat[,i]) * ((r_input[,3+i] - temp.sub)^2))
         Q_strength[i]<-Q_strength[i]/nrow(r_input)
 
       }
