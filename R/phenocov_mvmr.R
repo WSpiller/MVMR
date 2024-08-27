@@ -21,13 +21,13 @@ phenocov_mvmr<-function(Pcov,seBXGs){
 
   sigmalist <- vector("list", length(seBXGs[1,]))
 
-  for(i in 1:length(seBXGs[,1])){
+  for(i in seq_along(seBXGs[,1])){
 
     sigma_mattemp<-Pcov
 
-    for(j in 1:length(seBXGs[1,])){
+    for(j in seq_along(seBXGs[1,])){
 
-      for(k in 1:length(seBXGs[1,])){
+      for(k in seq_along(seBXGs[1,])){
 
         sigma_mattemp[j,k]<-sigma_mattemp[j,k] * seBXGs[i,j] * seBXGs[i,k]
 
