@@ -103,7 +103,7 @@ pleiotropy_mvmr<-function(r_input,gencov=0){
 
     # Generate Sigma^2_A values
     sigma2A<-r_input[,3]^2
-    for(i in 1:length(r_input[,3])){
+    for(i in seq_along(r_input[,3])){
       sigma2A[i]<-sigma2A[i] + (t(as.matrix(A[,1])) %*% gencov[[i]]%*% as.matrix(A[,1]))
     }
 
