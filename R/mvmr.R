@@ -146,7 +146,7 @@ mvmr<-function(r_input,gencov,weights){
     }
 
     #Populates matrix of Q statistics with respect to instrument strength
-    Q_strength[i]<- sum( (1/sigma2xj_dat[,i]) * ((r_input[,3+i] - temp.sub)^2) )
+    Q_strength[i]<- sum((1/sigma2xj_dat[,i]) * ((r_input[,3+i] - temp.sub)^2))
   }
 
   Q_strength<-data.frame(Q_strength)
@@ -179,7 +179,7 @@ mvmr<-function(r_input,gencov,weights){
   }
 
   #Calculates Q statistic for instrument validity
-  Q_valid<- sum ((1/sigma2A)*(r_input[,2]-temp.sub2)^2)
+  Q_valid<- sum((1/sigma2A)*(r_input[,2]-temp.sub2)^2)
 
   #Calculates p_value for instrument validity
   Q_chiValid<-stats::pchisq(Q_valid,length(r_input[,2])-exp.number-1,lower.tail = FALSE)
