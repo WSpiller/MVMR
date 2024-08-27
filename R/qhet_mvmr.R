@@ -67,7 +67,7 @@ qhet_mvmr<-function(r_input,pcor,CI,iterations){
 
         cov = matrix(nrow = exp.number, ncol = exp.number)
         w=NULL
-        for(l in 1:nrow(r_input)){
+        for(l in seq_len(nrow(r_input))){
           for(pp in 1:exp.number){
             for(p2 in 1:exp.number){
               cov[pp,p2] <- correlation[pp,p2]*stderr[l,pp]*stderr[l,p2]
@@ -93,7 +93,7 @@ qhet_mvmr<-function(r_input,pcor,CI,iterations){
 
       cov = matrix(nrow =exp.number, ncol = exp.number)
       w=NULL
-      for(l in 1:nrow(r_input)){
+      for(l in seq_len(nrow(r_input))){
         for(pp in 1:exp.number){
           for(p2 in 1:exp.number){
             cov[pp,p2] <- correlation[pp,p2]*stderr[l,pp]*stderr[l,p2]
@@ -112,7 +112,7 @@ qhet_mvmr<-function(r_input,pcor,CI,iterations){
 
       w=NULL
       cov = matrix(nrow = exp.number, ncol = exp.number)
-      for(l in 1:nrow(r_input)){
+      for(l in seq_len(nrow(r_input))){
         for(pp in 1:exp.number){
           for(p2 in 1:exp.number){
             cov[pp,p2] <- correlation[pp,p2]*stderr[l,pp]*stderr[l,p2]
