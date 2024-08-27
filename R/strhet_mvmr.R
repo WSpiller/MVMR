@@ -114,7 +114,7 @@ strhet_mvmr<-function(r_input,gencov){
 
             temp<-temp[-i]
 
-            for(l in 1:length(r_input[,1])){
+            for(l in seq_along(r_input[,1])){
 
               sigma2xj_dat[l,i]<- sigma2xj_dat[l,i] - delta_mat[j,i]*2*gencov[[l]][i,temp[k]]
 
