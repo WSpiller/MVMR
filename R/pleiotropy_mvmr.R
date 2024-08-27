@@ -91,7 +91,7 @@ pleiotropy_mvmr<-function(r_input,gencov=0){
     }
 
     #Calculates Q statistic for instrument validity
-    Q_valid<- sum ((1/sigma2A)*(r_input[,2]-temp.sub2)^2)
+    Q_valid<- sum((1/sigma2A)*(r_input[,2]-temp.sub2)^2)
 
     #Calculates p_value for instrument validity
     Q_chiValid<-stats::pchisq(Q_valid,length(r_input[,2])-exp.number-1,lower.tail = FALSE)
@@ -117,7 +117,7 @@ pleiotropy_mvmr<-function(r_input,gencov=0){
     }
 
     #Calculates Q statistic for instrument validity
-    Q_valid<- sum ((1/sigma2A)*(r_input[,2]-temp.sub2)^2)
+    Q_valid<- sum((1/sigma2A)*(r_input[,2]-temp.sub2)^2)
 
     #Calculates p_value for instrument validity
     Q_chiValid<-stats::pchisq(Q_valid,length(r_input[,2])-exp.number-1,lower.tail = FALSE)
