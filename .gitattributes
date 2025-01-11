@@ -2,3 +2,4 @@
 *.[Rr]md linguist-detectable
 vignettes/* linguist-vendored=false
 *.css linguist-vendored
+*.bib linguist-vendored
