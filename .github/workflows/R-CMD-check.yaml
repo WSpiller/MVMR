@@ -32,6 +32,7 @@ jobs:
           - {os: ubuntu-latest,   r: 'oldrel-3'}
           - {os: ubuntu-latest,   r: 'oldrel-4'}
           - {os: ubuntu-latest,   r: 'oldrel-5'}
+          - {os: ubuntu-latest,   r: 'oldrel-6'}
 
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
