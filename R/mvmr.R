@@ -21,25 +21,27 @@
 #' @examples
 #' # Example using format_mvmr formatted data
 #' r_input <- format_mvmr(
-#'     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
-#'     BYG = rawdat_mvmr$SBP_beta,
-#'     seBXGs = rawdat_mvmr[,c("LDL_se","HDL_se")],
-#'     seBYG = rawdat_mvmr$SBP_se,
-#'     RSID = rawdat_mvmr$SNP)
+#'   BXGs = rawdat_mvmr[, c("LDL_beta", "HDL_beta")],
+#'   BYG = rawdat_mvmr$SBP_beta,
+#'   seBXGs = rawdat_mvmr[, c("LDL_se", "HDL_se")],
+#'   seBYG = rawdat_mvmr$SBP_se,
+#'   RSID = rawdat_mvmr$SNP
+#' )
 #' mvmr(r_input, 0, 1)
 #'
 #' # Example using MRMVInput formatted data from the MendelianRandomization package
 #' if (require("MendelianRandomization", quietly = TRUE)) {
-#' bx <- as.matrix(rawdat_mvmr[,c("LDL_beta", "HDL_beta")])
-#' bxse <- as.matrix(rawdat_mvmr[,c("LDL_se", "HDL_se")])
-#' dat <- MendelianRandomization::mr_mvinput(bx = bx,
-#'                                           bxse = bxse,
-#'                                           by = rawdat_mvmr$SBP_beta,
-#'                                           byse = rawdat_mvmr$SBP_se,
-#'                                           snps = rawdat_mvmr$SNP)
-#' mvmr(r_input = r_input, gencov = 0, weights = 1)
+#'   bx <- as.matrix(rawdat_mvmr[, c("LDL_beta", "HDL_beta")])
+#'   bxse <- as.matrix(rawdat_mvmr[, c("LDL_se", "HDL_se")])
+#'   dat <- MendelianRandomization::mr_mvinput(
+#'     bx = bx,
+#'     bxse = bxse,
+#'     by = rawdat_mvmr$SBP_beta,
+#'     byse = rawdat_mvmr$SBP_se,
+#'     snps = rawdat_mvmr$SNP
+#'   )
+#'   mvmr(r_input = r_input, gencov = 0, weights = 1)
 #' }
-
 # Define IVW Multivariable MR function: This takes the formatted dataframe from
 # the format_MVMR function, as an input, the covariance between the effect of the
 # genetic variants on each exposure, and a value indicating the weights to
