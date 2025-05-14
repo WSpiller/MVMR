@@ -127,7 +127,7 @@ Continuing with the previous example, we can evaluate the conditional strength o
 sres <- strength_mvmr(r_input = F.data, gencov = 0)
 ```
 
-In this case the set of instruments is sufficiently strong for MVMR estimation using the conventional F-statistic threshold of 10. However, note that we have manually set `mvmrcov` to zero, which would likely not be appropriate given each SNP-exposure estimate was obtained from the same sample. Using a random phenotypic covariance matrix, conditional F-statistics can be calculated as
+In this case the set of instruments is sufficiently strong for MVMR estimation using the conventional F-statistic threshold of 10. However, note that we have manually set `gencov` to zero, which would likely not be appropriate given each SNP-exposure estimate was obtained from the same sample. Using a random phenotypic covariance matrix, conditional F-statistics can be calculated as
 
 ```{r}
 mvmrcovmatrix <- matrix(c(1, -0.1, -0.05, -0.1, 1, 0.2, -0.05, 0.2, 1), nrow = 3, ncol = 3)
