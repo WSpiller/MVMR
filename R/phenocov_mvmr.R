@@ -42,7 +42,3 @@ phenocov_mvmr<-function(Pcov,seBXGs){
   return(sigmalist)
 
 }
-
-
-
-
