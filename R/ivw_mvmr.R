@@ -11,13 +11,13 @@
 #' @export
 #' @examples
 #' r_input <- format_mvmr(
-#'     BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
-#'     BYG = rawdat_mvmr$SBP_beta,
-#'     seBXGs = rawdat_mvmr[,c("LDL_se","HDL_se")],
-#'     seBYG = rawdat_mvmr$SBP_se,
-#'     RSID = rawdat_mvmr$SNP)
+#'   BXGs = rawdat_mvmr[, c("LDL_beta", "HDL_beta")],
+#'   BYG = rawdat_mvmr$SBP_beta,
+#'   seBXGs = rawdat_mvmr[, c("LDL_se", "HDL_se")],
+#'   seBYG = rawdat_mvmr$SBP_se,
+#'   RSID = rawdat_mvmr$SNP
+#' )
 #' ivw_mvmr(r_input)
-
 # Define IVW Multivariable MR function: This takes the formatted dataframe from
 # the format_MVMR function as an input, as well as the covariance between the effect of the
 # genetic variants on each exposure.
