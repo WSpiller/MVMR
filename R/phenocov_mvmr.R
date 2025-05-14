@@ -4,7 +4,7 @@
 #' variants on each exposure. The phenotypic covariance matrix should be constructed using standardised phenotype measures. The function returns a number of covariance matrices equal to the number of SNPs, where SNP and
 #' row numbers reference ordered exposures.
 #'
-#' @param Pcov A phenotypic matrix using exposures, constructed using individual level exposure data. Columns should be ordered by exposure so as to match \code{format_mvmr}.
+#' @param Pcov A phenotypic matrix using exposures, constructed using individual level exposure data. Columns should be ordered by exposure so as to match [`format_mvmr()`].
 #' @param seBXGs A matrix containing standard errors corresponding in relation to the gene-exposure association for each SNP.
 #'
 #' @return A list of covariance matrices with respect to each genetic variant, retaining the ordering in \code{seBXGs}
