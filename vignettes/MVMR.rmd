@@ -92,17 +92,19 @@ Downstream functions in the `MVMR` package rely upon prior formatting of raw sum
 Using the previous data `rawdat.mvmr`, we can format the data using the following command:
 
 ```{r}
-F.data <- format_mvmr(BXGs = rawdat_mvmr[,c(1,2,3)],
-                    BYG = rawdat_mvmr[,7],
-                    seBXGs = rawdat_mvmr[,c(4,5,6)],
-                    seBYG = rawdat_mvmr[,8],
-                    RSID = rawdat_mvmr[,9])
+F.data <- format_mvmr(
+  BXGs = rawdat_mvmr[, c(1, 2, 3)],
+  BYG = rawdat_mvmr[, 7],
+  seBXGs = rawdat_mvmr[, c(4, 5, 6)],
+  seBYG = rawdat_mvmr[, 8],
+  RSID = rawdat_mvmr[, 9]
+)
 head(F.data)
 ```
 
-In the above code we have provided the numbered columns for each argument. For example, `BXGs = rawdat.mvmr[,c(1,2,3)]` indicates that columns 1, 2, and 3 are the association estimates for exposures 1, 2, and 3. It is important to note that standard error columns `seBXGs` should be input in the same order as BXGs to ensure the correct matching of association estimates with corresponding standard errors.
+In the above code we have provided the numbered columns for each argument. For example, `BXGs = rawdat.mvmr[, c(1, 2, 3)]` indicates that columns 1, 2, and 3 are the association estimates for exposures 1, 2, and 3. It is important to note that standard error columns `seBXGs` should be input in the same order as BXGs to ensure the correct matching of association estimates with corresponding standard errors.
 
-In subsequent steps, each exposure is numbered such that `X1`, `X2`, and `X3` are the first, second, and third entries in the `BXGs = rawdat.mvmr[,c(1,2,3)]` argument.
+In subsequent steps, each exposure is numbered such that `X1`, `X2`, and `X3` are the first, second, and third entries in the `BXGs = rawdat.mvmr[, c(1, 2, 3)]` argument.
 
 ## Step 3: Test for weak instruments
 
@@ -128,8 +130,8 @@ sres <- strength_mvmr(r_input = F.data, gencov = 0)
 In this case the set of instruments is sufficiently strong for MVMR estimation using the conventional F-statistic threshold of 10. However, note that we have manually set `mvmrcov` to zero, which would likely not be appropriate given each SNP-exposure estimate was obtained from the same sample. Using a random phenotypic covariance matrix, conditional F-statistics can be calculated as
 
 ```{r}
-mvmrcovmatrix<-matrix(c(1,-0.1,-0.05,-0.1,1,0.2,-0.05,0.2,1), nrow = 3, ncol = 3)
-Xcovmat<-phenocov_mvmr(mvmrcovmatrix,F.data[,7:9])
+mvmrcovmatrix <- matrix(c(1, -0.1, -0.05, -0.1, 1, 0.2, -0.05, 0.2, 1), nrow = 3, ncol = 3)
+Xcovmat <- phenocov_mvmr(mvmrcovmatrix, F.data[, 7:9])
 sres2 <- strength_mvmr(r_input = F.data, gencov = Xcovmat)
 ```
 
