@@ -8,16 +8,18 @@
 #' @return Object of class `mvmr_format`, the MVMR format
 #' @examples
 #' if (require("MendelianRandomization", quietly = TRUE)) {
-#' bx <- as.matrix(rawdat_mvmr[,c("LDL_beta", "HDL_beta")])
-#' bxse <- as.matrix(rawdat_mvmr[,c("LDL_se", "HDL_se")])
-#' dat <- MendelianRandomization::mr_mvinput(bx = bx,
-#'                                           bxse = bxse,
-#'                                           by = rawdat_mvmr$SBP_beta,
-#'                                           byse = rawdat_mvmr$SBP_se,
-#'                                           snps = rawdat_mvmr$SNP)
-#' dat <- mrmvinput_to_mvmr_format(dat)
-#' head(dat)
-#' class(dat)
+#'   bx <- as.matrix(rawdat_mvmr[, c("LDL_beta", "HDL_beta")])
+#'   bxse <- as.matrix(rawdat_mvmr[, c("LDL_se", "HDL_se")])
+#'   dat <- MendelianRandomization::mr_mvinput(
+#'     bx = bx,
+#'     bxse = bxse,
+#'     by = rawdat_mvmr$SBP_beta,
+#'     byse = rawdat_mvmr$SBP_se,
+#'     snps = rawdat_mvmr$SNP
+#'   )
+#'   dat <- mrmvinput_to_mvmr_format(dat)
+#'   head(dat)
+#'   class(dat)
 #' }
 mrmvinput_to_mvmr_format <- function(dat) {
   if (!("MRMVInput" %in% class(dat))) {
