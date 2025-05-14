@@ -26,7 +26,7 @@ library(remotes)
 install_github("WSpiller/MVMR", build_opts = c("--no-resave-data", "--no-manual"), build_vignettes = TRUE)
 ```
 
-To update the package just run the `remotes::install_github("WSpiller/MVMR", build_opts = c("--no-resave-data", "--no-manual"), build_vignettes = TRUE)` command again.
+To update the package just run that command again.
 
 ## Description
 
