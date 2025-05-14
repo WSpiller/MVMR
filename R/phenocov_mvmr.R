@@ -4,7 +4,7 @@
 #' variants on each exposure. The phenotypic covariance matrix should be constructed using standardised phenotype measures. The function returns a number of covariance matrices equal to the number of SNPs, where SNP and
 #' row numbers reference ordered exposures.
 #'
-#' @param Pcov A phenotypic matrix using exposures, constructed using individual level exposure data. Columns should be ordered by exposure so as to match [`format_mvmr()`].
+#' @param pcor A phenotypic correlation matrix using exposures, constructed using individual level exposure data. Columns should be ordered by exposure so as to match [`format_mvmr()`].
 #' @param seBXGs A matrix containing standard errors corresponding in relation to the gene-exposure association for each SNP.
 #'
 #' @return A list of covariance matrices with respect to each genetic variant, retaining the ordering in \code{seBXGs}
@@ -14,16 +14,16 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' phenocov_mvmr(Pcov, summarydata[,c(3,4)])
+#' phenocov_mvmr(pcor, summarydata[,c(3,4)])
 #' }
 
-phenocov_mvmr<-function(Pcov,seBXGs){
+phenocov_mvmr<-function(pcor,seBXGs){
 
   sigmalist <- vector("list", length(seBXGs[, 1]))
 
   for(i in seq_along(seBXGs[,1])){
 
-    sigma_mattemp<-Pcov
+    sigma_mattemp<-pcor
 
     for(j in seq_along(seBXGs[1,])){
 
