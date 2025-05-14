@@ -19,7 +19,7 @@
 
 phenocov_mvmr<-function(Pcov,seBXGs){
 
-  sigmalist <- vector("list", length(seBXGs[1,]))
+  sigmalist <- vector("list", length(seBXGs[, 1]))
 
   for(i in seq_along(seBXGs[,1])){
 
