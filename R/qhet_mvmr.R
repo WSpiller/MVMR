@@ -12,7 +12,7 @@
 #'
 #' @return An dataframe containing effect estimates with respect to each exposure.
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
+#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
 #' @export
 #' @examples
 #' \dontrun{
