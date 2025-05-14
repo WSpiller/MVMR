@@ -4,7 +4,7 @@
 #'
 #' Fits an IVW multivariable Mendelian randomization model using first order weights. The function returns an object of class \code{"MVMRIVW"}, containing regression estimates, estimated heterogeneity as a measure of instrument strength (\code{Q_strength}), and estimated heterogeneity as a measure of instrument validity (\code{Q_valid}).
 #'
-#' @param r_input A formatted data frame using the [`format_mvmr`] function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput`]
+#' @param r_input A formatted data frame using the [`format_mvmr()`] function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput()`]
 #' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
 #' @param weights A value specifying the inverse variance weights used to calculate IVW estimate and Cochran's Q statistic. Currently only first order weights are available (\code{1}).
 #'
