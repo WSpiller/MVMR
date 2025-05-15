@@ -7,7 +7,9 @@ Authors@R: c(
     person("Jack", "Bowden", , "j.bowden2@exeter.ac.uk", role = "aut",
            comment = c(ORCID = "0000-0003-2628-3304")),
     person("Eleanor", "Sanderson", , "eleanor.sanderson@bristol.ac.uk", role = "aut",
-           comment = c(ORCID = "0000-0001-5188-5775"))
+           comment = c(ORCID = "0000-0001-5188-5775")),
+    person("Tom", "Palmer", , "remlapmot@hotmail.com", role = "aut",
+           comment = c(ORCID = "0000-0003-4655-4511"))
   )
 Description: An R package for performing multivariable Mendelian
     randomization analyses.
