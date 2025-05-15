@@ -7,7 +7,7 @@
 strength_mvmr(r_input, gencov = 0)
 }
 \arguments{
-\item{r_input}{r_input A formatted data frame using the \code{\link{format_mvmr}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput}}}
+\item{r_input}{r_input A formatted data frame using the \code{\link[=format_mvmr]{format_mvmr()}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput()}}}
 
 \item{gencov}{Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.}
 }
@@ -16,9 +16,9 @@ A dataframe showing the conditional F-statistic for each exposure.
 }
 \description{
 Calculates the conditional F-statistic for assessing instrument strength in two sample summary multivariable Mendelian randomization.
-The function takes a formatted dataframe as an input, obtained using the function \code{\link{format_mvmr}}. Additionally, covariance matrices
+The function takes a formatted dataframe as an input, obtained using the function \code{\link[=format_mvmr]{format_mvmr()}}. Additionally, covariance matrices
 for estimated effects of individual genetic variants on each exposure can also be provided. These can be estimated using external data by
-applying the \code{\link{snpcov_mvmr}} or \code{\link{phenocov_mvmr}} functions, are input manually. The function returns a dataframe including the conditional
+applying the \code{\link[=snpcov_mvmr]{snpcov_mvmr()}} or \code{\link[=phenocov_mvmr]{phenocov_mvmr()}} functions, are input manually. The function returns a dataframe including the conditional
 F-statistic with respect to each exposure. A conventional F-statistic threshold of 10 is used in basic assessments of instrument strength.
 }
 \examples{
@@ -27,7 +27,7 @@ strength_mvmr(data, covariances)
 }
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2018, 48, 3, 713-727. Available from: \doi{10.1093/ije/dyy262}
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. Available from: \doi{10.1093/ije/dyy262}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.

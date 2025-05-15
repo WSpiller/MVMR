@@ -4,10 +4,10 @@
 \alias{phenocov_mvmr}
 \title{phenocov_mvmr}
 \usage{
-phenocov_mvmr(Pcov, seBXGs)
+phenocov_mvmr(pcor, seBXGs)
 }
 \arguments{
-\item{Pcov}{A phenotypic matrix using exposures, constructed using individual level exposure data. Columns should be ordered by exposure so as to match \code{format_mvmr}.}
+\item{pcor}{A phenotypic correlation matrix using exposures, constructed using individual level exposure data. Columns should be ordered by exposure so as to match \code{\link[=format_mvmr]{format_mvmr()}}.}
 
 \item{seBXGs}{A matrix containing standard errors corresponding in relation to the gene-exposure association for each SNP.}
 }
@@ -21,11 +21,11 @@ row numbers reference ordered exposures.
 }
 \examples{
 \dontrun{
-phenocov_mvmr(Pcov, summarydata[,c(3,4)])
+phenocov_mvmr(pcor, summarydata[,c(3,4)])
 }
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.

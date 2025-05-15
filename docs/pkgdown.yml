@@ -1,9 +1,9 @@
-pandoc: '3.3'
-pkgdown: 2.1.0
+pandoc: 3.6.4
+pkgdown: 2.1.2
 pkgdown_sha: ~
 articles:
   MVMR: MVMR.html
-last_built: 2024-08-25T08:58Z
+last_built: 2025-05-15T08:49Z
 urls:
   reference: https://wspiller.github.io/MVMR/reference
   article: https://wspiller.github.io/MVMR/articles

@@ -4,26 +4,26 @@
 #' variants on each exposure. The phenotypic covariance matrix should be constructed using standardised phenotype measures. The function returns a number of covariance matrices equal to the number of SNPs, where SNP and
 #' row numbers reference ordered exposures.
 #'
-#' @param Pcov A phenotypic matrix using exposures, constructed using individual level exposure data. Columns should be ordered by exposure so as to match \code{format_mvmr}.
+#' @param pcor A phenotypic correlation matrix using exposures, constructed using individual level exposure data. Columns should be ordered by exposure so as to match [`format_mvmr()`].
 #' @param seBXGs A matrix containing standard errors corresponding in relation to the gene-exposure association for each SNP.
 #'
 #' @return A list of covariance matrices with respect to each genetic variant, retaining the ordering in \code{seBXGs}
 #'
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
+#' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
 #' @export
 #' @examples
 #' \dontrun{
-#' phenocov_mvmr(Pcov, summarydata[,c(3,4)])
+#' phenocov_mvmr(pcor, summarydata[,c(3,4)])
 #' }
 
-phenocov_mvmr<-function(Pcov,seBXGs){
+phenocov_mvmr<-function(pcor,seBXGs){
 
-  sigmalist <- vector("list", length(seBXGs[1,]))
+  sigmalist <- vector("list", length(seBXGs[, 1]))
 
   for(i in seq_along(seBXGs[,1])){
 
-    sigma_mattemp<-Pcov
+    sigma_mattemp<-pcor
 
     for(j in seq_along(seBXGs[1,])){
 
@@ -42,7 +42,3 @@ phenocov_mvmr<-function(Pcov,seBXGs){
   return(sigmalist)
 
 }
-
-
-
-

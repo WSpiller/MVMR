@@ -7,7 +7,7 @@
 ivw_mvmr(r_input, gencov = 0)
 }
 \arguments{
-\item{r_input}{A formatted data frame using the \code{\link{format_mvmr}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput}}}
+\item{r_input}{A formatted data frame using the \code{\link[=format_mvmr]{format_mvmr()}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput()}}}
 
 \item{gencov}{Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.}
 }
@@ -19,15 +19,16 @@ Fits an IVW multivariable Mendelian randomization model using first order weight
 }
 \examples{
 r_input <- format_mvmr(
-    BXGs = rawdat_mvmr[,c("LDL_beta","HDL_beta")],
-    BYG = rawdat_mvmr$SBP_beta,
-    seBXGs = rawdat_mvmr[,c("LDL_se","HDL_se")],
-    seBYG = rawdat_mvmr$SBP_se,
-    RSID = rawdat_mvmr$SNP)
+  BXGs = rawdat_mvmr[, c("LDL_beta", "HDL_beta")],
+  BYG = rawdat_mvmr$SBP_beta,
+  seBXGs = rawdat_mvmr[, c("LDL_se", "HDL_se")],
+  seBYG = rawdat_mvmr$SBP_se,
+  RSID = rawdat_mvmr$SNP
+)
 ivw_mvmr(r_input)
 }
 \references{
-Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713-727. \doi{10.1093/ije/dyy262}
+Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.
