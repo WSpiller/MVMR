@@ -16,7 +16,6 @@
 #' \dontrun{
 #' phenocov_mvmr(pcor, summarydata[,c(3,4)])
 #' }
-
 phenocov_mvmr<-function(pcor,seBXGs){
 
   sigmalist <- vector("list", length(seBXGs[, 1]))

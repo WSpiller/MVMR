@@ -21,7 +21,6 @@
 # Define IVW Multivariable MR function: This takes the formatted dataframe from
 # the format_MVMR function as an input, as well as the covariance between the effect of the
 # genetic variants on each exposure.
-
 ivw_mvmr<-function(r_input,gencov=0){
 
   # convert MRMVInput object to mvmr_format

@@ -18,7 +18,6 @@
 #' \dontrun{
 #' strhet_mvmr(r_input, covariances)
 #' }
-
 strhet_mvmr<-function(r_input,gencov){
 
   # convert MRMVInput object to mvmr_format

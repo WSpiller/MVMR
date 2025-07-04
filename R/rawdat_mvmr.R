@@ -16,7 +16,5 @@
 #' \item \url{https://www.nature.com/articles/ng.2797}
 #' \item \url{https://www.nature.com/articles/ng.3768}
 #' }
-
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
-
 "rawdat_mvmr"

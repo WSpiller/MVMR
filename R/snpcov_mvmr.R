@@ -16,7 +16,6 @@
 #' \dontrun{
 #' snpcov_mvmr(data[,1:10], data[,11:13])
 #' }
-
 snpcov_mvmr<-function(Gs,Xs){
 
   betas<-matrix(0,ncol=length(Xs[1,]),nrow=length(Gs[1,]))

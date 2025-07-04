@@ -18,7 +18,6 @@
 #' \dontrun{
 #' qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000)
 #' }
-
 qhet_mvmr<-function(r_input,pcor,CI,iterations){
 
   # convert MRMVInput object to mvmr_format

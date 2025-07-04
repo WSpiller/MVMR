@@ -19,8 +19,6 @@
 #' \dontrun{
 #' pleiotropy_mvmr(r_input, covariances)
 #' }
-#'
-
 pleiotropy_mvmr<-function(r_input,gencov=0){
 
   # convert MRMVInput object to mvmr_format

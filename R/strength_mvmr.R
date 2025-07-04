@@ -18,7 +18,6 @@
 #' \dontrun{
 #' strength_mvmr(data, covariances)
 #' }
-
 strength_mvmr<-function(r_input,gencov=0){
 
   # convert MRMVInput object to mvmr_format

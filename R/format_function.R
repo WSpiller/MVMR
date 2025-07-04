@@ -22,14 +22,11 @@
 #' )
 #' names(r_input)
 #' class(r_input)
-
 #Function for formatting MVMR data frame
-
 #Define formating function: This takes as inputs a matrix of instrument-exposure
 #associations, a vector of instrument-outcome associations, a matrix of
 #corresponding instrument-exposure standard errors, and a vector of identification
 #numbers for the instruments.
-
 format_mvmr<-function(BXGs,BYG,seBXGs,seBYG,RSID){
 
   #If no instrument-identification vector is provided, a set of placeholder values

@@ -46,7 +46,6 @@
 # the format_MVMR function, as an input, the covariance between the effect of the
 # genetic variants on each exposure, and a value indicating the weights to
 # used in the analysis.
-
 mvmr<-function(r_input,gencov,weights){
 
   # convert MRMVInput object to mvmr_format
