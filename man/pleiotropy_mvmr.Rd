@@ -25,7 +25,6 @@ Q-statistic for instrument validity, and a corresponding P-value.
 \dontrun{
 pleiotropy_mvmr(r_input, covariances)
 }
-
 }
 \references{
 Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
