@@ -14,7 +14,8 @@ mvmr(r_input, gencov, weights)
 \item{weights}{A value specifying the inverse variance weights used to calculate IVW estimate and Cochran's Q statistic. Currently only first order weights are available (\code{1}).}
 }
 \value{
-An object of class \code{"MVMRIVW"} containing the following components:\describe{
+An object of class \code{"MVMRIVW"} containing the following components:
+\describe{
 \item{\code{summary}}{A summary of the MVMR regression model, including estimated coefficients, standard errors, t-statistics, p-values, and heterogeneity statistics.}
 \item{\code{coef}}{The estimated coefficients, their standard errors, t-statistics, and corresponding (two-sided) p-values.}
 \item{\code{Q_strength}}{A data frame displaying modified Cochran's Q statistics for assessing instrument strength with respect to each exposure. The Q-statistic increases proportionally with instrument strength, and analogous to univariate MR analyses, a value equal to or greater than 10 can be used as a minimum threshold for instrument strength. Note that for these statistics it is not informative to evaluate p-values.}
