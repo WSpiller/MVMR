@@ -54,7 +54,7 @@ strength_mvmr <- function(r_input, gencov = 0) {
 
   A <- summary(stats::lm(
     stats::as.formula(paste(
-      "betaYG~ -1 +",
+      "betaYG ~ -1 +",
       paste(
         names(r_input)[
           seq(4, 3 + exp.number, by = 1)
