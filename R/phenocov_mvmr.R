@@ -17,28 +17,20 @@
 #' phenocov_mvmr(pcor, summarydata[,c(3,4)])
 #' }
 
-phenocov_mvmr<-function(pcor,seBXGs){
-
+phenocov_mvmr <- function(pcor, seBXGs) {
   sigmalist <- vector("list", length(seBXGs[, 1]))
 
-  for(i in seq_along(seBXGs[,1])){
+  for (i in seq_along(seBXGs[, 1])) {
+    sigma_mattemp <- pcor
 
-    sigma_mattemp<-pcor
-
-    for(j in seq_along(seBXGs[1,])){
-
-      for(k in seq_along(seBXGs[1,])){
-
-        sigma_mattemp[j,k]<-sigma_mattemp[j,k] * seBXGs[i,j] * seBXGs[i,k]
-
+    for (j in seq_along(seBXGs[1, ])) {
+      for (k in seq_along(seBXGs[1, ])) {
+        sigma_mattemp[j, k] <- sigma_mattemp[j, k] * seBXGs[i, j] * seBXGs[i, k]
       }
-
     }
 
-    sigmalist[[i]] <-sigma_mattemp
-
+    sigmalist[[i]] <- sigma_mattemp
   }
 
   return(sigmalist)
-
 }

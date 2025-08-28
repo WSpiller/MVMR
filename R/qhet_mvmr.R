@@ -19,177 +19,169 @@
 #' qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000)
 #' }
 
-qhet_mvmr<-function(r_input,pcor,CI,iterations){
-
+qhet_mvmr <- function(r_input, pcor, CI, iterations) {
   # convert MRMVInput object to mvmr_format
   if ("MRMVInput" %in% class(r_input)) {
     r_input <- mrmvinput_to_mvmr_format(r_input)
   }
 
   # Perform check that r_input has been formatted using format_mvmr function
-  if(!("mvmr_format" %in%
-       class(r_input))) {
-    stop('The class of the data object must be "mvmr_format", please resave the object with the output of format_mvmr().')
+  if (
+    !("mvmr_format" %in%
+      class(r_input))
+  ) {
+    stop(
+      'The class of the data object must be "mvmr_format", please resave the object with the output of format_mvmr().'
+    )
   }
 
   requireNamespace("boot", quietly = TRUE)
 
   warning("qhet_mvmr() is currently undergoing development.")
 
-  if(missing(CI)) {
-    CI<-FALSE
+  if (missing(CI)) {
+    CI <- FALSE
     warning("95 percent confidence interval not calculated")
   }
 
-  if(missing(iterations)) {
-    iterations<-1000
+  if (missing(iterations)) {
+    iterations <- 1000
     warning("Iterations for bootstrap not specified. Default = 1000")
   }
 
-  exp.number<-length(names(r_input)[-c(1,2,3)])/2
+  exp.number <- length(names(r_input)[-c(1, 2, 3)]) / 2
 
-  Qtemp<-function(r_input,pcor){
-
-    exp.number<-length(names(r_input)[-c(1,2,3)])/2
-    stderr<-as.matrix(r_input[,(exp.number + 4):length(r_input)])
-    correlation<-pcor
-    gammahat<-r_input$betaYG
-    segamma<-r_input$sebetaYG
-    pihat<-as.matrix(r_input[,c(4:(3+exp.number))])
+  Qtemp <- function(r_input, pcor) {
+    exp.number <- length(names(r_input)[-c(1, 2, 3)]) / 2
+    stderr <- as.matrix(r_input[, (exp.number + 4):length(r_input)])
+    correlation <- pcor
+    gammahat <- r_input$betaYG
+    segamma <- r_input$sebetaYG
+    pihat <- as.matrix(r_input[, c(4:(3 + exp.number))])
 
     #estimation with the heterogeneity statistic
 
-    PL_MVMR = function(a){
-      tau2   = a[1]
+    PL_MVMR = function(a) {
+      tau2 = a[1]
 
-      PL2_MVMR = function(ab){
-        b<-ab
+      PL2_MVMR = function(ab) {
+        b <- ab
 
         cov = matrix(nrow = exp.number, ncol = exp.number)
-        w=NULL
-        for(l in seq_len(nrow(r_input))){
-          for(pp in 1:exp.number){
-            for(p2 in 1:exp.number){
-              cov[pp,p2] <- correlation[pp,p2]*stderr[l,pp]*stderr[l,p2]
+        w = NULL
+        for (l in seq_len(nrow(r_input))) {
+          for (pp in 1:exp.number) {
+            for (p2 in 1:exp.number) {
+              cov[pp, p2] <- correlation[pp, p2] * stderr[l, pp] * stderr[l, p2]
             }
           }
 
-          segamma<-r_input$sebetaYG
+          segamma <- r_input$sebetaYG
 
-          w[l] <- segamma[l]^2+t(b)%*%cov%*%b + tau2
+          w[l] <- segamma[l]^2 + t(b) %*% cov %*% b + tau2
         }
 
-        q =  sum((1/w)*((gammahat - pihat%*%b)^2))
+        q = sum((1 / w) * ((gammahat - pihat %*% b)^2))
 
         return(q)
-
       }
 
-      st_PL2  =  rep(0,exp.number)
+      st_PL2 = rep(0, exp.number)
 
-      bc    = stats::optim(st_PL2, PL2_MVMR)
+      bc = stats::optim(st_PL2, PL2_MVMR)
 
       bcresults <- bc$par
 
-      cov = matrix(nrow =exp.number, ncol = exp.number)
-      w=NULL
-      for(l in seq_len(nrow(r_input))){
-        for(pp in 1:exp.number){
-          for(p2 in 1:exp.number){
-            cov[pp,p2] <- correlation[pp,p2]*stderr[l,pp]*stderr[l,p2]
-          }
-        }
-
-        w[l] <- segamma[l]^2+t(bcresults)%*%cov%*%bcresults + tau2
-      }
-
-      q = (sum((1/w)*((gammahat - pihat%*%bcresults)^2))-(nrow(r_input)-2))^2
-
-    }
-
-    PL2_MVMR = function(ab){
-      b=ab
-
-      w=NULL
       cov = matrix(nrow = exp.number, ncol = exp.number)
-      for(l in seq_len(nrow(r_input))){
-        for(pp in 1:exp.number){
-          for(p2 in 1:exp.number){
-            cov[pp,p2] <- correlation[pp,p2]*stderr[l,pp]*stderr[l,p2]
+      w = NULL
+      for (l in seq_len(nrow(r_input))) {
+        for (pp in 1:exp.number) {
+          for (p2 in 1:exp.number) {
+            cov[pp, p2] <- correlation[pp, p2] * stderr[l, pp] * stderr[l, p2]
           }
         }
 
-        w[l] <- segamma[l]^2+t(b)%*%cov%*%b + tau_i
+        w[l] <- segamma[l]^2 + t(bcresults) %*% cov %*% bcresults + tau2
       }
 
-      q =  sum((1/w)*((gammahat - pihat%*%b)^2))
-
+      q = (sum((1 / w) * ((gammahat - pihat %*% bcresults)^2)) -
+        (nrow(r_input) - 2))^2
     }
 
-    limltauest  = stats::optimize(PL_MVMR,interval=c(-10,10))
+    PL2_MVMR = function(ab) {
+      b = ab
+
+      w = NULL
+      cov = matrix(nrow = exp.number, ncol = exp.number)
+      for (l in seq_len(nrow(r_input))) {
+        for (pp in 1:exp.number) {
+          for (p2 in 1:exp.number) {
+            cov[pp, p2] <- correlation[pp, p2] * stderr[l, pp] * stderr[l, p2]
+          }
+        }
+
+        w[l] <- segamma[l]^2 + t(b) %*% cov %*% b + tau_i
+      }
+
+      q = sum((1 / w) * ((gammahat - pihat %*% b)^2))
+    }
+
+    limltauest = stats::optimize(PL_MVMR, interval = c(-10, 10))
     tau_i = limltauest$objective
 
     tau = tau_i
 
-    liml_het2<- stats::optim(rep(0,exp.number), PL2_MVMR)
+    liml_het2 <- stats::optim(rep(0, exp.number), PL2_MVMR)
     limlhets <- liml_het2$par
     Qexact_het <- liml_het2$value
 
-    Effects<-limlhets
-    Effects<-data.frame(Effects)
-    names(Effects)<-"Effect Estimates"
-    for(i in 1:exp.number){
-      rownames(Effects)[i]<-paste("Exposure",i,sep=" ")
-
+    Effects <- limlhets
+    Effects <- data.frame(Effects)
+    names(Effects) <- "Effect Estimates"
+    for (i in 1:exp.number) {
+      rownames(Effects)[i] <- paste("Exposure", i, sep = " ")
     }
 
     return(Effects)
-
-
   }
 
-  if(CI==FALSE){
-
-    res<-Qtemp(r_input,pcor)
-
+  if (CI == FALSE) {
+    res <- Qtemp(r_input, pcor)
   }
 
-  if(CI==TRUE){
-
-    bootse<-function(data, indices){
-
-      bres<-Qtemp(data[indices,],pcor)[,1]
+  if (CI == TRUE) {
+    bootse <- function(data, indices) {
+      bres <- Qtemp(data[indices, ], pcor)[, 1]
 
       return(bres)
-
     }
 
-    b.results<-boot::boot(data=r_input,statistic=bootse,R=iterations)
+    b.results <- boot::boot(data = r_input, statistic = bootse, R = iterations)
 
-    lcb<-NULL
-    ucb<-NULL
-    ci<-NULL
+    lcb <- NULL
+    ucb <- NULL
+    ci <- NULL
 
-    for(i in 1:exp.number){
+    for (i in 1:exp.number) {
+      lcb[i] <- round(
+        boot::boot.ci(b.results, type = "bca", index = i)$bca[4],
+        digits = 3
+      )
+      ucb[i] <- round(
+        boot::boot.ci(b.results, type = "bca", index = i)$bca[5],
+        digits = 3
+      )
 
-      lcb[i]<-round(boot::boot.ci(b.results, type="bca",index=i)$bca[4],digits=3)
-      ucb[i]<-round(boot::boot.ci(b.results, type="bca",index=i)$bca[5],digits=3)
-
-      ci[i]<-paste(lcb[i],ucb[i],sep="-")
-
+      ci[i] <- paste(lcb[i], ucb[i], sep = "-")
     }
 
-    res<-data.frame(b.results$t0,ci)
+    res <- data.frame(b.results$t0, ci)
 
-    names(res)<-c("Effect Estimates","95% CI")
-    for(i in 1:exp.number){
-      rownames(res)[i]<-paste("Exposure",i,sep=" ")
-
+    names(res) <- c("Effect Estimates", "95% CI")
+    for (i in 1:exp.number) {
+      rownames(res)[i] <- paste("Exposure", i, sep = " ")
     }
-
   }
 
   return(res)
-
-
 }

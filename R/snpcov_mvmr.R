@@ -17,49 +17,44 @@
 #' snpcov_mvmr(data[,1:10], data[,11:13])
 #' }
 
-snpcov_mvmr<-function(Gs,Xs){
+snpcov_mvmr <- function(Gs, Xs) {
+  betas <- matrix(0, ncol = length(Xs[1, ]), nrow = length(Gs[1, ]))
 
-  betas<-matrix(0,ncol=length(Xs[1,]),nrow=length(Gs[1,]))
+  resmat <- data.frame(rep(0, length(Gs[, 1])))
 
-  resmat<-data.frame(rep(0,length(Gs[,1])))
+  for (j in seq_along(Xs[1, ])) {
+    for (i in seq_along(Gs[1, ])) {
+      betas[i, j] <- stats::lm(Xs[, j] ~ -1 + Gs[, i])$coefficients
 
-  for(j in seq_along(Xs[1,])){
+      resids <- data.frame(stats::lm(Xs[, j] ~ -1 + Gs[, i])$residuals)
 
-    for(i in seq_along(Gs[1,])){
-
-      betas[i,j]<-stats::lm(Xs[,j]~-1 + Gs[,i])$coefficients
-
-      resids<-data.frame(stats::lm(Xs[,j]~-1 + Gs[,i])$residuals)
-
-      resmat<-cbind(resmat,resids)
-
+      resmat <- cbind(resmat, resids)
     }
-
   }
 
-  resmat<-resmat[,-1]
+  resmat <- resmat[, -1]
 
-  sigmalist <- vector("list", length(Gs[1,]))
+  sigmalist <- vector("list", length(Gs[1, ]))
 
-  for(i in seq_along(Gs[1,])){
+  for (i in seq_along(Gs[1, ])) {
+    sigma_mattemp <- matrix(
+      ((t(Gs[, i]) %*% Gs[, i])^-1) / length(Gs[, i]),
+      ncol = length(Xs[1, ]),
+      nrow = length(Xs[1, ])
+    )
 
-    sigma_mattemp<-matrix(((t(Gs[,i]) %*% Gs[,i])^-1)/length(Gs[,i]),ncol=length(Xs[1,])
-                          ,nrow=length(Xs[1,]))
-
-    for(j in seq_along(Xs[1,])){
-
-      for(k in seq_along(Xs[1,])){
-
-        sigma_mattemp[k,j]<-sigma_mattemp[k,j] * sum(resmat[,i+((k-1)*length(Gs))] * resmat[,i+((j-1)*length(Gs))])
-
-
+    for (j in seq_along(Xs[1, ])) {
+      for (k in seq_along(Xs[1, ])) {
+        sigma_mattemp[k, j] <- sigma_mattemp[k, j] *
+          sum(
+            resmat[, i + ((k - 1) * length(Gs))] *
+              resmat[, i + ((j - 1) * length(Gs))]
+          )
       }
     }
 
-    sigmalist[[i]] <-sigma_mattemp
-
+    sigmalist[[i]] <- sigma_mattemp
   }
 
   return(sigmalist)
-
 }
