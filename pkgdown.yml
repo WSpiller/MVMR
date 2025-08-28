@@ -3,7 +3,7 @@ pkgdown: 2.1.3
 pkgdown_sha: ~
 articles:
   MVMR: MVMR.html
-last_built: 2025-08-26T10:09Z
+last_built: 2025-08-28T14:39Z
 urls:
   reference: https://wspiller.github.io/MVMR/reference
   article: https://wspiller.github.io/MVMR/articles
