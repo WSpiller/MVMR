@@ -154,11 +154,11 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = parallelly::availa
     return(Effects)
   }
 
-  if (CI == FALSE) {
+  if (!CI) {
     res <- Qtemp(r_input, pcor)
   }
 
-  if (CI == TRUE) {
+  if (CI) {
     bootse <- function(data, indices) {
       bres <- Qtemp(data[indices, ], pcor)[, 1]
 
