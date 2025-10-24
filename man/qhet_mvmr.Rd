@@ -4,7 +4,13 @@
 \alias{qhet_mvmr}
 \title{qhet_mvmr}
 \usage{
-qhet_mvmr(r_input, pcor, CI, iterations)
+qhet_mvmr(
+  r_input,
+  pcor,
+  CI,
+  iterations,
+  ncores = parallelly::availableCores(omit = 1)
+)
 }
 \arguments{
 \item{r_input}{A formatted data frame using the \code{\link[=format_mvmr]{format_mvmr()}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput()}}}
@@ -14,6 +20,8 @@ qhet_mvmr(r_input, pcor, CI, iterations)
 \item{CI}{Indicates whether 95 percent confidence intervals should be calculated using a non-parametric bootstrap.}
 
 \item{iterations}{Specifies number of bootstrap iterations for calculating 95 percent confidence intervals.}
+
+\item{ncores}{Number of cores to use for parallel processing in bootstrap. Default is \code{parallelly::availableCores(omit = 1)}. On Windows, this is automatically set to 1 regardless of user input. It is recommended to only set this to a maximum of \code{parallelly::availableCores(omit = 1)}.}
 }
 \value{
 An dataframe containing effect estimates with respect to each exposure.
