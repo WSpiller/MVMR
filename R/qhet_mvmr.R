@@ -9,6 +9,7 @@
 #' @param pcor A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.
 #' @param CI Indicates whether 95 percent confidence intervals should be calculated using a non-parametric bootstrap.
 #' @param iterations Specifies number of bootstrap iterations for calculating 95 percent confidence intervals.
+#' @param ncores Number of cores to use for parallel processing in bootstrap. Default is `parallelly::availableCores(omit = 1)`. On Windows, this is automatically set to 1 regardless of user input. It is recommended to only set this to a maximum of `parallelly::availableCores(omit = 1)`.
 #'
 #' @return An dataframe containing effect estimates with respect to each exposure.
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
@@ -19,7 +20,7 @@
 #' qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000)
 #' }
 
-qhet_mvmr <- function(r_input, pcor, CI, iterations) {
+qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = parallelly::availableCores(omit = 1)) {
   # convert MRMVInput object to mvmr_format
   if ("MRMVInput" %in% class(r_input)) {
     r_input <- mrmvinput_to_mvmr_format(r_input)
@@ -35,8 +36,6 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations) {
     )
   }
 
-  requireNamespace("boot", quietly = TRUE)
-
   warning("qhet_mvmr() is currently undergoing development.")
 
   if (missing(CI)) {
@@ -47,6 +46,16 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations) {
   if (missing(iterations)) {
     iterations <- 1000
     warning("Iterations for bootstrap not specified. Default = 1000")
+  }
+
+  # Check if on Windows and adjust ncores accordingly
+  if (.Platform$OS.type == "windows" && ncores > 1) {
+    warning("Multi-core processing is not supported on Windows. Setting ncores to 1.")
+    ncores <- 1
+  }
+
+  if (ncores > parallelly::availableCores(omit = 1)) {
+    stop('You have set the number of cores greater than the number available on the machine minus one. We recommend setting this to a maximum of parallelly::availableCores(omit = 1).')
   }
 
   exp.number <- length(names(r_input)[-c(1, 2, 3)]) / 2
@@ -145,32 +154,31 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations) {
     return(Effects)
   }
 
-  if (CI == FALSE) {
+  if (!CI) {
     res <- Qtemp(r_input, pcor)
   }
 
-  if (CI == TRUE) {
+  if (CI) {
     bootse <- function(data, indices) {
       bres <- Qtemp(data[indices, ], pcor)[, 1]
 
       return(bres)
     }
 
-    b.results <- boot::boot(data = r_input, statistic = bootse, R = iterations)
+    if (ncores > 1) {
+      b.results <- boot::boot(data = r_input, statistic = bootse, R = iterations, parallel = "multicore", ncpus = ncores)
+    } else {
+      b.results <- boot::boot(data = r_input, statistic = bootse, R = iterations)
+    }
 
     lcb <- NULL
     ucb <- NULL
     ci <- NULL
 
     for (i in 1:exp.number) {
-      lcb[i] <- round(
-        boot::boot.ci(b.results, type = "bca", index = i)$bca[4],
-        digits = 3
-      )
-      ucb[i] <- round(
-        boot::boot.ci(b.results, type = "bca", index = i)$bca[5],
-        digits = 3
-      )
+      boot_ci <- boot::boot.ci(b.results, type = "bca", index = i)
+      lcb[i] <- round(boot_ci$bca[4], digits = 3)
+      ucb[i] <- round(boot_ci$bca[5], digits = 3)
 
       ci[i] <- paste(lcb[i], ucb[i], sep = "-")
     }
