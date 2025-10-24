@@ -13,7 +13,7 @@ Note that calculating confidence intervals at present can take a substantial amo
 
     <a class="navbar-brand me-2" href="../index.html">MVMR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -55,7 +55,13 @@ Note that calculating confidence intervals at present can take a substantial amo
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">qhet_mvmr</span><span class="op">(</span><span class="va">r_input</span>, <span class="va">pcor</span>, <span class="va">CI</span>, <span class="va">iterations</span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">qhet_mvmr</span><span class="op">(</span></span>
+<span>  <span class="va">r_input</span>,</span>
+<span>  <span class="va">pcor</span>,</span>
+<span>  <span class="va">CI</span>,</span>
+<span>  <span class="va">iterations</span>,</span>
+<span>  ncores <span class="op">=</span> <span class="fu">parallelly</span><span class="fu">::</span><span class="fu"><a href="https://parallelly.futureverse.org/reference/availableCores.html" class="external-link">availableCores</a></span><span class="op">(</span>omit <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -76,6 +82,10 @@ Note that calculating confidence intervals at present can take a substantial amo
 
 <dt id="arg-iterations">iterations<a class="anchor" aria-label="anchor" href="#arg-iterations"></a></dt>
 <dd><p>Specifies number of bootstrap iterations for calculating 95 percent confidence intervals.</p></dd>
+
+
+<dt id="arg-ncores">ncores<a class="anchor" aria-label="anchor" href="#arg-ncores"></a></dt>
+<dd><p>Number of cores to use for parallel processing in bootstrap. Default is <code>parallelly::availableCores(omit = 1)</code>. On Windows, this is automatically set to 1 regardless of user input. It is recommended to only set this to a maximum of <code>parallelly::availableCores(omit = 1)</code>.</p></dd>
 
 </dl></div>
     <div class="section level2">

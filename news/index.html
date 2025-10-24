@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MVMR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,11 +40,16 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.2" id="mvmr-042">MVMR 0.4.2<a class="anchor" aria-label="anchor" href="#mvmr-042"></a></h2>
+<ul><li>The <code><a href="../reference/qhet_mvmr.html">qhet_mvmr()</a></code> function with argument <code>CI = TRUE</code> is now faster as it can use multiple processor cores (except on Windows) and it calculates the bootstrap confidence interval limits more efficiently as an unnecessarily repeated function call has been removed (thanks <a href="https://github.com/nickhir" class="external-link">@nickhir</a>).</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.1" id="mvmr-041">MVMR 0.4.1<a class="anchor" aria-label="anchor" href="#mvmr-041"></a></h2>
 <ul><li><p>We have slightly improved the speed of the <code><a href="../reference/phenocov_mvmr.html">phenocov_mvmr()</a></code> function (thanks <a href="https://github.com/shiyw" class="external-link">@shiyw</a>).</p></li>
 <li><p>In the <code><a href="../reference/phenocov_mvmr.html">phenocov_mvmr()</a></code> function we renamed the <code>Pcov</code> argument to <code>pcor</code> to reflect that this is a correlation matrix. This matches the argument name in <code><a href="../reference/qhet_mvmr.html">qhet_mvmr()</a></code> (thanks <a href="https://github.com/mooreann" class="external-link">@mooreann</a>).</p></li>
 </ul></div>
-  </main></div>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
+    </nav></aside></div>
 
 
     <footer><div class="pkgdown-footer-left">
