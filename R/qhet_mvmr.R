@@ -36,8 +36,6 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = parallelly::availa
     )
   }
 
-  requireNamespace("boot", quietly = TRUE)
-
   warning("qhet_mvmr() is currently undergoing development.")
 
   if (missing(CI)) {
