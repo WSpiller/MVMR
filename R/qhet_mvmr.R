@@ -9,7 +9,7 @@
 #' @param pcor A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.
 #' @param CI Indicates whether 95 percent confidence intervals should be calculated using a non-parametric bootstrap.
 #' @param iterations Specifies number of bootstrap iterations for calculating 95 percent confidence intervals.
-#' @param ncores Number of cores to use for parallel processing in bootstrap. Default is 1. On Windows, this is automatically set to 1 regardless of user input.
+#' @param ncores Number of cores to use for parallel processing in bootstrap. Default is `parallelly::availableCores(omit = 1)`. On Windows, this is automatically set to 1 regardless of user input. It is recommended to only set this to a maximum of `parallelly::availableCores(omit = 1)`.
 #'
 #' @return An dataframe containing effect estimates with respect to each exposure.
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
@@ -17,10 +17,10 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000, ncores = 4)
+#' qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000)
 #' }
 
-qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = 1) {
+qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = parallelly::availableCores(omit = 1)) {
   # convert MRMVInput object to mvmr_format
   if ("MRMVInput" %in% class(r_input)) {
     r_input <- mrmvinput_to_mvmr_format(r_input)
@@ -54,6 +54,10 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = 1) {
   if (.Platform$OS.type == "windows" && ncores > 1) {
     warning("Multi-core processing is not supported on Windows. Setting ncores to 1.")
     ncores <- 1
+  }
+
+  if (ncores > parallelly::availableCores(omit = 1)) {
+    stop('You have set the number of cores greater than the number available on the machine minus one. We recommend setting this to a maximum of parallelly::availableCores(omit = 1).')
   }
 
   exp.number <- length(names(r_input)[-c(1, 2, 3)]) / 2

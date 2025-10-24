@@ -20,7 +20,8 @@ BugReports: https://github.com/WSpiller/MVMR/issues
 Depends: 
     R (>= 3.6)
 Imports: 
-    boot
+    boot,
+    parallelly
 Suggests:
     knitr,
     MendelianRandomization,
