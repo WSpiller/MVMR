@@ -53,7 +53,7 @@ jobs:
       - if: runner.os == 'macOS'
         run: |
           mkdir ~/.R
-          tee ~/.R/Makevars <<EOF 
+          tee ~/.R/Makevars <<EOF
           CFLAGS=-I/opt/homebrew/include
           CPPFLAGS=-I/opt/homebrew/include
           CXXFLAGS=-I/opt/homebrew/include
