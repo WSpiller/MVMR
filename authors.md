@@ -15,7 +15,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/WSpiller/MVMR/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/WSpiller/MVMR/blob/v0.4.3/inst/CITATION)
 
 Sanderson E, Spiller W, Bowden J (2021). “Testing and correcting for
 weak and pleiotropic instruments in two-sample multivariable Mendelian
