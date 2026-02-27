@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MVMR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.3</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -39,6 +39,10 @@
       <small>Source: <a href="https://github.com/WSpiller/MVMR/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.3" id="mvmr-043">MVMR 0.4.3<a class="anchor" aria-label="anchor" href="#mvmr-043"></a></h2>
+<ul><li>The <code><a href="../reference/snpcov_mvmr.html">snpcov_mvmr()</a></code> function accidentally omitted intercepts from its regressions of exposure on genotype. This has been fixed.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.2" id="mvmr-042">MVMR 0.4.2<a class="anchor" aria-label="anchor" href="#mvmr-042"></a></h2>
 <ul><li>The <code><a href="../reference/qhet_mvmr.html">qhet_mvmr()</a></code> function with argument <code>CI = TRUE</code> is now faster as it can use multiple processor cores (except on Windows) and it calculates the bootstrap confidence interval limits more efficiently as an unnecessarily repeated function call has been removed (thanks <a href="https://github.com/nickhir" class="external-link">@nickhir</a>).</li>
