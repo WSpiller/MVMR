@@ -52,24 +52,6 @@ strength_mvmr <- function(r_input, gencov = 0) {
 
   exp.number <- length(names(r_input)[-c(1, 2, 3)]) / 2
 
-  A <- summary(stats::lm(
-    stats::as.formula(paste(
-      "betaYG ~ -1 +",
-      paste(
-        names(r_input)[
-          seq(4, 3 + exp.number, by = 1)
-        ],
-        collapse = "+"
-      )
-    )),
-    data = r_input
-  ))$coef
-
-  #Rename the regressors for ease of interpretation
-  for (i in 1:exp.number) {
-    dimnames(A)[[1]][i] <- paste0("exposure", i, collapse = "")
-  }
-
   #############################################
   # Generalised instrument strength het.stats #
   #############################################
@@ -153,7 +135,7 @@ strength_mvmr <- function(r_input, gencov = 0) {
   }
 
   Q_strength <- data.frame(Q_strength)
-  names(Q_strength) <- dimnames(A)[[1]]
+  names(Q_strength) <- paste0("exposure", seq_len(exp.number))
   rownames(Q_strength) <- "F-statistic"
 
   ##########
