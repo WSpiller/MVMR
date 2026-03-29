@@ -64,6 +64,7 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = parallelly::availa
     exp.number <- length(names(r_input)[-c(1, 2, 3)]) / 2
     stderr <- as.matrix(r_input[, (exp.number + 4):length(r_input)])
     correlation <- pcor
+    covlist <- lapply(seq_len(nrow(r_input)), function(l) correlation * outer(stderr[l, ], stderr[l, ]))
     gammahat <- r_input$betaYG
     segamma <- r_input$sebetaYG
     pihat <- as.matrix(r_input[, c(4:(3 + exp.number))])
@@ -76,19 +77,7 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = parallelly::availa
       PL2_MVMR = function(ab) {
         b <- ab
 
-        cov = matrix(nrow = exp.number, ncol = exp.number)
-        w = NULL
-        for (l in seq_len(nrow(r_input))) {
-          for (pp in 1:exp.number) {
-            for (p2 in 1:exp.number) {
-              cov[pp, p2] <- correlation[pp, p2] * stderr[l, pp] * stderr[l, p2]
-            }
-          }
-
-          segamma <- r_input$sebetaYG
-
-          w[l] <- segamma[l]^2 + t(b) %*% cov %*% b + tau2
-        }
+        w <- segamma^2 + sapply(covlist, function(cv) drop(t(b) %*% cv %*% b)) + tau2
 
         q = sum((1 / w) * ((gammahat - pihat %*% b)^2))
 
@@ -101,17 +90,7 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = parallelly::availa
 
       bcresults <- bc$par
 
-      cov = matrix(nrow = exp.number, ncol = exp.number)
-      w = NULL
-      for (l in seq_len(nrow(r_input))) {
-        for (pp in 1:exp.number) {
-          for (p2 in 1:exp.number) {
-            cov[pp, p2] <- correlation[pp, p2] * stderr[l, pp] * stderr[l, p2]
-          }
-        }
-
-        w[l] <- segamma[l]^2 + t(bcresults) %*% cov %*% bcresults + tau2
-      }
+      w <- segamma^2 + sapply(covlist, function(cv) drop(t(bcresults) %*% cv %*% bcresults)) + tau2
 
       q = (sum((1 / w) * ((gammahat - pihat %*% bcresults)^2)) -
         (nrow(r_input) - 2))^2
@@ -120,17 +99,7 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = parallelly::availa
     PL2_MVMR = function(ab) {
       b = ab
 
-      w = NULL
-      cov = matrix(nrow = exp.number, ncol = exp.number)
-      for (l in seq_len(nrow(r_input))) {
-        for (pp in 1:exp.number) {
-          for (p2 in 1:exp.number) {
-            cov[pp, p2] <- correlation[pp, p2] * stderr[l, pp] * stderr[l, p2]
-          }
-        }
-
-        w[l] <- segamma[l]^2 + t(b) %*% cov %*% b + tau_i
-      }
+      w <- segamma^2 + sapply(covlist, function(cv) drop(t(b) %*% cv %*% b)) + tau_i
 
       q = sum((1 / w) * ((gammahat - pihat %*% b)^2))
     }
