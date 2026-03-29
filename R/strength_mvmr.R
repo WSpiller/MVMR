@@ -52,24 +52,6 @@ strength_mvmr <- function(r_input, gencov = 0) {
 
   exp.number <- length(names(r_input)[-c(1, 2, 3)]) / 2
 
-  A <- summary(stats::lm(
-    stats::as.formula(paste(
-      "betaYG ~ -1 +",
-      paste(
-        names(r_input)[
-          seq(4, 3 + exp.number, by = 1)
-        ],
-        collapse = "+"
-      )
-    )),
-    data = r_input
-  ))$coef
-
-  #Rename the regressors for ease of interpretation
-  for (i in 1:exp.number) {
-    dimnames(A)[[1]][i] <- paste0("exposure", i, collapse = "")
-  }
-
   #############################################
   # Generalised instrument strength het.stats #
   #############################################
@@ -140,13 +122,10 @@ strength_mvmr <- function(r_input, gencov = 0) {
   Q_strength <- matrix(ncol = exp.number, nrow = 1, 0)
 
   #Generates the component of the Q statistic to be subtracted from the exposure estimates
+  betas_all <- as.matrix(r_input[, c(4:(3 + exp.number))])
+
   for (i in 1:exp.number) {
-    betas <- r_input[, c(4:(3 + exp.number))]
-    betas <- data.frame(betas[, -i])
-    temp.sub <- 0
-    for (j in 1:(exp.number - 1)) {
-      temp.sub <- temp.sub + (delta_mat[j, i] * betas[, j])
-    }
+    temp.sub <- betas_all[, -i, drop = FALSE] %*% delta_mat[, i]
 
     #Populates matrix of Q statistics with respect to instrument strength
     Q_strength[i] <- sum(
@@ -156,7 +135,7 @@ strength_mvmr <- function(r_input, gencov = 0) {
   }
 
   Q_strength <- data.frame(Q_strength)
-  names(Q_strength) <- dimnames(A)[[1]]
+  names(Q_strength) <- paste0("exposure", seq_len(exp.number))
   rownames(Q_strength) <- "F-statistic"
 
   ##########

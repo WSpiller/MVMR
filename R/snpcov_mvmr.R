@@ -24,9 +24,10 @@ snpcov_mvmr <- function(Gs, Xs) {
 
   for (j in seq_along(Xs[1, ])) {
     for (i in seq_along(Gs[1, ])) {
-      betas[i, j] <- stats::lm(Xs[, j] ~ Gs[, i])$coefficients[2]
+      fit <- stats::lm(Xs[, j] ~ Gs[, i])
+      betas[i, j] <- fit$coefficients[2]
 
-      resids <- data.frame(stats::lm(Xs[, j] ~ Gs[, i])$residuals)
+      resids <- data.frame(fit$residuals)
 
       resmat <- cbind(resmat, resids)
     }
