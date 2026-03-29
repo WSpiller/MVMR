@@ -140,13 +140,10 @@ strength_mvmr <- function(r_input, gencov = 0) {
   Q_strength <- matrix(ncol = exp.number, nrow = 1, 0)
 
   #Generates the component of the Q statistic to be subtracted from the exposure estimates
+  betas_all <- as.matrix(r_input[, c(4:(3 + exp.number))])
+
   for (i in 1:exp.number) {
-    betas <- r_input[, c(4:(3 + exp.number))]
-    betas <- data.frame(betas[, -i])
-    temp.sub <- 0
-    for (j in 1:(exp.number - 1)) {
-      temp.sub <- temp.sub + (delta_mat[j, i] * betas[, j])
-    }
+    temp.sub <- betas_all[, -i, drop = FALSE] %*% delta_mat[, i]
 
     #Populates matrix of Q statistics with respect to instrument strength
     Q_strength[i] <- sum(
