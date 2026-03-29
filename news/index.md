@@ -1,5 +1,9 @@
 # Changelog
 
+## MVMR 0.4.4
+
+- Implement some optimizations.
+
 ## MVMR 0.4.3
 
 - The
