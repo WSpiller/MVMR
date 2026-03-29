@@ -70,19 +70,7 @@ ivw_mvmr <- function(r_input, gencov = 0) {
     data = r_input
   ))
 
-  A <- summary(stats::lm(
-    stats::as.formula(paste(
-      "betaYG ~ -1 +",
-      paste(
-        names(r_input)[
-          seq(4, 3 + exp.number, by = 1)
-        ],
-        collapse = "+"
-      )
-    )),
-    weights = Wj,
-    data = r_input
-  ))$coef
+  A <- A_sum$coef
 
   #Rename the regressors for ease of interpretation
   for (i in 1:exp.number) {
