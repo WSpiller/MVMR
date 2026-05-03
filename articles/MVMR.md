@@ -8,7 +8,7 @@ exposures on an outcome using genetic variants as instruments. The
 `MVMR` R package facilitates estimation of causal effects using MVMR, as
 well as including a range of sensitivity analyses evaluating the
 underlying assumptions of the approach. The methods included in `MVMR`
-originate from Sanderson, Spiller, and Bowden (2021), available
+originate from Sanderson et al. (2021), available
 [here](https://doi.org/10.1002/sim.9133).
 
 ### Workflow
@@ -61,6 +61,7 @@ that the `MVMR` can take an arbirtary number of exposures (greater than
 The first 6 rows of `rawdat_mvmr` are:
 
 ``` r
+
 library(MVMR)
 head(rawdat_mvmr)
 #>   LDL_beta HDL_beta Trg_beta LDL_se HDL_se Trg_se    SBP_beta     SBP_se
@@ -162,6 +163,7 @@ Using the previous data `rawdat.mvmr`, we can format the data using the
 following command:
 
 ``` r
+
 F.data <- format_mvmr(
   BXGs = rawdat_mvmr[, c(1, 2, 3)],
   BYG = rawdat_mvmr[, 7],
@@ -243,6 +245,7 @@ strength of the instruments for each exposure using the following
 command
 
 ``` r
+
 sres <- strength_mvmr(r_input = F.data, gencov = 0)
 #> Warning in strength_mvmr(r_input = F.data, gencov = 0): Covariance between
 #> effect of genetic variants on each exposure not specified. Fixing covariance at
@@ -262,6 +265,7 @@ same sample. Using a random phenotypic correlation matrix, conditional
 F-statistics can be calculated as
 
 ``` r
+
 mvmrcormatrix <- matrix(c(1, -0.1, -0.05, -0.1, 1, 0.2, -0.05, 0.2, 1), nrow = 3, ncol = 3)
 Xcovmat <- phenocov_mvmr(mvmrcormatrix, F.data[, 7:9])
 sres2 <- strength_mvmr(r_input = F.data, gencov = Xcovmat)
@@ -294,6 +298,7 @@ the
 `r_input` and `gencov`.
 
 ``` r
+
 pres <- pleiotropy_mvmr(r_input = F.data, gencov = 0)
 #> Warning in pleiotropy_mvmr(r_input = F.data, gencov = 0): Covariance between
 #> effect of genetic variants on each exposure not specified. Fixing covariance at
@@ -305,6 +310,7 @@ pres <- pleiotropy_mvmr(r_input = F.data, gencov = 0)
 And with the example covariance matrices from Step 3:
 
 ``` r
+
 pres <- pleiotropy_mvmr(r_input = F.data, gencov = Xcovmat)
 #> Q-Statistic for instrument validity:
 #> 682.843 on 141 DF , p-value: 5.36533e-72
@@ -320,6 +326,7 @@ outcome. This is performed using the
 function as shown below:
 
 ``` r
+
 res <- ivw_mvmr(r_input = F.data)
 #> Warning in ivw_mvmr(r_input = F.data): Covariance between effect of genetic
 #> variants on each exposure not specified. Fixing covariance at 0.
@@ -349,6 +356,7 @@ performed using the
 function.
 
 ``` r
+
 res1 <- qhet_mvmr(F.data, mvmrcormatrix, CI = FALSE, iterations = 100)
 #> Warning in qhet_mvmr(F.data, mvmrcormatrix, CI = FALSE, iterations = 100):
 #> qhet_mvmr() is currently undergoing development.

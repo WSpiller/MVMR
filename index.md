@@ -6,6 +6,7 @@ MVMR can be installed from the [MRCIEU
 R-Universe](https://mrcieu.r-universe.dev/) with
 
 ``` r
+
 install.packages("MVMR", repos = c("https://mrcieu.r-universe.dev", "https://cloud.r-project.org"))
 ```
 
@@ -13,12 +14,14 @@ To install `MVMR` directly from the GitHub repository, first make sure
 you have the `remotes` package installed:
 
 ``` r
+
 install.packages("remotes")
 ```
 
 Then the `MVMR` package can be installed using:
 
 ``` r
+
 library(remotes)
 install_github("WSpiller/MVMR", build_opts = c("--no-resave-data", "--no-manual"), build_vignettes = TRUE)
 ```

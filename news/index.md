@@ -1,5 +1,9 @@
 # Changelog
 
+## MVMR 0.4.5
+
+- Bump roxygen2 to 8.0.0 and add package level helpfile.
+
 ## MVMR 0.4.4
 
 - Implement some optimizations.
