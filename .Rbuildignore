@@ -8,3 +8,5 @@
 ^\.github$
 ^\.lintr$
 ^docs$
+^\.positai$
+^\.claude$
