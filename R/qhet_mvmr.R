@@ -11,7 +11,7 @@
 #' @param iterations Specifies number of bootstrap iterations for calculating 95 percent confidence intervals.
 #' @param ncores Number of cores to use for parallel processing in bootstrap. Default is `parallelly::availableCores(omit = 1)`. On Windows, this is automatically set to 1 regardless of user input. It is recommended to only set this to a maximum of `parallelly::availableCores(omit = 1)`.
 #'
-#' @return An dataframe containing effect estimates with respect to each exposure.
+#' @return A dataframe containing effect estimates with respect to each exposure.
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
 #' @export
