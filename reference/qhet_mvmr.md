@@ -57,7 +57,7 @@ qhet_mvmr(
 
 ## Value
 
-An dataframe containing effect estimates with respect to each exposure.
+A dataframe containing effect estimates with respect to each exposure.
 
 ## References
 

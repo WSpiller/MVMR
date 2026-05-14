@@ -55,7 +55,7 @@ lipoprotein cholesterol (HDL-C), and triglycerides (Trg) have been
 selected as exposures, while systolic blood pressure (SBP) is the
 outcome of interest. Here the suffix `_beta` is used to denote
 association estimates, while `_se` denotes standard errors. Please note
-that the `MVMR` can take an arbirtary number of exposures (greater than
+that the `MVMR` can take an arbitrary number of exposures (greater than
 1), and that three exposures have been selected purely for illustration.
 
 The first 6 rows of `rawdat_mvmr` are:
@@ -103,8 +103,8 @@ to select one of the following three solutions:
     function can be used to calculate the necessary covariance terms.
 
 2.  Estimate the covariance terms using phenotypic correlation between
-    exposures. an estimate of the correlation between the (phenotypic)
-    exposures is available, the
+    exposures. If an estimate of the correlation between the
+    (phenotypic) exposures is available, the
     [`phenocov_mvmr()`](https://wspiller.github.io/MVMR/reference/phenocov_mvmr.md)
     function can be used to provide an approximation for the necessary
     covariance terms. This function takes the phenotypic correlation
@@ -113,7 +113,7 @@ to select one of the following three solutions:
 
 3.  Obtain gene-exposure associations from non-overlapping samples.
 
-    If gene-exposure associations are estimated in seperate
+    If gene-exposure associations are estimated in separate
     non-overlapping samples, then the covariances will be zero by
     design. It is therefore not necessary to calculate the set of
     covariances, although this approach can be difficult to apply due to
@@ -125,11 +125,11 @@ or
 [`phenocov_mvmr()`](https://wspiller.github.io/MVMR/reference/phenocov_mvmr.md)
 functions, a set of covariance matrices will be produced equal to the
 number of SNPs used in estimation. By saving this output as an object,
-it is possible to use this information in downstream senstivity analyses
-and assumption testing. As the
+it is possible to use this information in downstream sensitivity
+analyses and assumption testing. As the
 [`phenocov_mvmr()`](https://wspiller.github.io/MVMR/reference/phenocov_mvmr.md)
 function requires gene-exposure standard errors, it can be useful to
-estimate the covariance matrices after initially formatiing the data. An
+estimate the covariance matrices after initially formatting the data. An
 illustrative example is provided in step 6, creating an object `Xcovmat`
 using the
 [`phenocov_mvmr()`](https://wspiller.github.io/MVMR/reference/phenocov_mvmr.md)

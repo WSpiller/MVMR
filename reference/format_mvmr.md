@@ -16,8 +16,8 @@ format_mvmr(BXGs, BYG, seBXGs, seBYG, RSID)
 - BXGs:
 
   A matrix containing beta-coefficient values for genetic associations
-  with the each exposure. Columns should indicate exposure number, with
-  rows representing estimates for a given genetic variant.
+  with each exposure. Columns should indicate exposure number, with rows
+  representing estimates for a given genetic variant.
 
 - BYG:
 

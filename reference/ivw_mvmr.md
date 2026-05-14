@@ -28,7 +28,7 @@ ivw_mvmr(r_input, gencov = 0)
 
 ## Value
 
-An dataframe containing MVMR results, including estimated coefficients,
+A dataframe containing MVMR results, including estimated coefficients,
 their standard errors, t-statistics, and corresponding (two-sided)
 p-values.
 

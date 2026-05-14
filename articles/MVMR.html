@@ -67,7 +67,7 @@ Eleanor Sanderson, and Jack Bowden</h4>
             <h4 data-toc-skip class="date">31<sup>st</sup> January
 2021</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/WSpiller/MVMR/blob/v0.4.5/vignettes/MVMR.rmd" class="external-link"><code>vignettes/MVMR.rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/WSpiller/MVMR/blob/master/vignettes/MVMR.rmd" class="external-link"><code>vignettes/MVMR.rmd</code></a></small>
       <div class="d-none name"><code>MVMR.rmd</code></div>
     </div>
 
@@ -130,7 +130,7 @@ lipoprotein cholesterol (HDL-C), and triglycerides (Trg) have been
 selected as exposures, while systolic blood pressure (SBP) is the
 outcome of interest. Here the suffix <code>_beta</code> is used to
 denote association estimates, while <code>_se</code> denotes standard
-errors. Please note that the <code>MVMR</code> can take an arbirtary
+errors. Please note that the <code>MVMR</code> can take an arbitrary
 number of exposures (greater than 1), and that three exposures have been
 selected purely for illustration.</p>
 <p>The first 6 rows of <code>rawdat_mvmr</code> are:</p>
@@ -174,7 +174,7 @@ estimates were obtained, the <code><a href="../reference/snpcov_mvmr.html">snpco
 used to calculate the necessary covariance terms.</p>
 </li>
 <li><p>Estimate the covariance terms using phenotypic correlation
-between exposures. an estimate of the correlation between the
+between exposures. If an estimate of the correlation between the
 (phenotypic) exposures is available, the <code><a href="../reference/phenocov_mvmr.html">phenocov_mvmr()</a></code>
 function can be used to provide an approximation for the necessary
 covariance terms. This function takes the phenotypic correlation between
@@ -183,7 +183,7 @@ inputs.</p></li>
 <li>
 <p>Obtain gene-exposure associations from non-overlapping
 samples.</p>
-<p>If gene-exposure associations are estimated in seperate
+<p>If gene-exposure associations are estimated in separate
 non-overlapping samples, then the covariances will be zero by design. It
 is therefore not necessary to calculate the set of covariances, although
 this approach can be difficult to apply due to a lack of suitable
@@ -194,10 +194,10 @@ sources of data.</p>
 <code><a href="../reference/snpcov_mvmr.html">snpcov_mvmr()</a></code> or <code><a href="../reference/phenocov_mvmr.html">phenocov_mvmr()</a></code> functions, a
 set of covariance matrices will be produced equal to the number of SNPs
 used in estimation. By saving this output as an object, it is possible
-to use this information in downstream senstivity analyses and assumption
-testing. As the <code><a href="../reference/phenocov_mvmr.html">phenocov_mvmr()</a></code> function requires
-gene-exposure standard errors, it can be useful to estimate the
-covariance matrices after initially formatiing the data. An illustrative
+to use this information in downstream sensitivity analyses and
+assumption testing. As the <code><a href="../reference/phenocov_mvmr.html">phenocov_mvmr()</a></code> function
+requires gene-exposure standard errors, it can be useful to estimate the
+covariance matrices after initially formatting the data. An illustrative
 example is provided in step 6, creating an object <code>Xcovmat</code>
 using the <code><a href="../reference/phenocov_mvmr.html">phenocov_mvmr()</a></code> function.</p>
 </div>

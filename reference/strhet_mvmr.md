@@ -11,7 +11,7 @@ estimated using external data by applying the
 [`snpcov_mvmr()`](https://wspiller.github.io/MVMR/reference/snpcov_mvmr.md)
 or
 [`phenocov_mvmr()`](https://wspiller.github.io/MVMR/reference/phenocov_mvmr.md)
-functions, are input manually. The function returns a dataframe
+functions, or are input manually. The function returns a dataframe
 including the conditional F-statistic with respect to each exposure. A
 conventional F-statistic threshold of 10 is used in basic assessments of
 instrument strength.
