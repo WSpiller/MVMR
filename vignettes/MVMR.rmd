@@ -75,7 +75,7 @@ The MVMR approach requires pairwise covariances between an instrument and pairs 
 
 3. Obtain gene-exposure associations from non-overlapping samples.
 
-    If gene-exposure associations are estimated in seperate non-overlapping samples, then the covariances will be zero by design. It is therefore not necessary to calculate the set of covariances, although this approach can be difficult to apply due to a lack of suitable sources of data.
+    If gene-exposure associations are estimated in separate non-overlapping samples, then the covariances will be zero by design. It is therefore not necessary to calculate the set of covariances, although this approach can be difficult to apply due to a lack of suitable sources of data.
 
 When the necessary data are provided to the `snpcov_mvmr()` or `phenocov_mvmr()` functions, a set of covariance matrices will be produced equal to the number of SNPs used in estimation. By saving this output as an object, it is possible to use this information in downstream senstivity analyses and assumption testing. As the `phenocov_mvmr()` function requires gene-exposure standard errors, it can be useful to estimate the covariance matrices after initially formatiing the data. An illustrative example is provided in step 6, creating an object `Xcovmat` using the `phenocov_mvmr()` function.
 
