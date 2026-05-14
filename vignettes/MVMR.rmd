@@ -71,7 +71,7 @@ The MVMR approach requires pairwise covariances between an instrument and pairs 
 
     If individual level data is available from which the GWAS summary estimates were obtained, the `snpcov_mvmr()` function can be used to calculate the necessary covariance terms. 
 
-2. Estimate the covariance terms using phenotypic correlation between exposures. an estimate of the correlation between the (phenotypic) exposures is available, the `phenocov_mvmr()` function can be used to provide an approximation for the necessary covariance terms. This function takes the phenotypic correlation between the exposures and the standard error of the SNP-exposure betas as inputs. 
+2. Estimate the covariance terms using phenotypic correlation between exposures. If an estimate of the correlation between the (phenotypic) exposures is available, the `phenocov_mvmr()` function can be used to provide an approximation for the necessary covariance terms. This function takes the phenotypic correlation between the exposures and the standard error of the SNP-exposure betas as inputs. 
 
 3. Obtain gene-exposure associations from non-overlapping samples.
 
