@@ -18,7 +18,7 @@ A dataframe showing the conditional F-statistic for each exposure.
 Calculates the conditional F-statistic for assessing instrument strength in two sample summary multivariable Mendelian randomization through minimisation of Q-statistics.
 The function takes a formatted dataframe as an input, obtained using the function \code{\link[=format_mvmr]{format_mvmr()}}. Additionally, covariance matrices
 for estimated effects of individual genetic variants on each exposure can also be provided. These can be estimated using external data by
-applying the \code{\link[=snpcov_mvmr]{snpcov_mvmr()}} or \code{\link[=phenocov_mvmr]{phenocov_mvmr()}} functions, are input manually. The function returns a dataframe including the conditional
+applying the \code{\link[=snpcov_mvmr]{snpcov_mvmr()}} or \code{\link[=phenocov_mvmr]{phenocov_mvmr()}} functions, or are input manually. The function returns a dataframe including the conditional
 F-statistic with respect to each exposure. A conventional F-statistic threshold of 10 is used in basic assessments of instrument strength.
 }
 \examples{

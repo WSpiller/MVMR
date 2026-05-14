@@ -24,7 +24,7 @@ qhet_mvmr(
 \item{ncores}{Number of cores to use for parallel processing in bootstrap. Default is \code{parallelly::availableCores(omit = 1)}. On Windows, this is automatically set to 1 regardless of user input. It is recommended to only set this to a maximum of \code{parallelly::availableCores(omit = 1)}.}
 }
 \value{
-An dataframe containing effect estimates with respect to each exposure.
+A dataframe containing effect estimates with respect to each exposure.
 }
 \description{
 Fits a multivariable Mendelian randomization model adjusting for weak instruments. The functions requires a formatted dataframe using the \code{\link[=format_mvmr]{format_mvmr()}} function, as well a phenotypic correlation matrix \code{pcor}. This should be obtained from individual level

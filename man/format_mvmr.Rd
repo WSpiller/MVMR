@@ -7,7 +7,7 @@
 format_mvmr(BXGs, BYG, seBXGs, seBYG, RSID)
 }
 \arguments{
-\item{BXGs}{A matrix containing beta-coefficient values for genetic associations with the each exposure. Columns should indicate exposure number, with rows representing estimates for a given genetic variant.}
+\item{BXGs}{A matrix containing beta-coefficient values for genetic associations with each exposure. Columns should indicate exposure number, with rows representing estimates for a given genetic variant.}
 
 \item{BYG}{A numeric vector of beta-coefficient values for genetic associations with the outcome.}
 
