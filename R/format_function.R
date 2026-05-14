@@ -2,7 +2,7 @@
 #'
 #' Reads in summary data. Checks and organises columns for use in calculating multivariable Mendelian Randomization analyses. Where variant IDs are not provided, a vector is generated for variant identification.
 #'
-#' @param BXGs A matrix containing beta-coefficient values for genetic associations with the each exposure. Columns should indicate exposure number, with rows representing estimates for a given genetic variant.
+#' @param BXGs A matrix containing beta-coefficient values for genetic associations with each exposure. Columns should indicate exposure number, with rows representing estimates for a given genetic variant.
 #' @param BYG A numeric vector of beta-coefficient values for genetic associations with the outcome.
 #' @param seBXGs A matrix containing standard errors corresponding to the matrix of beta-coefficients \code{BXGs}.
 #' @param seBYG A numeric vector of standard errors corresponding to the beta-coefficients \code{BYG}.
