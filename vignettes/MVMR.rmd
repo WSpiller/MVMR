@@ -36,9 +36,13 @@ Fitting and interpreting MVMR models can be achieved by following the 5 steps gi
 
 Each of these steps are shown in the figure below, highlighting the R function used for each step.
 
+<div style="text-align: center;">
+
 ```{r, echo=FALSE, out.width="600px", fig.alt="Figure showing the workflow of an MVMR analysis.", fig.cap="The workflow of an MVMR analysis."}
 knitr::include_graphics("./png/workflow.png")
 ```
+
+</div>
 
 ## Step 1: Obtain summary data
 
@@ -52,7 +56,7 @@ The following information is necessary to estimate causal effects using MVMR:
 
 4) Corresponding standard errors for the gene-outcome associations.
 
-The data frame `rawdat_mvmr`, included in the `MVMR` package shows an example of such data obtained from MRBase. When data is extracted from MRBase or using the TwoSampleMR R package, the `mrmvinput_to_mvmr_format()` function can be used to convert the data to the `MVMR` data format. This specifically requires gene-exposure associations for all included SNPs, gene-outcome associations, and corresponding standard errors. In this case, low-density lipoprotein cholesterol (LDL-C), high-density lipoprotein cholesterol (HDL-C), and triglycerides (Trg) have been selected as exposures, while systolic blood pressure (SBP) is the outcome of interest. Here the suffix `_beta` is used to denote association estimates, while `_se` denotes standard errors. Please note that the `MVMR` can take an arbitrary number of exposures (greater than 1), and that three exposures have been selected purely for illustration.
+The data frame `rawdat_mvmr`, included in the `MVMR` package shows an example of such data obtained from MRBase (now [OpenGWAS](https://opengwas.io/)). When data is extracted from MRBase or using the TwoSampleMR R package, the `mrmvinput_to_mvmr_format()` function can be used to convert the data to the `MVMR` data format. This specifically requires gene-exposure associations for all included SNPs, gene-outcome associations, and corresponding standard errors. In this case, low-density lipoprotein cholesterol (LDL-C), high-density lipoprotein cholesterol (HDL-C), and triglycerides (Trg) have been selected as exposures, while systolic blood pressure (SBP) is the outcome of interest. Here the suffix `_beta` is used to denote association estimates, while `_se` denotes standard errors. Please note that the `MVMR` can take an arbitrary number of exposures (greater than 1), and that three exposures have been selected purely for illustration.
 
 The first 6 rows of `rawdat_mvmr` are:
 
@@ -65,15 +69,18 @@ Note that the final column `SNP` contains the rsid numbers for each genetic vari
 
 ### Estimating pairwise covariances between SNP associations
 
-The MVMR approach requires pairwise covariances between an instrument and pairs of exposures to be known across all SNPs for testing and sensitivity analyses. However, this is often not reported in published GWAS analyses. Before continuing with MVMR it is therefore **necessary** to select one of the following three solutions:
+The MVMR approach requires pairwise covariances between an instrument and pairs of exposures to be estimated across all SNPs for testing and sensitivity analyses. However, this is often not reported in published GWAS analyses. Before continuing with MVMR it is therefore **necessary** to select one of the following solutions. Further details are given in the [estimating phenotypic correlations vignette](estimating-phenotypic-correlations.html).
 
 1. Estimate the covariance terms using individual level data
 
     If individual level data is available from which the GWAS summary estimates were obtained, the `snpcov_mvmr()` function can be used to calculate the necessary covariance terms. 
 
-2. Estimate the covariance terms using phenotypic correlation between exposures. If an estimate of the correlation between the (phenotypic) exposures is available, the `phenocov_mvmr()` function can be used to provide an approximation for the necessary covariance terms. This function takes the phenotypic correlation between the exposures and the standard error of the SNP-exposure betas as inputs. 
+2. Obtain an estimate of the covariance using the full GWAS summary statistics. This estimates the phenotypic correlation, weighted by the sample overlap from the SNPs that are null for both exposures. The `phenocov_mvmr()` function can then be used to estimate the necessary covariance terms. 
 
-3. Obtain gene-exposure associations from non-overlapping samples.
+
+3. Estimate the covariance terms using phenotypic correlation between exposures. If an estimate of the correlation between the (phenotypic) exposures is available, the `phenocov_mvmr()` function can be used to provide an approximation for the necessary covariance terms. This function takes the phenotypic correlation between the exposures and the standard error of the SNP-exposure betas as inputs. 
+
+4. Obtain gene-exposure associations from non-overlapping samples.
 
     If gene-exposure associations are estimated in separate non-overlapping samples, then the covariances will be zero by design. It is therefore not necessary to calculate the set of covariances, although this approach can be difficult to apply due to a lack of suitable sources of data.
 
