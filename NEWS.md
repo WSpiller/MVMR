@@ -1,3 +1,7 @@
+# MVMR 0.4.6
+
+* Add vignette on estimating phenotypic correlations.
+
 # MVMR 0.4.5
 
 * Bump roxygen2 to 8.0.0 and add package level helpfile.
