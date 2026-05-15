@@ -12,7 +12,7 @@
 #'
 #' @source
 #' \itemize{
-#' \item \url{http://www.mrbase.org/}
+#' \item \url{https://opengwas.io/}
 #' \item \url{https://www.nature.com/articles/ng.2797}
 #' \item \url{https://www.nature.com/articles/ng.3768}
 #' }
