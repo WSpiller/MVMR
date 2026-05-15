@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   estimating-phenotypic-correlations: estimating-phenotypic-correlations.html
   MVMR: MVMR.html
-last_built: 2026-05-15T20:43Z
+last_built: 2026-05-15T20:45Z
 urls:
   reference: https://wspiller.github.io/MVMR/reference
   article: https://wspiller.github.io/MVMR/articles
