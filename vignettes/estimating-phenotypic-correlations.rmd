@@ -10,7 +10,7 @@ bibliography: refs.bib
 
 ## Covariance and Phenotypic correlations in MVMR
 
-Summary data multivariable Mendelian randomization (MVMR) requires estimation of the covariance between the effect of each instrument on each exposure included in the MVMR model for effective strength testing, heterogeneity estimation and pleiotropy robust estimation (@sanderson-statsmed-2021).
+Summary data multivariable Mendelian randomization (MVMR) requires estimation of the covariance between the effect of each instrument on each exposure included in the MVMR model for effective strength testing, heterogeneity estimation, and pleiotropy robust estimation (@sanderson-statsmed-2021).
 
 This covariance is dependent on the level of sample overlap between the GWAS used for each exposure and is zero if there is no sample overlap. In that case `gencov = 0` can be used in the `pleiotropy_mvmr()` and `strength_mvmr()` functions.
 
@@ -29,7 +29,7 @@ $$\left[\begin{matrix}
 \sigma_{X_1,X_2} & \sigma_{X_2}^2
 \end{matrix}\right]\right)$$
 
-The estimate of the covariance $\hat{\sigma}_{X_1,X_2}$ is not available from standard GWAS summary statistics and so needs to be obtained elsewhere. This can be done in a couple of different ways;
+The estimate of the covariance $\hat{\sigma}_{X_1,X_2}$ is not available from standard GWAS summary statistics and so needs to be obtained elsewhere. This can be done in a couple of different ways:
 
 1.  *Estimating the covariances from individual level data.*
 
@@ -43,7 +43,7 @@ The estimate of the covariance $\hat{\sigma}_{X_1,X_2}$ is not available from st
 
     These estimates can be obtained from the `snpcov_mvmr()` function. Estimation in this way does not account for population structure controls included in the original GWAS which may affect the estimates of the covariance of the resulting residuals.
 
-2.  ***RECOMMENDED** Estimate* $\lambda$
+2.  ***RECOMMENDED:** Estimate* $\lambda$
 
     The distribution of the estimated effects can be rewritten as;
 
@@ -64,7 +64,7 @@ The estimate of the covariance $\hat{\sigma}_{X_1,X_2}$ is not available from st
 
     $$\lambda = \frac{n_{\text{overlap}}\rho}{\sqrt{n_{X_1}n_{X_2}}}$$
 
-    $\rho$ is the correlation between $X_1$ and $X_2$, $n_{X_1}$ is the sample size for $X_1$, $n_{X_2}$ is the sample size for $X_2$ and $n_{overlap}$ is the sample size for the overlap between the sample for $X_1$ and $X_2$.
+    $\rho$ is the correlation between $X_1$ and $X_2$, $n_{X_1}$ is the sample size for $X_1$, $n_{X_2}$ is the sample size for $X_2$ and $n_{\text{overlap}}$ is the sample size for the overlap between the samples for $X_1$ and $X_2$.
 
     @forde-plosgen-2026 provide a function to estimate this value of $\lambda$ using the null SNPs for both $X_1$ and $X_2$ from the GWAS summary statistics. It therefore does not require access to any individual level data. This method works best if the full summary statistics are available. The function is `est_lambda()` in the [mr.simss package](https://amandaforde.github.io/mr.simss/).
 
