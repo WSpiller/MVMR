@@ -65,7 +65,7 @@ Note that the final column `SNP` contains the rsid numbers for each genetic vari
 
 ### Estimating pairwise covariances between SNP associations
 
-The MVMR approach requires pairwise covariances between an instrument and pairs of exposures to be estimated across all SNPs for testing and sensitivity analyses. However, this is often not reported in published GWAS analyses. Before continuing with MVMR it is therefore **necessary** to select one of the following solutions. Further details are given here: https://eleanorsanderson.github.io/Correlations-for-MVMR/estimation 
+The MVMR approach requires pairwise covariances between an instrument and pairs of exposures to be estimated across all SNPs for testing and sensitivity analyses. However, this is often not reported in published GWAS analyses. Before continuing with MVMR it is therefore **necessary** to select one of the following solutions. Further details are given in the [estimating phenotypic correlations vignette](estimating-phenotypic-correlations.html).
 
 1. Estimate the covariance terms using individual level data
 
