@@ -20,7 +20,7 @@ data is available by using the command
 
 ## Source
 
-- <http://www.mrbase.org/>
+- <https://opengwas.io/>
 
 - <https://www.nature.com/articles/ng.2797>
 

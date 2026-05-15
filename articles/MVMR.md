@@ -44,8 +44,9 @@ MVMR:
 4.  Corresponding standard errors for the gene-outcome associations.
 
 The data frame `rawdat_mvmr`, included in the `MVMR` package shows an
-example of such data obtained from MRBase. When data is extracted from
-MRBase or using the TwoSampleMR R package, the
+example of such data obtained from MRBase (now
+[OpenGWAS](https://opengwas.io/)). When data is extracted from MRBase or
+using the TwoSampleMR R package, the
 [`mrmvinput_to_mvmr_format()`](https://wspiller.github.io/MVMR/reference/mrmvinput_to_mvmr_format.md)
 function can be used to convert the data to the `MVMR` data format. This
 specifically requires gene-exposure associations for all included SNPs,
@@ -90,10 +91,12 @@ Biobank](https://www.nature.com/articles/ng.3768).
 ### Estimating pairwise covariances between SNP associations
 
 The MVMR approach requires pairwise covariances between an instrument
-and pairs of exposures to be known across all SNPs for testing and
+and pairs of exposures to be estimated across all SNPs for testing and
 sensitivity analyses. However, this is often not reported in published
 GWAS analyses. Before continuing with MVMR it is therefore **necessary**
-to select one of the following three solutions:
+to select one of the following solutions. Further details are given in
+the [estimating phenotypic correlations
+vignette](https://wspiller.github.io/MVMR/articles/estimating-phenotypic-correlations.md).
 
 1.  Estimate the covariance terms using individual level data
 
@@ -102,7 +105,15 @@ to select one of the following three solutions:
     [`snpcov_mvmr()`](https://wspiller.github.io/MVMR/reference/snpcov_mvmr.md)
     function can be used to calculate the necessary covariance terms.
 
-2.  Estimate the covariance terms using phenotypic correlation between
+2.  Obtain an estimate of the covariance using the full GWAS summary
+    statistics. This estimates the phenotypic correlation, weighted by
+    the sample overlap from the SNPs that are null for both exposures.
+    The
+    [`phenocov_mvmr()`](https://wspiller.github.io/MVMR/reference/phenocov_mvmr.md)
+    function can then be used to estimate the necessary covariance
+    terms.
+
+3.  Estimate the covariance terms using phenotypic correlation between
     exposures. If an estimate of the correlation between the
     (phenotypic) exposures is available, the
     [`phenocov_mvmr()`](https://wspiller.github.io/MVMR/reference/phenocov_mvmr.md)
@@ -111,7 +122,7 @@ to select one of the following three solutions:
     between the exposures and the standard error of the SNP-exposure
     betas as inputs.
 
-3.  Obtain gene-exposure associations from non-overlapping samples.
+4.  Obtain gene-exposure associations from non-overlapping samples.
 
     If gene-exposure associations are estimated in separate
     non-overlapping samples, then the covariances will be zero by

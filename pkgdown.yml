@@ -2,8 +2,9 @@ pandoc: 3.8.3
 pkgdown: 2.2.0
 pkgdown_sha: ~
 articles:
+  estimating-phenotypic-correlations: estimating-phenotypic-correlations.html
   MVMR: MVMR.html
-last_built: 2026-05-14T18:57Z
+last_built: 2026-05-15T20:43Z
 urls:
   reference: https://wspiller.github.io/MVMR/reference
   article: https://wspiller.github.io/MVMR/articles
