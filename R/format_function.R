@@ -50,7 +50,7 @@ format_mvmr <- function(BXGs, BYG, seBXGs, seBYG, RSID) {
   RSID <- data.frame(RSID)
 
   for (i in seq_len(ncol(BXGs))) {
-    names(BXGs)[i] <- paste0("betaX", i, collapse = ",")
+    names(BXGs)[i] <- paste0("betaX", i)
   }
 
   #This loop names each column of instrument-exposure standard errors in the order
@@ -59,7 +59,7 @@ format_mvmr <- function(BXGs, BYG, seBXGs, seBYG, RSID) {
   #is labelled sebetaX1.
 
   for (i in seq_len(ncol(seBXGs))) {
-    names(seBXGs)[i] <- paste0("sebetaX", i, collapse = ",")
+    names(seBXGs)[i] <- paste0("sebetaX", i)
   }
 
   # A dataframe containing all the necessary information for performing
