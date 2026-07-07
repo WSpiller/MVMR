@@ -105,7 +105,7 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = parallelly::availa
     }
 
     limltauest = stats::optimize(PL_MVMR, interval = c(-10, 10))
-    tau_i = limltauest$objective
+    tau_i = limltauest$minimum
 
     tau = tau_i
 
