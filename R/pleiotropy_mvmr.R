@@ -84,7 +84,7 @@ pleiotropy_mvmr <- function(r_input, gencov = 0) {
   ## Instrument Validity #
   ########################
 
-  if (length(gencov) < 2) {
+  if (!is.list(gencov)) {
     # Generate Sigma^2_A values
     sigma2A <- r_input[, 3]^2
     for (i in 1:exp.number) {
@@ -111,7 +111,7 @@ pleiotropy_mvmr <- function(r_input, gencov = 0) {
     )
   }
 
-  if (length(gencov) > 2) {
+  if (is.list(gencov)) {
     # Generate Sigma^2_A values
     sigma2A <- r_input[, 3]^2
     for (i in seq_along(r_input[, 3])) {
