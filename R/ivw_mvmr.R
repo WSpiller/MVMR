@@ -3,7 +3,7 @@
 #' Fits an IVW multivariable Mendelian randomization model using first order weights.
 #'
 #' @param r_input A formatted data frame using the [`format_mvmr()`] function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput()`]
-#' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
+#' @param gencov Retained for interface consistency with the other MVMR functions. The IVW point estimates do not depend on the covariance between the effect of the genetic variants on each exposure, so this argument is not used by \code{ivw_mvmr()}. A value of \code{0} is used by default.
 #'
 #' @return A dataframe containing MVMR results, including estimated coefficients, their standard errors, t-statistics, and corresponding (two-sided) p-values.
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
@@ -37,14 +37,6 @@ ivw_mvmr <- function(r_input, gencov = 0) {
       'The class of the data object must be "mvmr_format", please resave the object with the output of format_mvmr().'
     )
   }
-
-  if (!is.list(gencov) && gencov == 0) {
-    warning(
-      "Covariance between effect of genetic variants on each exposure not specified. Fixing covariance at 0."
-    )
-  }
-
-  #If weights is missing, first order weights are used by default.
 
   # Inverse variance weighting is used.
 
