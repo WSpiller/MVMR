@@ -9,7 +9,7 @@ ivw_mvmr(r_input, gencov = 0)
 \arguments{
 \item{r_input}{A formatted data frame using the \code{\link[=format_mvmr]{format_mvmr()}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput()}}}
 
-\item{gencov}{Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.}
+\item{gencov}{Retained for interface consistency with the other MVMR functions. The IVW point estimates do not depend on the covariance between the effect of the genetic variants on each exposure, so this argument is not used by \code{ivw_mvmr()}. A value of \code{0} is used by default.}
 }
 \value{
 A dataframe containing MVMR results, including estimated coefficients, their standard errors, t-statistics, and corresponding (two-sided) p-values.
