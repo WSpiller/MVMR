@@ -1,5 +1,31 @@
 # Changelog
 
+## MVMR 0.4.7
+
+- [`qhet_mvmr()`](https://wspiller.github.io/MVMR/reference/qhet_mvmr.md)
+  now uses the estimated heterogeneity parameter (the minimiser) rather
+  than the minimised objective value when constructing the model
+  weights. This corrects the effect estimates, which will differ from
+  previous versions.
+- [`snpcov_mvmr()`](https://wspiller.github.io/MVMR/reference/snpcov_mvmr.md)
+  now returns correct covariance matrices when the genetic instrument
+  data are supplied as a matrix rather than a data frame.
+- [`strength_mvmr()`](https://wspiller.github.io/MVMR/reference/strength_mvmr.md)
+  and
+  [`pleiotropy_mvmr()`](https://wspiller.github.io/MVMR/reference/pleiotropy_mvmr.md)
+  now select the covariance-matrix calculation based on whether `gencov`
+  is a list, fixing a division-by-zero that occurred when a `gencov`
+  list for exactly two variants was supplied.
+- [`ivw_mvmr()`](https://wspiller.github.io/MVMR/reference/ivw_mvmr.md)
+  no longer emits a spurious warning about fixing the covariance at
+  zero; the `gencov` argument does not affect the IVW estimates and is
+  retained only for interface consistency.
+- [`mvmr()`](https://wspiller.github.io/MVMR/reference/mvmr.md) no
+  longer fits the same weighted regression twice.
+- Tidied
+  [`format_mvmr()`](https://wspiller.github.io/MVMR/reference/format_mvmr.md)
+  internal column naming.
+
 ## MVMR 0.4.6
 
 - Add vignette on estimating phenotypic correlations.

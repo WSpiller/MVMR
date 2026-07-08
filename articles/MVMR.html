@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MVMR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -390,8 +390,6 @@ the outcome. This is performed using the <code><a href="../reference/ivw_mvmr.ht
 function as shown below:</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/ivw_mvmr.html">ivw_mvmr</a></span><span class="op">(</span>r_input <span class="op">=</span> <span class="va">F.data</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in ivw_mvmr(r_input = F.data): Covariance between effect of genetic</span></span>
-<span><span class="co">#&gt; variants on each exposure not specified. Fixing covariance at 0.</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; Multivariable MR</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -420,9 +418,9 @@ be performed using the <code><a href="../reference/qhet_mvmr.html">qhet_mvmr()</
 <span><span class="co">#&gt; qhet_mvmr() is currently undergoing development.</span></span>
 <span><span class="va">res1</span></span>
 <span><span class="co">#&gt;            Effect Estimates</span></span>
-<span><span class="co">#&gt; Exposure 1    -0.0264865644</span></span>
-<span><span class="co">#&gt; Exposure 2     0.0094372624</span></span>
-<span><span class="co">#&gt; Exposure 3     0.0002575009</span></span></code></pre></div>
+<span><span class="co">#&gt; Exposure 1     -0.024122657</span></span>
+<span><span class="co">#&gt; Exposure 2      0.008801407</span></span>
+<span><span class="co">#&gt; Exposure 3      0.008303278</span></span></code></pre></div>
 <p>It is important to highlight that the phenotypic covariance matrix is
 used as an input, and not the set of estimated covariance matrices which
 previously formed the <code>gencov</code> argument. It should also be

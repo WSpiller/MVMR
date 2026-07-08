@@ -339,8 +339,6 @@ function as shown below:
 ``` r
 
 res <- ivw_mvmr(r_input = F.data)
-#> Warning in ivw_mvmr(r_input = F.data): Covariance between effect of genetic
-#> variants on each exposure not specified. Fixing covariance at 0.
 #> 
 #> Multivariable MR
 #> 
@@ -373,9 +371,9 @@ res1 <- qhet_mvmr(F.data, mvmrcormatrix, CI = FALSE, iterations = 100)
 #> qhet_mvmr() is currently undergoing development.
 res1
 #>            Effect Estimates
-#> Exposure 1    -0.0264865644
-#> Exposure 2     0.0094372624
-#> Exposure 3     0.0002575009
+#> Exposure 1     -0.024122657
+#> Exposure 2      0.008801407
+#> Exposure 3      0.008303278
 ```
 
 It is important to highlight that the phenotypic covariance matrix is

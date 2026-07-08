@@ -54,7 +54,6 @@ r_input <- format_mvmr(
   RSID = rawdat_mvmr$SNP
 )
 ivw_mvmr(r_input)
-#> Warning: Covariance between effect of genetic variants on each exposure not specified. Fixing covariance at 0.
 #> 
 #> Multivariable MR
 #> 

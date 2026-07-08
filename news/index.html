@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MVMR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -43,6 +43,20 @@
       <small>Source: <a href="https://github.com/WSpiller/MVMR/blob/master/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.7" id="mvmr-047">MVMR 0.4.7<a class="anchor" aria-label="anchor" href="#mvmr-047"></a></h2>
+<ul><li>
+<code><a href="../reference/qhet_mvmr.html">qhet_mvmr()</a></code> now uses the estimated heterogeneity parameter (the minimiser) rather than the minimised objective value when constructing the model weights. This corrects the effect estimates, which will differ from previous versions.</li>
+<li>
+<code><a href="../reference/snpcov_mvmr.html">snpcov_mvmr()</a></code> now returns correct covariance matrices when the genetic instrument data are supplied as a matrix rather than a data frame.</li>
+<li>
+<code><a href="../reference/strength_mvmr.html">strength_mvmr()</a></code> and <code><a href="../reference/pleiotropy_mvmr.html">pleiotropy_mvmr()</a></code> now select the covariance-matrix calculation based on whether <code>gencov</code> is a list, fixing a division-by-zero that occurred when a <code>gencov</code> list for exactly two variants was supplied.</li>
+<li>
+<code><a href="../reference/ivw_mvmr.html">ivw_mvmr()</a></code> no longer emits a spurious warning about fixing the covariance at zero; the <code>gencov</code> argument does not affect the IVW estimates and is retained only for interface consistency.</li>
+<li>
+<code><a href="../reference/mvmr.html">mvmr()</a></code> no longer fits the same weighted regression twice.</li>
+<li>Tidied <code><a href="../reference/format_mvmr.html">format_mvmr()</a></code> internal column naming.</li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.6" id="mvmr-046">MVMR 0.4.6<a class="anchor" aria-label="anchor" href="#mvmr-046"></a></h2>
 <ul><li>Add vignette on estimating phenotypic correlations.</li>
