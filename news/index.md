@@ -1,5 +1,17 @@
 # Changelog
 
+## MVMR 0.4.8
+
+- [`strhet_mvmr()`](https://wspiller.github.io/MVMR/reference/strhet_mvmr.md)
+  has been reimplemented. The previous version built a combinatorial
+  grid of candidate coefficients with
+  [`utils::combn()`](https://rdrr.io/r/utils/combn.html) (which could
+  exhaust memory with four or more exposures) and never actually
+  minimised the Q-statistic, returning invalid conditional F-statistics.
+  It now estimates the coefficients by iteratively reweighted least
+  squares, giving distinct, well-identified conditional F-statistics for
+  each exposure. Reported values will differ from previous versions.
+
 ## MVMR 0.4.7
 
 - [`qhet_mvmr()`](https://wspiller.github.io/MVMR/reference/qhet_mvmr.md)
