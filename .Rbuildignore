@@ -10,3 +10,4 @@
 ^docs$
 ^\.positai$
 ^\.claude$
+^justfile$
