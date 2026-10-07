@@ -32,6 +32,12 @@ phenotypic data, or constructed as a correlation matrix where correlations have 
 By default, standard errors are not produced but can be calculated by setting \code{se = TRUE}. The number of bootstrap iterations is specified using the \code{iterations} argument.
 Note that calculating confidence intervals at present can take a substantial amount of time.
 }
+\details{
+Effects are estimated by minimising a Q-statistic that includes an additive heterogeneity parameter tau-squared. Following
+Sanderson, Spiller and Bowden (2021), tau-squared is chosen so that the minimised Q-statistic equals L - K, where L is the
+number of genetic variants and K the number of exposures. Tau-squared is constrained to be non-negative, and is fixed at zero
+when the minimised Q-statistic without heterogeneity is already no greater than L - K.
+}
 \examples{
 \dontrun{
 qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000)
@@ -39,6 +45,8 @@ qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000)
 }
 \references{
 Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
+
+Sanderson, E., Spiller, W., and Bowden, J., Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Statistics in Medicine, 2021, 40, 25, 5434--5452. \doi{10.1002/sim.9133}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.

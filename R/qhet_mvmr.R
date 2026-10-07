@@ -5,6 +5,11 @@
 #' By default, standard errors are not produced but can be calculated by setting \code{se = TRUE}. The number of bootstrap iterations is specified using the \code{iterations} argument.
 #' Note that calculating confidence intervals at present can take a substantial amount of time.
 #'
+#' Effects are estimated by minimising a Q-statistic that includes an additive heterogeneity parameter tau-squared. Following
+#' Sanderson, Spiller and Bowden (2021), tau-squared is chosen so that the minimised Q-statistic equals L - K, where L is the
+#' number of genetic variants and K the number of exposures. Tau-squared is constrained to be non-negative, and is fixed at zero
+#' when the minimised Q-statistic without heterogeneity is already no greater than L - K.
+#'
 #' @param r_input A formatted data frame using the [`format_mvmr()`] function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput()`]
 #' @param pcor A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.
 #' @param CI Indicates whether 95 percent confidence intervals should be calculated using a non-parametric bootstrap.
@@ -14,6 +19,8 @@
 #' @return A dataframe containing effect estimates with respect to each exposure.
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
+#'
+#' Sanderson, E., Spiller, W., and Bowden, J., Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Statistics in Medicine, 2021, 40, 25, 5434--5452. \doi{10.1002/sim.9133}
 #' @export
 #' @examples
 #' \dontrun{
@@ -69,49 +76,40 @@ qhet_mvmr <- function(r_input, pcor, CI, iterations, ncores = parallelly::availa
     segamma <- r_input$sebetaYG
     pihat <- as.matrix(r_input[, c(4:(3 + exp.number))])
 
-    #estimation with the heterogeneity statistic
+    nsnp <- nrow(r_input)
 
-    PL_MVMR = function(a) {
-      tau2 = a[1]
+    # Q-statistic for causal effects b with additive heterogeneity tau2
+    Qstat <- function(b, tau2) {
+      w <- segamma^2 + vapply(covlist, function(cv) drop(t(b) %*% cv %*% b), numeric(1)) + tau2
+      sum((1 / w) * ((gammahat - pihat %*% b)^2))
+    }
 
-      PL2_MVMR = function(ab) {
-        b <- ab
+    # Minimise the Q-statistic over b for a given tau2, starting from the IVW estimate
+    bstart <- stats::lm.wfit(pihat, gammahat, 1 / segamma^2)$coefficients
+    Qmin <- function(tau2) {
+      stats::optim(bstart, Qstat, tau2 = tau2, method = "BFGS", control = list(reltol = 1e-12))
+    }
 
-        w <- segamma^2 + sapply(covlist, function(cv) drop(t(b) %*% cv %*% b)) + tau2
-
-        q = sum((1 / w) * ((gammahat - pihat %*% b)^2))
-
-        return(q)
+    # Choose tau2 >= 0 so that the minimised Q-statistic equals its expectation
+    # L - K under its chi-squared null distribution (Sanderson, Spiller and
+    # Bowden, 2021). If the minimised Q-statistic is already no greater than
+    # L - K there is no excess heterogeneity and tau2 is fixed at 0.
+    target <- nsnp - exp.number
+    tau_i <- 0
+    if (Qmin(0)$value > target) {
+      # Search upwards from the scale of the outcome variances for an upper bound
+      upper <- stats::median(segamma^2)
+      while (Qmin(upper)$value > target) {
+        upper <- upper * 10
       }
-
-      st_PL2 = rep(0, exp.number)
-
-      bc = stats::optim(st_PL2, PL2_MVMR)
-
-      bcresults <- bc$par
-
-      w <- segamma^2 + sapply(covlist, function(cv) drop(t(bcresults) %*% cv %*% bcresults)) + tau2
-
-      q = (sum((1 / w) * ((gammahat - pihat %*% bcresults)^2)) -
-        (nrow(r_input) - 2))^2
+      tau_i <- stats::uniroot(
+        function(tau2) Qmin(tau2)$value - target,
+        interval = c(0, upper),
+        tol = upper * 1e-8
+      )$root
     }
 
-    PL2_MVMR = function(ab) {
-      b = ab
-
-      w <- segamma^2 + sapply(covlist, function(cv) drop(t(b) %*% cv %*% b)) + tau_i
-
-      q = sum((1 / w) * ((gammahat - pihat %*% b)^2))
-    }
-
-    limltauest = stats::optimize(PL_MVMR, interval = c(-10, 10))
-    tau_i = limltauest$minimum
-
-    tau = tau_i
-
-    liml_het2 <- stats::optim(rep(0, exp.number), PL2_MVMR)
-    limlhets <- liml_het2$par
-    Qexact_het <- liml_het2$value
+    limlhets <- Qmin(tau_i)$par
 
     Effects <- limlhets
     Effects <- data.frame(Effects)
