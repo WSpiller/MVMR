@@ -1,6 +1,7 @@
 # MVMR (development version)
 
 * `strength_mvmr()` and `strhet_mvmr()` now divide the conditional Q-statistic by L - (K - 1), where L is the number of variants and K the number of exposures, as in Equation 7 of Sanderson, Spiller and Bowden (2021, <https://doi.org/10.1002/sim.9133>). They previously divided by L, which slightly understated the conditional F-statistics. The `strhet_mvmr()` documentation now describes its estimator as iteratively reweighted least squares rather than exact Q-statistic minimisation.
+* `pleiotropy_mvmr()` now computes its p-value on L - K degrees of freedom, as in Section 3.2 of Sanderson, Spiller and Bowden (2021). It previously used L - K - 1, which gave p-values that were too small. Its documentation now notes that the Q-statistic is evaluated at the IVW estimate rather than at the Q-minimising estimate used in the paper.
 
 # MVMR 0.4.8
 

@@ -6,6 +6,12 @@
 #'  applying the [`snpcov_mvmr()`] or [`phenocov_mvmr()`] functions, are input manually. The function returns a dataframe including the conditional
 #'  Q-statistic for instrument validity, and a corresponding P-value.
 #'
+#'  The Q-statistic is evaluated at the inverse variance weighted (IVW) estimate and compared with a chi-squared distribution on
+#'  L - K degrees of freedom, where L is the number of genetic variants and K the number of exposures. This differs from the test in
+#'  Section 3.2 of Sanderson, Spiller and Bowden (2021), which evaluates the Q-statistic at the estimate that minimises it. As the
+#'  Q-statistic at the IVW estimate can be no smaller than its minimum, the test may over-reject, particularly when the instruments
+#'  are conditionally weak.
+#'
 #'
 #' @param r_input A formatted data frame using the [`format_mvmr()`] function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput()`]
 #' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
@@ -14,6 +20,8 @@
 #'
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
+#'
+#' Sanderson, E., Spiller, W., and Bowden, J., Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Statistics in Medicine, 2021, 40, 25, 5434--5452. \doi{10.1002/sim.9133}
 #' @export
 #' @examples
 #' \dontrun{
@@ -103,10 +111,10 @@ pleiotropy_mvmr <- function(r_input, gencov = 0) {
     #Calculates Q statistic for instrument validity
     Q_valid <- sum((1 / sigma2A) * (r_input[, 2] - temp.sub2)^2)
 
-    #Calculates p_value for instrument validity
+    #Calculates p_value for instrument validity on L - K degrees of freedom
     Q_chiValid <- stats::pchisq(
       Q_valid,
-      length(r_input[, 2]) - exp.number - 1,
+      length(r_input[, 2]) - exp.number,
       lower.tail = FALSE
     )
   }
@@ -131,10 +139,10 @@ pleiotropy_mvmr <- function(r_input, gencov = 0) {
     #Calculates Q statistic for instrument validity
     Q_valid <- sum((1 / sigma2A) * (r_input[, 2] - temp.sub2)^2)
 
-    #Calculates p_value for instrument validity
+    #Calculates p_value for instrument validity on L - K degrees of freedom
     Q_chiValid <- stats::pchisq(
       Q_valid,
-      length(r_input[, 2]) - exp.number - 1,
+      length(r_input[, 2]) - exp.number,
       lower.tail = FALSE
     )
   }
@@ -150,7 +158,7 @@ pleiotropy_mvmr <- function(r_input, gencov = 0) {
   cat(
     Q_valid,
     "on",
-    length(r_input[, 2]) - exp.number - 1,
+    length(r_input[, 2]) - exp.number,
     "DF",
     ",",
     "p-value:",
