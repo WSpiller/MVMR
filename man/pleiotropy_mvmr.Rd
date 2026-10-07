@@ -4,12 +4,15 @@
 \alias{pleiotropy_mvmr}
 \title{pleiotropy_mvmr}
 \usage{
-pleiotropy_mvmr(r_input, gencov = 0)
+pleiotropy_mvmr(r_input, gencov = 0, estimator = c("qmin", "ivw"))
 }
 \arguments{
 \item{r_input}{A formatted data frame using the \code{\link[=format_mvmr]{format_mvmr()}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput()}}}
 
 \item{gencov}{Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.}
+
+\item{estimator}{The causal effect estimates at which the Q-statistic is evaluated: \code{"qmin"} (the default) for the estimates
+that minimise the Q-statistic, or \code{"ivw"} for the inverse variance weighted estimates.}
 }
 \value{
 A Q-statistic for instrument validity and the corresponding p-value
@@ -21,6 +24,15 @@ for estimated effects of individual genetic variants on each exposure can also b
 applying the \code{\link[=snpcov_mvmr]{snpcov_mvmr()}} or \code{\link[=phenocov_mvmr]{phenocov_mvmr()}} functions, are input manually. The function returns a dataframe including the conditional
 Q-statistic for instrument validity, and a corresponding P-value.
 }
+\details{
+By default the Q-statistic is evaluated at the causal effect estimates that minimise it and compared with a chi-squared distribution
+on L - K degrees of freedom, where L is the number of genetic variants and K the number of exposures, as in Section 3.2 of
+Sanderson, Spiller and Bowden (2021). This test does not over-reject when the instruments are weak, although it can then be
+conservative.
+Setting \code{estimator = "ivw"} instead evaluates the Q-statistic at the inverse variance weighted (IVW) estimate, as in earlier
+versions of the package. As the Q-statistic at the IVW estimate can be no smaller than its minimum, that test may over-reject,
+particularly when the instruments are conditionally weak.
+}
 \examples{
 \dontrun{
 pleiotropy_mvmr(r_input, covariances)
@@ -29,6 +41,8 @@ pleiotropy_mvmr(r_input, covariances)
 }
 \references{
 Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
+
+Sanderson, E., Spiller, W., and Bowden, J., Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Statistics in Medicine, 2021, 40, 25, 5434--5452. \doi{10.1002/sim.9133}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.

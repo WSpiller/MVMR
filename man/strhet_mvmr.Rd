@@ -15,7 +15,7 @@ strhet_mvmr(r_input, gencov)
 A dataframe showing the conditional F-statistic for each exposure.
 }
 \description{
-Calculates the conditional F-statistic for assessing instrument strength in two sample summary multivariable Mendelian randomization through minimisation of Q-statistics.
+Calculates the conditional F-statistic for assessing instrument strength in two sample summary multivariable Mendelian randomization, estimating the coefficients for each exposure by iteratively reweighted least squares of the Q-statistic. The weights are held fixed within each iteration, so the result is a fixed point of the reweighting rather than the exact minimiser of the Q-statistic; as any consistent estimator of the coefficients may be used, the resulting statistic remains valid (Sanderson, Spiller and Bowden, 2021).
 The function takes a formatted dataframe as an input, obtained using the function \code{\link[=format_mvmr]{format_mvmr()}}. Additionally, covariance matrices
 for estimated effects of individual genetic variants on each exposure can also be provided. These can be estimated using external data by
 applying the \code{\link[=snpcov_mvmr]{snpcov_mvmr()}} or \code{\link[=phenocov_mvmr]{phenocov_mvmr()}} functions, or are input manually. The function returns a dataframe including the conditional
@@ -28,6 +28,8 @@ strhet_mvmr(r_input, covariances)
 }
 \references{
 Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
+
+Sanderson, E., Spiller, W., and Bowden, J., Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Statistics in Medicine, 2021, 40, 25, 5434--5452. \doi{10.1002/sim.9133}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.
