@@ -21,6 +21,7 @@ Depends:
     R (>= 4.1)
 Imports: 
     boot,
+    parallel,
     parallelly
 Suggests:
     knitr,
