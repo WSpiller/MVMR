@@ -15,6 +15,10 @@
 #'
 #' @param r_input A formatted data frame using the [`format_mvmr()`] function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput()`]
 #' @param pcor A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.
+#' It is used to construct the covariance between the estimated effects of each genetic variant on each exposure, as \code{pcor}
+#' multiplied by the outer product of the variant's standard errors. This is appropriate when the exposure GWAS were estimated in
+#' the same sample. If the exposure GWAS were estimated in non-overlapping samples these covariances are zero, and the identity
+#' matrix \code{diag(K)}, where K is the number of exposures, should be supplied instead.
 #' @param CI Indicates whether 95 percent confidence intervals should be calculated.
 #' @param iterations Specifies number of bootstrap iterations for calculating 95 percent confidence intervals. Not used when \code{CI_method = "jackknife"}.
 #' @param ncores Number of cores to use for parallel processing in the bootstrap or jackknife. Default is `parallelly::availableCores(omit = 1)`. On Windows, this is automatically set to 1 regardless of user input. It is recommended to only set this to a maximum of `parallelly::availableCores(omit = 1)`.

@@ -16,7 +16,11 @@ qhet_mvmr(
 \arguments{
 \item{r_input}{A formatted data frame using the \code{\link[=format_mvmr]{format_mvmr()}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput()}}}
 
-\item{pcor}{A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.}
+\item{pcor}{A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.
+It is used to construct the covariance between the estimated effects of each genetic variant on each exposure, as \code{pcor}
+multiplied by the outer product of the variant's standard errors. This is appropriate when the exposure GWAS were estimated in
+the same sample. If the exposure GWAS were estimated in non-overlapping samples these covariances are zero, and the identity
+matrix \code{diag(K)}, where K is the number of exposures, should be supplied instead.}
 
 \item{CI}{Indicates whether 95 percent confidence intervals should be calculated.}
 

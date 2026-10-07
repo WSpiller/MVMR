@@ -4,6 +4,7 @@
 * `pleiotropy_mvmr()` now computes its p-value on L - K degrees of freedom, as in Section 3.2 of Sanderson, Spiller and Bowden (2021). It previously used L - K - 1, which gave p-values that were too small. Its documentation now notes that the Q-statistic is evaluated at the IVW estimate rather than at the Q-minimising estimate used in the paper.
 * `qhet_mvmr()` now chooses the heterogeneity parameter tau-squared so that the minimised Q-statistic equals L - K, as in Sanderson, Spiller and Bowden (2021). It previously targeted L - 2, which is only correct with two exposures. Tau-squared is now constrained to be non-negative (it was searched over -10 to 10, which could give negative weights and is poorly scaled for summary data), and is found by root finding with the Q-statistic minimised by BFGS from the IVW estimate. Effect estimates will differ from previous versions, including with two exposures.
 * `qhet_mvmr()` gains a `CI_method` argument. `CI_method = "jackknife"` calculates leave-one-variant-out jackknife standard errors and normal-based 95% confidence intervals, as recommended by Sanderson, Spiller and Bowden (2021); the default `"bootstrap"` retains the BCa bootstrap intervals. The documentation no longer refers to a non-existent `se` argument.
+* The `qhet_mvmr()` documentation now explains how `pcor` is used, and that the identity matrix should be supplied when the exposure GWAS were estimated in non-overlapping samples.
 
 # MVMR 0.4.8
 
