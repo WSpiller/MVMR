@@ -4,12 +4,15 @@
 \alias{pleiotropy_mvmr}
 \title{pleiotropy_mvmr}
 \usage{
-pleiotropy_mvmr(r_input, gencov = 0)
+pleiotropy_mvmr(r_input, gencov = 0, estimator = c("qmin", "ivw"))
 }
 \arguments{
 \item{r_input}{A formatted data frame using the \code{\link[=format_mvmr]{format_mvmr()}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput()}}}
 
 \item{gencov}{Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.}
+
+\item{estimator}{The causal effect estimates at which the Q-statistic is evaluated: \code{"qmin"} (the default) for the estimates
+that minimise the Q-statistic, or \code{"ivw"} for the inverse variance weighted estimates.}
 }
 \value{
 A Q-statistic for instrument validity and the corresponding p-value
@@ -22,11 +25,13 @@ applying the \code{\link[=snpcov_mvmr]{snpcov_mvmr()}} or \code{\link[=phenocov_
 Q-statistic for instrument validity, and a corresponding P-value.
 }
 \details{
-The Q-statistic is evaluated at the inverse variance weighted (IVW) estimate and compared with a chi-squared distribution on
-L - K degrees of freedom, where L is the number of genetic variants and K the number of exposures. This differs from the test in
-Section 3.2 of Sanderson, Spiller and Bowden (2021), which evaluates the Q-statistic at the estimate that minimises it. As the
-Q-statistic at the IVW estimate can be no smaller than its minimum, the test may over-reject, particularly when the instruments
-are conditionally weak.
+By default the Q-statistic is evaluated at the causal effect estimates that minimise it and compared with a chi-squared distribution
+on L - K degrees of freedom, where L is the number of genetic variants and K the number of exposures, as in Section 3.2 of
+Sanderson, Spiller and Bowden (2021). This test does not over-reject when the instruments are weak, although it can then be
+conservative.
+Setting \code{estimator = "ivw"} instead evaluates the Q-statistic at the inverse variance weighted (IVW) estimate, as in earlier
+versions of the package. As the Q-statistic at the IVW estimate can be no smaller than its minimum, that test may over-reject,
+particularly when the instruments are conditionally weak.
 }
 \examples{
 \dontrun{

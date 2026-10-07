@@ -6,15 +6,19 @@
 #'  applying the [`snpcov_mvmr()`] or [`phenocov_mvmr()`] functions, are input manually. The function returns a dataframe including the conditional
 #'  Q-statistic for instrument validity, and a corresponding P-value.
 #'
-#'  The Q-statistic is evaluated at the inverse variance weighted (IVW) estimate and compared with a chi-squared distribution on
-#'  L - K degrees of freedom, where L is the number of genetic variants and K the number of exposures. This differs from the test in
-#'  Section 3.2 of Sanderson, Spiller and Bowden (2021), which evaluates the Q-statistic at the estimate that minimises it. As the
-#'  Q-statistic at the IVW estimate can be no smaller than its minimum, the test may over-reject, particularly when the instruments
-#'  are conditionally weak.
+#'  By default the Q-statistic is evaluated at the causal effect estimates that minimise it and compared with a chi-squared distribution
+#'  on L - K degrees of freedom, where L is the number of genetic variants and K the number of exposures, as in Section 3.2 of
+#'  Sanderson, Spiller and Bowden (2021). This test does not over-reject when the instruments are weak, although it can then be
+#'  conservative.
+#'  Setting \code{estimator = "ivw"} instead evaluates the Q-statistic at the inverse variance weighted (IVW) estimate, as in earlier
+#'  versions of the package. As the Q-statistic at the IVW estimate can be no smaller than its minimum, that test may over-reject,
+#'  particularly when the instruments are conditionally weak.
 #'
 #'
 #' @param r_input A formatted data frame using the [`format_mvmr()`] function or an object of class `MRMVInput` from [`MendelianRandomization::mr_mvinput()`]
 #' @param gencov Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.
+#' @param estimator The causal effect estimates at which the Q-statistic is evaluated: \code{"qmin"} (the default) for the estimates
+#' that minimise the Q-statistic, or \code{"ivw"} for the inverse variance weighted estimates.
 #'
 #' @return A Q-statistic for instrument validity and the corresponding p-value
 #'
@@ -29,7 +33,7 @@
 #' }
 #'
 
-pleiotropy_mvmr <- function(r_input, gencov = 0) {
+pleiotropy_mvmr <- function(r_input, gencov = 0, estimator = c("qmin", "ivw")) {
   # convert MRMVInput object to mvmr_format
   if ("MRMVInput" %in% class(r_input)) {
     r_input <- mrmvinput_to_mvmr_format(r_input)
@@ -54,98 +58,50 @@ pleiotropy_mvmr <- function(r_input, gencov = 0) {
     )
   }
 
-  # Inverse variance weighting is used.
-
-  Wj <- 1 / r_input[, 3]^2
+  estimator <- match.arg(estimator)
 
   #Determine the number of exposures included in the model
 
   exp.number <- length(names(r_input)[-c(1, 2, 3)]) / 2
+  nsnp <- nrow(r_input)
 
-  #Fit the IVW MVMR model
+  betas <- as.matrix(r_input[, 4:(3 + exp.number)])
+  sebetas <- as.matrix(r_input[, (exp.number + 4):length(r_input)])
 
-  A_sum <- summary(stats::lm(
-    stats::as.formula(paste(
-      "betaYG ~ -1 +",
-      paste(
-        names(r_input)[
-          seq(4, 3 + exp.number, by = 1)
-        ],
-        collapse = "+"
-      )
-    )),
-    weights = Wj,
-    data = r_input
-  ))
-
-  A <- A_sum$coef
-
-  #Rename the regressors for ease of interpretation
-  for (i in 1:exp.number) {
-    dimnames(A)[[1]][i] <- paste0("exposure", i, collapse = "")
+  # Per-SNP covariance matrices of the exposure effect estimates. When gencov is
+  # a scalar these are diagonal with the squared standard errors; when gencov is
+  # a list, one covariance matrix is supplied per SNP.
+  if (is.list(gencov)) {
+    covlist <- gencov
+  } else {
+    covlist <- lapply(seq_len(nsnp), function(l) diag(sebetas[l, ]^2, exp.number))
   }
-
-  #Create a subset containing only standard errors for exposure effect estimates
-  sebetas <- r_input[, (exp.number + 4):length(r_input)]
 
   ########################
   ## Instrument Validity #
   ########################
 
-  if (!is.list(gencov)) {
-    # Generate Sigma^2_A values
-    sigma2A <- r_input[, 3]^2
-    for (i in 1:exp.number) {
-      sigma2A <- sigma2A + (A[i]^2 * sebetas[, i]^2)
-    }
-
-    #Create a subset of exposure effect estimates
-    betas <- r_input[, c(4:(3 + exp.number))]
-
-    #Generates the component of the Q statistic to be subtracted from the outcome estimates
-    temp.sub2 <- 0
-    for (i in 1:exp.number) {
-      temp.sub2 <- temp.sub2 + (betas[, i] * A[i])
-    }
-
-    #Calculates Q statistic for instrument validity
-    Q_valid <- sum((1 / sigma2A) * (r_input[, 2] - temp.sub2)^2)
-
-    #Calculates p_value for instrument validity on L - K degrees of freedom
-    Q_chiValid <- stats::pchisq(
-      Q_valid,
-      length(r_input[, 2]) - exp.number,
-      lower.tail = FALSE
-    )
+  # Q-statistic for instrument validity at causal effects b, with
+  # sigma^2_A = se(betaYG)^2 + t(b) %*% Sigma_l %*% b
+  Qstat <- function(b) {
+    sigma2A <- r_input[, 3]^2 +
+      vapply(covlist, function(S) drop(t(b) %*% S %*% b), numeric(1))
+    sum((1 / sigma2A) * (r_input[, 2] - betas %*% b)^2)
   }
 
-  if (is.list(gencov)) {
-    # Generate Sigma^2_A values
-    sigma2A <- r_input[, 3]^2
-    for (i in seq_along(r_input[, 3])) {
-      sigma2A[i] <- sigma2A[i] +
-        (t(as.matrix(A[, 1])) %*% gencov[[i]] %*% as.matrix(A[, 1]))
-    }
+  # Fit the IVW MVMR model
+  bivw <- stats::lm.wfit(betas, r_input[, 2], 1 / r_input[, 3]^2)$coefficients
 
-    #Create a subset of exposure effect estimates
-    betas <- r_input[, c(4:(3 + exp.number))]
-
-    #Generates the component of the Q statistic to be subtracted from the outcome estimates
-    temp.sub2 <- 0
-    for (i in 1:exp.number) {
-      temp.sub2 <- temp.sub2 + (betas[, i] * A[i])
-    }
-
-    #Calculates Q statistic for instrument validity
-    Q_valid <- sum((1 / sigma2A) * (r_input[, 2] - temp.sub2)^2)
-
-    #Calculates p_value for instrument validity on L - K degrees of freedom
-    Q_chiValid <- stats::pchisq(
-      Q_valid,
-      length(r_input[, 2]) - exp.number,
-      lower.tail = FALSE
-    )
+  if (estimator == "qmin") {
+    # Minimise the Q-statistic over the causal effects, starting from the IVW
+    # estimate, as in Section 3.2 of Sanderson, Spiller and Bowden (2021)
+    Q_valid <- stats::optim(bivw, Qstat, method = "BFGS", control = list(reltol = 1e-12))$value
+  } else {
+    Q_valid <- Qstat(bivw)
   }
+
+  #Calculates p_value for instrument validity on L - K degrees of freedom
+  Q_chiValid <- stats::pchisq(Q_valid, nsnp - exp.number, lower.tail = FALSE)
 
   ##########
   # Output #
@@ -158,7 +114,7 @@ pleiotropy_mvmr <- function(r_input, gencov = 0) {
   cat(
     Q_valid,
     "on",
-    length(r_input[, 2]) - exp.number,
+    nsnp - exp.number,
     "DF",
     ",",
     "p-value:",
