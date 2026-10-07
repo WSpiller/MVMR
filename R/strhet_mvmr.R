@@ -1,6 +1,6 @@
 #' strhet_mvmr
 #'
-#' Calculates the conditional F-statistic for assessing instrument strength in two sample summary multivariable Mendelian randomization through minimisation of Q-statistics.
+#' Calculates the conditional F-statistic for assessing instrument strength in two sample summary multivariable Mendelian randomization, estimating the coefficients for each exposure by iteratively reweighted least squares of the Q-statistic. The weights are held fixed within each iteration, so the result is a fixed point of the reweighting rather than the exact minimiser of the Q-statistic; as any consistent estimator of the coefficients may be used, the resulting statistic remains valid (Sanderson, Spiller and Bowden, 2021).
 #' The function takes a formatted dataframe as an input, obtained using the function [`format_mvmr()`]. Additionally, covariance matrices
 #' for estimated effects of individual genetic variants on each exposure can also be provided. These can be estimated using external data by
 #' applying the [`snpcov_mvmr()`] or [`phenocov_mvmr()`] functions, or are input manually. The function returns a dataframe including the conditional
@@ -13,6 +13,8 @@
 #'
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
+#'
+#' Sanderson, E., Spiller, W., and Bowden, J., Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Statistics in Medicine, 2021, 40, 25, 5434--5452. \doi{10.1002/sim.9133}
 #' @export
 #' @examples
 #' \dontrun{
@@ -68,10 +70,12 @@ strhet_mvmr <- function(r_input, gencov) {
   #############################################
 
   # For each exposure the delta coefficients (regressing that exposure's
-  # associations on the others) are estimated by minimising the Q-statistic. The
-  # variance weights sigma^2 are held fixed at the current delta within each
-  # iteration and updated until convergence (iteratively reweighted least
-  # squares), which keeps the per-exposure statistics well identified. Writing
+  # associations on the others) are estimated by iteratively reweighted least
+  # squares: the variance weights sigma^2 are held fixed at the current delta
+  # within each iteration and updated until convergence. This is a fixed point
+  # of the reweighting rather than the exact Q minimiser, but gives a consistent
+  # estimate of delta, as Equation 7 of Sanderson, Spiller and Bowden (2021)
+  # requires. Writing
   # the residual as a contrast v with -1 in the exposure's own position and delta
   # elsewhere, sigma^2_l = t(v) %*% Sigma_l %*% v.
   qminvec <- numeric(exp.number)
@@ -99,7 +103,8 @@ strhet_mvmr <- function(r_input, gencov) {
     v[-m] <- d
     sig <- vapply(covlist, function(S) drop(t(v) %*% S %*% v), numeric(1))
     resid <- as.vector(y - X %*% d)
-    qminvec[m] <- sum(resid^2 / sig) / nsnp
+    # Divide by L - (K - 1), Equation 7 of Sanderson, Spiller and Bowden (2021)
+    qminvec[m] <- sum(resid^2 / sig) / (nsnp - exp.number + 1)
   }
 
   Q_strength <- data.frame(t(qminvec))

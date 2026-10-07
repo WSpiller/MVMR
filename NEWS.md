@@ -1,3 +1,7 @@
+# MVMR (development version)
+
+* `strength_mvmr()` and `strhet_mvmr()` now divide the conditional Q-statistic by L - (K - 1), where L is the number of variants and K the number of exposures, as in Equation 7 of Sanderson, Spiller and Bowden (2021, <https://doi.org/10.1002/sim.9133>). They previously divided by L, which slightly understated the conditional F-statistics. The `strhet_mvmr()` documentation now describes its estimator as iteratively reweighted least squares rather than exact Q-statistic minimisation.
+
 # MVMR 0.4.8
 
 * `strhet_mvmr()` has been reimplemented. The previous version built a combinatorial grid of candidate coefficients with `utils::combn()` (which could exhaust memory with four or more exposures) and never actually minimised the Q-statistic, returning invalid conditional F-statistics. It now estimates the coefficients by iteratively reweighted least squares, giving distinct, well-identified conditional F-statistics for each exposure. Reported values will differ from previous versions.
