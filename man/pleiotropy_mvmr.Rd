@@ -4,15 +4,15 @@
 \alias{pleiotropy_mvmr}
 \title{pleiotropy_mvmr}
 \usage{
-pleiotropy_mvmr(r_input, gencov = 0, estimator = c("qmin", "ivw"))
+pleiotropy_mvmr(r_input, gencov = 0, estimator = c("ivw", "qmin"))
 }
 \arguments{
 \item{r_input}{A formatted data frame using the \code{\link[=format_mvmr]{format_mvmr()}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput()}}}
 
 \item{gencov}{Calculating heterogeneity statistics requires the covariance between the effect of the genetic variants on each exposure to be known. This can either be estimated from individual level data, be assumed to be zero, or fixed at zero using non-overlapping samples of each exposure GWAS. A value of \code{0} is used by default.}
 
-\item{estimator}{The causal effect estimates at which the Q-statistic is evaluated: \code{"qmin"} (the default) for the estimates
-that minimise the Q-statistic, or \code{"ivw"} for the inverse variance weighted estimates.}
+\item{estimator}{The causal effect estimates at which the Q-statistic is evaluated: \code{"ivw"} (the default) for the inverse
+variance weighted estimates, or \code{"qmin"} for the estimates that minimise the Q-statistic.}
 }
 \value{
 A Q-statistic for instrument validity and the corresponding p-value
@@ -25,13 +25,13 @@ applying the \code{\link[=snpcov_mvmr]{snpcov_mvmr()}} or \code{\link[=phenocov_
 Q-statistic for instrument validity, and a corresponding P-value.
 }
 \details{
-By default the Q-statistic is evaluated at the causal effect estimates that minimise it and compared with a chi-squared distribution
-on L - K degrees of freedom, where L is the number of genetic variants and K the number of exposures, as in Section 3.2 of
-Sanderson, Spiller and Bowden (2021). This test does not over-reject when the instruments are weak, although it can then be
-conservative.
-Setting \code{estimator = "ivw"} instead evaluates the Q-statistic at the inverse variance weighted (IVW) estimate, as in earlier
-versions of the package. As the Q-statistic at the IVW estimate can be no smaller than its minimum, that test may over-reject,
-particularly when the instruments are conditionally weak.
+By default the Q-statistic is evaluated at the inverse variance weighted (IVW) estimates of the causal effects and compared with a
+chi-squared distribution on L - K degrees of freedom, where L is the number of genetic variants and K the number of exposures.
+This is the Q-statistic for heterogeneity in MVMR described in Sanderson, Spiller and Bowden (2021). It is not robust to weak
+instruments and will be inflated when the instruments are conditionally weak, so instrument strength should first be assessed
+with \code{\link[=strength_mvmr]{strength_mvmr()}}; if the instruments are weak the results should not be interpreted.
+Setting \code{estimator = "qmin"} instead evaluates the Q-statistic at the causal effect estimates that minimise it, which are
+robust to weak instruments, as discussed in Section 3.2 of Sanderson, Spiller and Bowden (2021).
 }
 \examples{
 \dontrun{
