@@ -265,7 +265,7 @@ sres <- strength_mvmr(r_input = F.data, gencov = 0)
 #> Conditional F-statistics for instrument strength
 #> 
 #>             exposure1 exposure2 exposure3
-#> F-statistic  46.33671  67.80463  38.80184
+#> F-statistic  46.98478  68.75295  39.34452
 ```
 
 In this case the set of instruments is sufficiently strong for MVMR
@@ -284,7 +284,7 @@ sres2 <- strength_mvmr(r_input = F.data, gencov = Xcovmat)
 #> Conditional F-statistics for instrument strength
 #> 
 #>             exposure1 exposure2 exposure3
-#> F-statistic  48.20993  69.55193  39.77326
+#> F-statistic  48.88419  70.52469  40.32953
 ```
 
 ## Step 4: Test for horizontal pleiotropy using conventional Q-statistic estimation
@@ -315,7 +315,7 @@ pres <- pleiotropy_mvmr(r_input = F.data, gencov = 0)
 #> effect of genetic variants on each exposure not specified. Fixing covariance at
 #> 0.
 #> Q-Statistic for instrument validity:
-#> 683.0807 on 141 DF , p-value: 4.880403e-72
+#> 683.0807 on 142 DF , p-value: 1.078069e-71
 ```
 
 And with the example covariance matrices from Step 3:
@@ -324,7 +324,7 @@ And with the example covariance matrices from Step 3:
 
 pres <- pleiotropy_mvmr(r_input = F.data, gencov = Xcovmat)
 #> Q-Statistic for instrument validity:
-#> 682.843 on 141 DF , p-value: 5.36533e-72
+#> 682.843 on 142 DF , p-value: 1.184983e-71
 ```
 
 ## Step 5: Estimate causal effects
@@ -371,9 +371,9 @@ res1 <- qhet_mvmr(F.data, mvmrcormatrix, CI = FALSE, iterations = 100)
 #> qhet_mvmr() is currently undergoing development.
 res1
 #>            Effect Estimates
-#> Exposure 1     -0.024122657
-#> Exposure 2      0.008801407
-#> Exposure 3      0.008303278
+#> Exposure 1     -0.024313071
+#> Exposure 2      0.008973480
+#> Exposure 3      0.007375369
 ```
 
 It is important to highlight that the phenotypic covariance matrix is

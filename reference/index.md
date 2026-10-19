@@ -24,5 +24,3 @@
   : snpcov_mvmr
 - [`strength_mvmr()`](https://wspiller.github.io/MVMR/reference/strength_mvmr.md)
   : strength_mvmr
-- [`strhet_mvmr()`](https://wspiller.github.io/MVMR/reference/strhet_mvmr.md)
-  : strhet_mvmr

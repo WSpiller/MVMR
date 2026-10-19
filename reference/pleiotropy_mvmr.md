@@ -20,7 +20,7 @@ corresponding P-value.
 ## Usage
 
 ``` r
-pleiotropy_mvmr(r_input, gencov = 0)
+pleiotropy_mvmr(r_input, gencov = 0, estimator = c("ivw", "qmin"))
 ```
 
 ## Arguments
@@ -40,9 +40,32 @@ pleiotropy_mvmr(r_input, gencov = 0)
   zero, or fixed at zero using non-overlapping samples of each exposure
   GWAS. A value of `0` is used by default.
 
+- estimator:
+
+  The causal effect estimates at which the Q-statistic is evaluated:
+  `"ivw"` (the default) for the inverse variance weighted estimates, or
+  `"qmin"` for the estimates that minimise the Q-statistic.
+
 ## Value
 
 A Q-statistic for instrument validity and the corresponding p-value
+
+## Details
+
+By default the Q-statistic is evaluated at the inverse variance weighted
+(IVW) estimates of the causal effects and compared with a chi-squared
+distribution on L - K degrees of freedom, where L is the number of
+genetic variants and K the number of exposures. This is the Q-statistic
+for heterogeneity in MVMR described in Sanderson, Spiller and Bowden
+(2021). It is not robust to weak instruments and will be inflated when
+the instruments are conditionally weak, so instrument strength should
+first be assessed with
+[`strength_mvmr()`](https://wspiller.github.io/MVMR/reference/strength_mvmr.md);
+if the instruments are weak the results should not be interpreted.
+Setting `estimator = "qmin"` instead evaluates the Q-statistic at the
+causal effect estimates that minimise it, which are robust to weak
+instruments, as discussed in Section 3.2 of Sanderson, Spiller and
+Bowden (2021).
 
 ## References
 
@@ -50,6 +73,11 @@ Sanderson, E., et al., An examination of multivariable Mendelian
 randomization in the single-sample and two-sample summary data settings.
 International Journal of Epidemiology, 2019, 48, 3, 713–727.
 [doi:10.1093/ije/dyy262](https://doi.org/10.1093/ije/dyy262)
+
+Sanderson, E., Spiller, W., and Bowden, J., Testing and correcting for
+weak and pleiotropic instruments in two-sample multivariable Mendelian
+randomization. Statistics in Medicine, 2021, 40, 25, 5434–5452.
+[doi:10.1002/sim.9133](https://doi.org/10.1002/sim.9133)
 
 ## Author
 

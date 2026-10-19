@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MVMR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,9 +44,25 @@
     </div>
 
     <div class="section level2">
+<h2 class="pkg-version" data-toc-text="0.4.9" id="mvmr-049">MVMR 0.4.9<a class="anchor" aria-label="anchor" href="#mvmr-049"></a></h2>
+<ul><li>
+<code><a href="../reference/strength_mvmr.html">strength_mvmr()</a></code> now divides the conditional Q-statistic by L - (K - 1), where L is the number of variants and K the number of exposures, as in Equation 7 of Sanderson, Spiller and Bowden (2021, <a href="https://doi.org/10.1002/sim.9133" class="external-link uri">https://doi.org/10.1002/sim.9133</a>). It previously divided by L, which slightly understated the conditional F-statistics.</li>
+<li>
+<code>strhet_mvmr()</code> has been removed. It was not described in the accompanying papers or the vignette. Use <code><a href="../reference/strength_mvmr.html">strength_mvmr()</a></code> to assess conditional instrument strength, and <code><a href="../reference/qhet_mvmr.html">qhet_mvmr()</a></code> for effect estimates that are robust to weak instruments.</li>
+<li>
+<code><a href="../reference/pleiotropy_mvmr.html">pleiotropy_mvmr()</a></code> now computes its p-value on L - K degrees of freedom, as in Section 3.2 of Sanderson, Spiller and Bowden (2021). It previously used L - K - 1, which gave p-values that were too small. Its documentation now explains that the Q-statistic is evaluated at the IVW estimate and is not robust to weak instruments, so it should only be interpreted when <code><a href="../reference/strength_mvmr.html">strength_mvmr()</a></code> indicates the instruments are strong.</li>
+<li>
+<code><a href="../reference/qhet_mvmr.html">qhet_mvmr()</a></code> now chooses the heterogeneity parameter tau-squared so that the minimised Q-statistic equals L - K, as in Sanderson, Spiller and Bowden (2021). It previously targeted L - 2, which is only correct with two exposures. Tau-squared is now constrained to be non-negative (it was searched over -10 to 10, which could give negative weights and is poorly scaled for summary data), and is found by root finding with the Q-statistic minimised by BFGS from the IVW estimate. Effect estimates will differ from previous versions, including with two exposures.</li>
+<li>
+<code><a href="../reference/qhet_mvmr.html">qhet_mvmr()</a></code> gains a <code>CI_method</code> argument. <code>CI_method = "jackknife"</code> calculates leave-one-variant-out jackknife standard errors and normal-based 95% confidence intervals, as recommended by Sanderson, Spiller and Bowden (2021); the default <code>"bootstrap"</code> retains the BCa bootstrap intervals. The documentation no longer refers to a non-existent <code>se</code> argument.</li>
+<li>
+<code><a href="../reference/pleiotropy_mvmr.html">pleiotropy_mvmr()</a></code> gains an <code>estimator</code> argument. The default, <code>estimator = "ivw"</code>, evaluates the Q-statistic at the IVW estimate as before; <code>estimator = "qmin"</code> evaluates it at the causal effect estimates that minimise it, which are robust to weak instruments, as discussed in Section 3.2 of Sanderson, Spiller and Bowden (2021).</li>
+<li>The <code><a href="../reference/qhet_mvmr.html">qhet_mvmr()</a></code> documentation now explains how <code>pcor</code> is used, and that the identity matrix should be supplied when the exposure GWAS were estimated in non-overlapping samples.</li>
+</ul></div>
+    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.8" id="mvmr-048">MVMR 0.4.8<a class="anchor" aria-label="anchor" href="#mvmr-048"></a></h2>
 <ul><li>
-<code><a href="../reference/strhet_mvmr.html">strhet_mvmr()</a></code> has been reimplemented. The previous version built a combinatorial grid of candidate coefficients with <code><a href="https://rdrr.io/r/utils/combn.html" class="external-link">utils::combn()</a></code> (which could exhaust memory with four or more exposures) and never actually minimised the Q-statistic, returning invalid conditional F-statistics. It now estimates the coefficients by iteratively reweighted least squares, giving distinct, well-identified conditional F-statistics for each exposure. Reported values will differ from previous versions.</li>
+<code>strhet_mvmr()</code> has been reimplemented. The previous version built a combinatorial grid of candidate coefficients with <code><a href="https://rdrr.io/r/utils/combn.html" class="external-link">utils::combn()</a></code> (which could exhaust memory with four or more exposures) and never actually minimised the Q-statistic, returning invalid conditional F-statistics. It now estimates the coefficients by iteratively reweighted least squares, giving distinct, well-identified conditional F-statistics for each exposure. Reported values will differ from previous versions.</li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="0.4.7" id="mvmr-047">MVMR 0.4.7<a class="anchor" aria-label="anchor" href="#mvmr-047"></a></h2>

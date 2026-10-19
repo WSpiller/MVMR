@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">MVMR</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.4.9</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -332,7 +332,7 @@ command</p>
 <span><span class="co">#&gt; Conditional F-statistics for instrument strength</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;             exposure1 exposure2 exposure3</span></span>
-<span><span class="co">#&gt; F-statistic  46.33671  67.80463  38.80184</span></span></code></pre></div>
+<span><span class="co">#&gt; F-statistic  46.98478  68.75295  39.34452</span></span></code></pre></div>
 <p>In this case the set of instruments is sufficiently strong for MVMR
 estimation using the conventional F-statistic threshold of 10. However,
 note that we have manually set <code>gencov</code> to zero, which would
@@ -347,7 +347,7 @@ conditional F-statistics can be calculated as</p>
 <span><span class="co">#&gt; Conditional F-statistics for instrument strength</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;             exposure1 exposure2 exposure3</span></span>
-<span><span class="co">#&gt; F-statistic  48.20993  69.55193  39.77326</span></span></code></pre></div>
+<span><span class="co">#&gt; F-statistic  48.88419  70.52469  40.32953</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="step-4-test-for-horizontal-pleiotropy-using-conventional-q-statistic-estimation">Step 4: Test for horizontal pleiotropy using conventional
@@ -373,12 +373,12 @@ heterogeneity, requiring the same arguments as the
 <span><span class="co">#&gt; effect of genetic variants on each exposure not specified. Fixing covariance at</span></span>
 <span><span class="co">#&gt; 0.</span></span>
 <span><span class="co">#&gt; Q-Statistic for instrument validity:</span></span>
-<span><span class="co">#&gt; 683.0807 on 141 DF , p-value: 4.880403e-72</span></span></code></pre></div>
+<span><span class="co">#&gt; 683.0807 on 142 DF , p-value: 1.078069e-71</span></span></code></pre></div>
 <p>And with the example covariance matrices from Step 3:</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">pres</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pleiotropy_mvmr.html">pleiotropy_mvmr</a></span><span class="op">(</span>r_input <span class="op">=</span> <span class="va">F.data</span>, gencov <span class="op">=</span> <span class="va">Xcovmat</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Q-Statistic for instrument validity:</span></span>
-<span><span class="co">#&gt; 682.843 on 141 DF , p-value: 5.36533e-72</span></span></code></pre></div>
+<span><span class="co">#&gt; 682.843 on 142 DF , p-value: 1.184983e-71</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="step-5-estimate-causal-effects">Step 5: Estimate causal effects<a class="anchor" aria-label="anchor" href="#step-5-estimate-causal-effects"></a>
@@ -418,9 +418,9 @@ be performed using the <code><a href="../reference/qhet_mvmr.html">qhet_mvmr()</
 <span><span class="co">#&gt; qhet_mvmr() is currently undergoing development.</span></span>
 <span><span class="va">res1</span></span>
 <span><span class="co">#&gt;            Effect Estimates</span></span>
-<span><span class="co">#&gt; Exposure 1     -0.024122657</span></span>
-<span><span class="co">#&gt; Exposure 2      0.008801407</span></span>
-<span><span class="co">#&gt; Exposure 3      0.008303278</span></span></code></pre></div>
+<span><span class="co">#&gt; Exposure 1     -0.024313071</span></span>
+<span><span class="co">#&gt; Exposure 2      0.008973480</span></span>
+<span><span class="co">#&gt; Exposure 3      0.007375369</span></span></code></pre></div>
 <p>It is important to highlight that the phenotypic covariance matrix is
 used as an input, and not the set of estimated covariance matrices which
 previously formed the <code>gencov</code> argument. It should also be
