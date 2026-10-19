@@ -46,10 +46,6 @@ strength_mvmr <- function(r_input, gencov = 0) {
     )
   }
 
-  # Inverse variance weighting is used.
-
-  Wj <- 1 / r_input[, 3]^2
-
   #Determine the number of exposures included in the model
 
   exp.number <- length(names(r_input)[-c(1, 2, 3)]) / 2
