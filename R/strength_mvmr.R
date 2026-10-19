@@ -13,6 +13,8 @@
 #'
 #' @author Wes Spiller; Eleanor Sanderson; Jack Bowden.
 #' @references Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. Available from: \doi{10.1093/ije/dyy262}
+#'
+#' Sanderson, E., Spiller, W., and Bowden, J., Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Statistics in Medicine, 2021, 40, 25, 5434--5452. \doi{10.1002/sim.9133}
 #' @export
 #' @examples
 #' \dontrun{
@@ -43,10 +45,6 @@ strength_mvmr <- function(r_input, gencov = 0) {
       "Covariance between effect of genetic variants on each exposure not specified. Fixing covariance at 0."
     )
   }
-
-  # Inverse variance weighting is used.
-
-  Wj <- 1 / r_input[, 3]^2
 
   #Determine the number of exposures included in the model
 
@@ -131,7 +129,8 @@ strength_mvmr <- function(r_input, gencov = 0) {
     Q_strength[i] <- sum(
       (1 / sigma2xj_dat[, i]) * ((r_input[, 3 + i] - temp.sub)^2)
     )
-    Q_strength[i] <- Q_strength[i] / nrow(r_input)
+    # Divide by L - (K - 1), Equation 7 of Sanderson, Spiller and Bowden (2021)
+    Q_strength[i] <- Q_strength[i] / (nrow(r_input) - exp.number + 1)
   }
 
   Q_strength <- data.frame(Q_strength)

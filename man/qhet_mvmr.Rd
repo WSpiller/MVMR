@@ -9,36 +9,57 @@ qhet_mvmr(
   pcor,
   CI,
   iterations,
-  ncores = parallelly::availableCores(omit = 1)
+  ncores = parallelly::availableCores(omit = 1),
+  CI_method = c("bootstrap", "jackknife")
 )
 }
 \arguments{
 \item{r_input}{A formatted data frame using the \code{\link[=format_mvmr]{format_mvmr()}} function or an object of class \code{MRMVInput} from \code{\link[MendelianRandomization:mr_mvinput]{MendelianRandomization::mr_mvinput()}}}
 
-\item{pcor}{A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.}
+\item{pcor}{A phenotypic correlation matrix including the correlation between each exposure included in the MVMR analysis.
+It is used to construct the covariance between the estimated effects of each genetic variant on each exposure, as \code{pcor}
+multiplied by the outer product of the variant's standard errors. This is appropriate when the exposure GWAS were estimated in
+the same sample. If the exposure GWAS were estimated in non-overlapping samples these covariances are zero, and the identity
+matrix \code{diag(K)}, where K is the number of exposures, should be supplied instead.}
 
-\item{CI}{Indicates whether 95 percent confidence intervals should be calculated using a non-parametric bootstrap.}
+\item{CI}{Indicates whether 95 percent confidence intervals should be calculated.}
 
-\item{iterations}{Specifies number of bootstrap iterations for calculating 95 percent confidence intervals.}
+\item{iterations}{Specifies number of bootstrap iterations for calculating 95 percent confidence intervals. Not used when \code{CI_method = "jackknife"}.}
 
-\item{ncores}{Number of cores to use for parallel processing in bootstrap. Default is \code{parallelly::availableCores(omit = 1)}. On Windows, this is automatically set to 1 regardless of user input. It is recommended to only set this to a maximum of \code{parallelly::availableCores(omit = 1)}.}
+\item{ncores}{Number of cores to use for parallel processing in the bootstrap or jackknife. Default is \code{parallelly::availableCores(omit = 1)}. On Windows, this is automatically set to 1 regardless of user input. It is recommended to only set this to a maximum of \code{parallelly::availableCores(omit = 1)}.}
+
+\item{CI_method}{Method used to calculate confidence intervals when \code{CI = TRUE}: \code{"bootstrap"} (the default) for bias-corrected and
+accelerated (BCa) non-parametric bootstrap intervals, or \code{"jackknife"} for normal-based intervals using the leave-one-variant-out jackknife standard error.}
 }
 \value{
-A dataframe containing effect estimates with respect to each exposure.
+A dataframe containing effect estimates with respect to each exposure, and when \code{CI = TRUE} their 95 percent confidence intervals.
+With \code{CI_method = "jackknife"} the jackknife standard errors are also returned.
 }
 \description{
 Fits a multivariable Mendelian randomization model adjusting for weak instruments. The functions requires a formatted dataframe using the \code{\link[=format_mvmr]{format_mvmr()}} function, as well a phenotypic correlation matrix \code{pcor}. This should be obtained from individual level
-phenotypic data, or constructed as a correlation matrix where correlations have previously been reported. Confidence intervals are calculated using a non-parametric bootstrap.
-By default, standard errors are not produced but can be calculated by setting \code{se = TRUE}. The number of bootstrap iterations is specified using the \code{iterations} argument.
-Note that calculating confidence intervals at present can take a substantial amount of time.
+phenotypic data, or constructed as a correlation matrix where correlations have previously been reported.
+By default, confidence intervals are not produced but can be calculated by setting \code{CI = TRUE}. They are calculated using either a non-parametric
+bootstrap over the genetic variants (\code{CI_method = "bootstrap"}, the default), with the number of bootstrap iterations specified using the
+\code{iterations} argument, or a leave-one-variant-out jackknife (\code{CI_method = "jackknife"}). Sanderson, Spiller and Bowden (2021) recommend
+the jackknife, as with a moderate number of variants bootstrap resamples can give very weak instruments.
+Note that calculating confidence intervals can take a substantial amount of time.
+}
+\details{
+Effects are estimated by minimising a Q-statistic that includes an additive heterogeneity parameter tau-squared. Following
+Sanderson, Spiller and Bowden (2021), tau-squared is chosen so that the minimised Q-statistic equals L - K, where L is the
+number of genetic variants and K the number of exposures. Tau-squared is constrained to be non-negative, and is fixed at zero
+when the minimised Q-statistic without heterogeneity is already no greater than L - K.
 }
 \examples{
 \dontrun{
 qhet_mvmr(r_input, pcor, CI = TRUE, iterations = 1000)
+qhet_mvmr(r_input, pcor, CI = TRUE, CI_method = "jackknife")
 }
 }
 \references{
 Sanderson, E., et al., An examination of multivariable Mendelian randomization in the single-sample and two-sample summary data settings. International Journal of Epidemiology, 2019, 48, 3, 713--727. \doi{10.1093/ije/dyy262}
+
+Sanderson, E., Spiller, W., and Bowden, J., Testing and correcting for weak and pleiotropic instruments in two-sample multivariable Mendelian randomization. Statistics in Medicine, 2021, 40, 25, 5434--5452. \doi{10.1002/sim.9133}
 }
 \author{
 Wes Spiller; Eleanor Sanderson; Jack Bowden.
